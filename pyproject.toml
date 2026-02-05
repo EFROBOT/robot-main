@@ -1,0 +1,34 @@
+[project]
+name = "efrobot"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy>=1.24.4",
+    "opencv-python>=4.13.0.90",
+]
+
+[project.scripts]
+start = "main:main"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.14",
+]
+
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# E = pycodestyle errors, F = pyflakes, I = isort
+select = ["E", "F", "I"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.uv]
+package = true
