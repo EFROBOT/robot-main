@@ -171,7 +171,6 @@ class Camera:
                 all_charuco_corners.append(charuco_corners)
                 all_charuco_ids.append(charuco_ids)
 
-        # --- 4. Calibration ---
         if len(all_charuco_corners) > 0 and image_size is not None:
             print("\nCalibration ...")
 
@@ -200,7 +199,6 @@ class Camera:
             print("\nDistorsion (k1, k2, p1, p2, k3) :")
             print(dist_coeffs)
 
-            # --- 5. Sauvegarde ---
             np.savez(output_file, mtx=camera_matrix, dist=dist_coeffs, ret=ret)
             print(f"\nDonnées sauvegardées : '{output_file}'")
 

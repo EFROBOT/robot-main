@@ -29,7 +29,9 @@ class Aruco:
         camera_matrix=None,
         dictionary=aruco.DICT_4X4_50,
     ):
-        """ """
+        """
+        Constructeur de la classe Aruco.
+        """
         self.marker_size = marker_size
         self.dist_coeffs = dist_coeffs if dist_coeffs is not None else np.zeros((4, 1))
         self.camera_matrix = camera_matrix
@@ -74,6 +76,9 @@ class Aruco:
                     y = float(tvec[1][0])
                     z = float(tvec[2][0])
 
+                    rmat, _ = cv2.Rodrigues(rvec)            # Rodrigue est un vecteur de rotation
+                    yaw = math.atan2(rmat[0][2], rmat[2][2]) # Yaw est l'angle de rotation sur l'axe Y
+
                     marker_aruco = Marker(
                         id=int(ids[i][0]),
                         vect_trans=tvec,
@@ -82,7 +87,7 @@ class Aruco:
                         x_pos=x,
                         y_pos=y,
                         z_pos=z,
-                        angle=float(rvec[1][0]),
+                        angle=yaw,
                     )
                     list_markers.append(marker_aruco)
 
