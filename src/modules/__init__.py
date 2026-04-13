@@ -1,5 +1,5 @@
 """"""
 
-from .Aruco import Aruco, Marker, Map, MapGUI
+from .Aruco import Aruco, Marker, Map, MapGUI, Simulation, Strategy
 
-__all__ = ["Aruco", "Marker", "Map", "MapGUI"]
+__all__ = ["Aruco", "Marker", "Map", "MapGUI", "Simulation", "Strategy"]

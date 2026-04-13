@@ -61,6 +61,10 @@ class Zone:
 
     def in_zone(self, pos):
         return self.x_min() <= pos.x <= self.x_max() and self.y_min() <= pos.y <= self.y_max
+    
+    def estime_zone(self, estimation):
+        rayon = math.sqrt((self.width / 2)**2 + (self.height / 2)**2)
+        return rayon + estimation
 
 
 class Map:
@@ -72,7 +76,9 @@ class Map:
         self.exclusion = self.exclusion()
         self.thermometre = self.thermometre()
         self.curseur = self.curseur()
+
         self.robot = self.get_robot_position()
+        self.caisses = self.caisses()
 
     def nids(self):
         if self.team == "yellow":
@@ -85,7 +91,7 @@ class Map:
             }
 
     def ramassage(self):
-        # 15 * 20 cm --> 4 caisses
+        # 15 * 20 cm --> 4 caisses par zone de ramassage
         # 8 R
         return{
             "R1": Zone("R1", Position(20, 120), 15, 20),
@@ -100,6 +106,27 @@ class Map:
             "R7": Zone("R7", Position(110, 20), 20, 15),
             "R8": Zone("R8", Position(190, 20), 20, 15),
         }
+    
+    def caisses(self):
+        # 4 caisses de 15x5 cm dans chaque zone de ramassage
+        caisses = {}
+        for key, zone in self.ramassage.items():  
+            if zone.width == 15 and zone.height == 20:
+                w_caisse, h_caisse = 15, 5
+                start_y = zone.y_min() + (h_caisse / 2)
+                for i in range(4):
+                    nom = f"{key}_{i+1}"
+                    cy = start_y + (i * h_caisse)
+                    caisses[nom] = Zone(nom, Position(zone.center.x, cy), w_caisse, h_caisse)
+            elif zone.width == 20 and zone.height == 15:
+                w_caisse, h_caisse = 5, 15
+                start_x = zone.x_min() + (w_caisse / 2)
+                for i in range(4):
+                    nom = f"{key}_{i+1}"
+                    cx = start_x + (i * w_caisse)
+                    caisses[nom] = Zone(nom, Position(cx, zone.center.y), w_caisse, h_caisse)
+
+        return caisses
 
     def garde_mangers(self):
         # 20 * 20 cm 
@@ -139,8 +166,11 @@ class Map:
         
     def get_robot_position(self):
         return {
-            "Robot": Zone("Robot", Position(14, 184), 28, 32)
+            "Robot": Zone("Robot", Position(14, 184), 32, 28)
             }
+    
+
+
 
 
 if __name__ == "__main__":
