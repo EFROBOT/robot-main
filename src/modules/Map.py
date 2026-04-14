@@ -60,7 +60,7 @@ class Zone:
         return self.center.y + self.height / 2
 
     def in_zone(self, pos):
-        return self.x_min() <= pos.x <= self.x_max() and self.y_min() <= pos.y <= self.y_max
+        return self.x_min() <= pos.x <= self.x_max() and self.y_min() <= pos.y <= self.y_max()
     
     def estime_zone(self, estimation):
         rayon = math.sqrt((self.width / 2)**2 + (self.height / 2)**2)

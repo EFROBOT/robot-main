@@ -113,8 +113,8 @@ class MapGUI:
             self.draw_estimation_circle(zone, marge_cm=7, color="deepskyblue")
 
         # Thermomètre
-        for key, zone in self.carte.thermometre.items():
-            self.draw_zone(zone, "lightcoral")
+        #for key, zone in self.carte.thermometre.items():
+        #    self.draw_zone(zone, "lightcoral")
             
         # Exclusion
         for key, zone in self.carte.exclusion.items():
@@ -135,9 +135,9 @@ class MapGUI:
         #    self.draw_zone(zone, "orange")
 
         # Object mobile 
-        if hasattr(self.carte, 'curseur'):
-            for key, zone in self.carte.curseur.items():
-                self.draw_zone(zone, "gray")
+        #if hasattr(self.carte, 'curseur'):
+        #    for key, zone in self.carte.curseur.items():
+        #        self.draw_zone(zone, "gray")
 
         if hasattr(self.carte, 'robot'):
             for key, zone in self.carte.robot.items():

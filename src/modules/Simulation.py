@@ -92,6 +92,19 @@ class Simulation:
             self._sync_map()
             self.gui.update_display()
 
+    
+    def tourner_vers_angle(self, angle_cible_deg):
+        angle_actuel_deg = math.degrees(self.angle)
+
+        diff = angle_cible_deg - angle_actuel_deg
+        diff = (diff + 180) % 360 - 180
+
+        if diff > 0:
+            self.rotation_gauche(diff)
+        elif diff < 0:
+            self.rotation_droite(abs(diff))
+
+
     def go_to_coord(self, x_cible, y_cible):
         dx = x_cible - self.x
         dy = y_cible - self.y
@@ -169,8 +182,20 @@ class Simulation:
     """
 
     def recuperer_caisses(self, id_zone):
-        caisses_a_prendre = [nom for nom in self.carte.caisses.keys() if id_zone in nom]
-        for nom_caisse in caisses_a_prendre:
+        caisses_noms = [nom for nom in self.carte.caisses.keys() if id_zone in nom]
+        caisses_triees = sorted(caisses_noms, key=lambda nom: math.hypot(self.carte.caisses[nom].center.x - self.x, self.carte.caisses[nom].center.y - self.y))
+
+        for nom_caisse in caisses_triees:
+            caisse = self.carte.caisses.get(nom_caisse)
+            if not caisse:
+                continue
+
+            dist = math.hypot(caisse.center.x - self.x, caisse.center.y - self.y)
+            avance_requise = dist - 18.5
+            
+            if avance_requise > 0.1:
+                self.avancer(avance_requise)
+
             self.attendre(1) 
             caisse_attrapee = self.carte.caisses.pop(nom_caisse)
             self.inventaire.append(caisse_attrapee)
@@ -184,17 +209,19 @@ class Simulation:
             self.attendre(0.5) 
             caisse_a_deposer = self.inventaire.pop(0)
             
-            # On recrache derrière (angle + 180°)
             angle_arriere = self.angle + math.pi
-            distance_recul = 18 + (i * 6) 
+            distance_recul = 18.0
             
             caisse_a_deposer.center.x = self.x + distance_recul * math.cos(angle_arriere)
             caisse_a_deposer.center.y = self.y + distance_recul * math.sin(angle_arriere)
             
             self.carte.caisses[caisse_a_deposer.name] = caisse_a_deposer
-            self.gui.update_display() # Force l'apparition graphique
+            self.gui.update_display()
             print(f"Caisse {caisse_a_deposer.name} déposée ({len(self.inventaire)})")
-
+            
+            if len(self.inventaire) > 0:
+                self.avancer(6.0)
+                
 if __name__ == "__main__":
     carte_jaune = Map(team="yellow")
     
@@ -202,8 +229,7 @@ if __name__ == "__main__":
     
     sim = Simulation(carte=carte_jaune, gui=interface, x_init=16.0, y_init=184.0, angle_init_deg=0.0)
     
-    cerveau = Strategy(carte=carte_jaune, robot=sim)
-    
+    cerveau = Strategy(carte=carte_jaune, robot=sim, sim=True)
     cerveau.strategy_1()
 
     print(f"X : {sim.x} | Y : {sim.y}")
