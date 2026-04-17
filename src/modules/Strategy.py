@@ -16,7 +16,6 @@ Strategie 3 :
 import time
 
 class Strategy:
-
     def __init__(self, carte, robot, sim=False):
         self.carte = carte
         self.robot = robot
@@ -34,7 +33,6 @@ class Strategy:
                 x_cible = zone.center.x
                 y_cible = zone.y_min() - dist_avant
                 angle_cible = 90.0
-
         else:
             if self.robot.x > zone.center.x:
                 x_cible = zone.x_max() + dist_avant
@@ -45,9 +43,8 @@ class Strategy:
                 y_cible = zone.center.y
                 angle_cible = 0.0
 
-        self.robot.go_to_coord(x_cible, y_cible)
+        self.robot.aller_a_coord(x_cible, y_cible)
         self.robot.tourner_vers_angle(angle_cible)
-
 
     def approche_garde_manger(self, zone):
         dist_arriere = 16.0 
@@ -75,30 +72,24 @@ class Strategy:
                 target_angle_deg = -90.0
 
         self.robot.tourner_vers_angle(target_angle_deg) 
-        self.robot.go_to_coord(target_x, target_y)
+        self.robot.aller_a_coord(target_x, target_y)
 
     def strategy_1(self):
         time.sleep(1)
 
         zone_ramassage = self.carte.ramassage["R1"]
-        print(f" {zone_ramassage.name} (X:{zone_ramassage.center.x}, Y:{zone_ramassage.center.y})")
         self.approche_ramassage(zone_ramassage)
-        if self.sim:
+        
+        if self.sim and hasattr(self.robot, 'recuperer_caisses'):
             self.robot.recuperer_caisses("R1")
 
         time.sleep(1)
 
         zone_garde_manger = self.carte.garde_mangers["G3"]
-        self.robot.go_to_coord(zone_garde_manger.center.x, zone_garde_manger.center.y)
-        print(f"Approche de {zone_garde_manger.name}")
-        self.robot.lacher_caisses()
-
-        time.sleep(1)
         self.approche_garde_manger(zone_garde_manger)
         
-        if self.sim:
+        if self.sim and hasattr(self.robot, 'lacher_caisses'):
             self.robot.lacher_caisses()
-
 
     def strategy_2(self):
         pass

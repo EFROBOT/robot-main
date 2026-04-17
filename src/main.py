@@ -1,11 +1,13 @@
 """"""
 
-from hardware import Camera
-from robot import Robot
+#from hardware import Camera
+#from robot import Robot
+from modules import Aruco, Marker, AffichageWeb, Map, Robot, Strategy
 import serial
 import serial.tools.list_ports
 
 import time
+"""
 def main():
 
     try:
@@ -39,7 +41,30 @@ def main():
     finally:
         if robot.running:
             del robot
+"""
     
 
 if __name__ == "__main__":
-    main()
+    #main()
+    carte = Map(team="yellow")
+    
+    robot = Robot(port="/dev/ttyACM0", baudrate=115200, x_init=150, y_init=100, angle_init_deg=0)
+    #robot.connecter() 
+    
+    web = AffichageWeb(
+        carte          = carte,
+        robot          = robot,
+        strategy_class = Strategy,
+        port           = 5000,
+        image_path     = "/img/table_FINALE_1.0-1.png"
+    )
+
+    web.run()
+
+    try:
+        while True:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        robot.fermer()
+        print("\nArrêt du programme")
+

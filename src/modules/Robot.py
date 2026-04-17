@@ -16,9 +16,7 @@ Instruction de deplacement en fonction de la strategie --> Communication avec le
 import serial
 import threading
 import time
-from AffichageWeb import log
-from AffichageWeb import AffichageWeb
-from Map import Map
+from .AffichageWeb import log
 
 class Robot:
     def __init__(self, port="/dev/ttyUSB0", baudrate=115200, x_init=0.0, y_init=0.0, angle_init_deg=0.0):
@@ -141,33 +139,4 @@ class Robot:
         if self.serial and self.serial.is_open:
             self.serial.close()
 
-
-if __name__ == "__main__":
-    carte = Map(team="yellow")
-    
-    robot = Robot(port="/dev/ttyUSB0", baudrate=115200, x_init=5, y_init=158, angle_init_deg=90)
-    robot.connecter() 
-    
-    web = AffichageWeb(carte, robot)
-    web.run()
-
-    time.sleep(2)
-    
-    robot.aller_a_coord(20.5, 30.0)
-    time.sleep(1)
-    
-    robot.avancer(15)
-    time.sleep(1)
-    
-    robot.tourner_vers_angle(90)
-    time.sleep(1)
-    
-    robot.stop()
-
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        robot.fermer()
-        print("\nArrêt du programme")
 
