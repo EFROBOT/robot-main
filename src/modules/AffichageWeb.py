@@ -193,6 +193,14 @@ HTML_PAGE = """
         .log-rpi  { color: #a5d6a7; }
         .log-err  { color: #e94560; }
         .log-info { color: #aaa; }
+
+        .btn.stop { 
+        background: #e94560; 
+        font-weight: bold; 
+        font-size: 14px; 
+        }
+
+        .btn.stop:hover { background: #ff2e63; }
     </style>
 </head>
 <body>
@@ -236,7 +244,7 @@ HTML_PAGE = """
             <button class="btn" id="btn-diag-droite">↗</button>
 
             <button class="btn" id="btn-gauche">←</button>
-            <button class="btn vide"></button>
+            <button class="btn stop" id="btn-stop">STOP</button>
             <button class="btn" id="btn-droite">→</button>
 
             <button class="btn" id="btn-rot-gauche">↺</button>
@@ -505,6 +513,7 @@ const boutons = {
     "btn-rot-droite":  "rot_droite",
     "btn-pince-open":  "pince_open",
     "btn-pince-close": "pince_close",
+    "btn-stop" : "stop",
 };
 Object.entries(boutons).forEach(([id, action]) => {
     document.getElementById(id).addEventListener("click", () => envoyerCommande(action));
@@ -627,16 +636,17 @@ class AffichageWeb:
             log("RPi", f"Commande : {action} {distance}cm")
 
             actions = {
-                "avancer":     lambda: self.robot.avancer(distance),
-                "reculer":     lambda: self.robot.reculer(distance),
-                "gauche":      lambda: self.robot.gauche(distance),
-                "droite":      lambda: self.robot.droite(distance),
+                "avancer"    : lambda: self.robot.avancer(distance),
+                "reculer"    : lambda: self.robot.reculer(distance),
+                "gauche"     : lambda: self.robot.gauche(distance),
+                "droite"     : lambda: self.robot.droite(distance),
                 "diag_gauche": lambda: self.robot.diagonale_gauche(distance),
                 "diag_droite": lambda: self.robot.diagonale_droite(distance),
-                "rot_gauche":  lambda: self.robot.rotation_gauche(distance),
-                "rot_droite":  lambda: self.robot.rotation_droite(distance),
-                "pince_open":  lambda: self.robot.ouvrir_pince(),
+                "rot_gauche" : lambda: self.robot.rotation_gauche(distance),
+                "rot_droite" : lambda: self.robot.rotation_droite(distance),
+                "pince_open" : lambda: self.robot.ouvrir_pince(),
                 "pince_close": lambda: self.robot.fermer_pince(),
+                "stop"       : lambda: self.robot.stop(),
             }
             if action in actions:
                 actions[action]()

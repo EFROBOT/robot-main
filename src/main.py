@@ -5,6 +5,7 @@
 from modules import Aruco, Marker, AffichageWeb, Map, Robot, Strategy
 import serial
 import serial.tools.list_ports
+import cv2
 
 import time
 """
@@ -42,15 +43,49 @@ def main():
         if robot.running:
             del robot
 """
-    
+
+def init_devices(vid_stm32=0x0483, vid_lidar=0x10c4):
+    devices = {
+        "stm32": None,
+        "lidar": None,
+        "cameras": []
+    }
+
+    for port in serial.tools.list_ports.comports():
+        if port.vid == vid_stm32:
+            devices["stm32"] = port.device
+        elif port.vid == vid_lidar:
+            devices["lidar"] = port.device
+
+    for i in range(10):
+        cap = cv2.VideoCapture(i)
+        if cap.isOpened():
+            devices["cameras"].append(i)
+            cap.release()
+            if len(devices["cameras"]) == 2:
+                break
+
+    return devices
+
 
 if __name__ == "__main__":
-    #main()
+    devices = init_devices()
+    
+    if not devices["stm32"]:
+        print("Erreur : STM32 non détectée")
+        exit()
+
     carte = Map(team="yellow")
     
-    robot = Robot(port="/dev/ttyACM0", baudrate=115200, x_init=150, y_init=100, angle_init_deg=0)
-    #robot.connecter() 
-    
+    robot = Robot(
+        port=devices["stm32"], 
+        baudrate=115200, 
+        x_init=150, 
+        y_init=100, 
+        angle_init_deg=0
+        )
+
+    robot.connecter()    
     web = AffichageWeb(
         carte          = carte,
         robot          = robot,

@@ -19,7 +19,7 @@ import time
 from .AffichageWeb import log
 
 class Robot:
-    def __init__(self, port="/dev/ttyUSB0", baudrate=115200, x_init=0.0, y_init=0.0, angle_init_deg=0.0):
+    def __init__(self, port="/dev/ttyACM0", baudrate=115200, x_init=0.0, y_init=0.0, angle_init_deg=0.0):
         self.x = float(x_init)
         self.y = float(y_init)
         self.angle_deg = float(angle_init_deg)
@@ -119,6 +119,9 @@ class Robot:
     def rotation_anti_horaire(self, angle):
         self.envoyer_commande(f"RAH {angle}")
 
+    def stop(self):
+        self.envoyer_commande("STOP")
+
     #-------------------------------------------------------------------------------------------
     # Pince robot
 
@@ -128,9 +131,6 @@ class Robot:
     def fermer_pince(self):
         pass
 
-    def stop(self):
-        if self.serial and self.serial.is_open:
-            self.serial.write(b"STOP\n")
 
     def fermer(self):
         self.running = False
