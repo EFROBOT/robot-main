@@ -91,7 +91,7 @@ if __name__ == "__main__":
         robot          = robot,
         strategy_class = Strategy,
         port           = 5000,
-        image_path     = "/img/table_FINALE_1.0-1.png"
+        camera_indices=devices["cameras"],
     )
 
     web.run()
