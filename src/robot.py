@@ -43,9 +43,10 @@ class Robot:
                     print("Erreur de lecture caméra.")
                     break
 
-                markers = self.aruco_detector.detect_markers(frame)
-                
-                self.aruco_detector.draw_marker(frame, markers)
+                markers = []
+                if self.aruco_detector is not None:
+                    markers = self.aruco_detector.detect_markers(frame)
+                    self.aruco_detector.draw_marker(frame, markers)
 
                 if markers:
                     target_marker = markers[0]
