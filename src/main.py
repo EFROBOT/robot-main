@@ -11,12 +11,18 @@ import time
 """
 def main():
 
+    available_cameras = Camera.list_available_cameras()
+    if available_cameras:
+        print(f"Caméras détectées : {available_cameras}")
+    else:
+        print("Aucune caméra détectée automatiquement.")
+
     try:
-        cam_id = int(input("Quelle caméra utiliser ? (0, 1, 2) : "))
-        if cam_id not in [0, 1, 2]:
-            raise ValueError
+        default_camera = available_cameras[0] if available_cameras else 0
+        cam_id_input = input(f"Quelle caméra utiliser ? [{default_camera}] : ").strip()
+        cam_id = default_camera if cam_id_input == "" else int(cam_id_input)
     except ValueError:
-        cam_id = 2
+        cam_id = available_cameras[0] if available_cameras else 0
 
     do_calib = input(f"Calibration caméra {cam_id} ? (o/n) : ").lower() == "o"
     
@@ -42,6 +48,7 @@ def main():
     finally:
         if robot.running:
             del robot
+
 """
 
 def init_devices(vid_stm32=0x0483, vid_lidar=0x10c4):
