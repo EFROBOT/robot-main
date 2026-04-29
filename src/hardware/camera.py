@@ -2,7 +2,7 @@
 
 import glob
 import os
-from typing import Optional, Tuple
+from typing import List, Optional, Tuple
 
 import cv2
 import numpy as np
@@ -43,6 +43,19 @@ class Camera:
 
         print(f"Erreur caméra {self.camera_id}\n")
         return False
+
+    @staticmethod
+    def list_available_cameras(max_index: int = 10) -> List[int]:
+        """Retourne la liste des index caméra disponibles."""
+        available = []
+
+        for index in range(max_index + 1):
+            cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
+            if cap.isOpened():
+                available.append(index)
+            cap.release()
+
+        return available
 
     def _configure(self):
         """Configure les paramètres de la caméra."""
@@ -85,6 +98,7 @@ class Camera:
     def release(self):
         if self.cap:
             self.cap.release()
+            self.cap = None
 
     def capture_images(self, save_dir: Optional[str] = None):
         """
