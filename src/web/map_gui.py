@@ -1,7 +1,9 @@
-import pygame
-import sys
 import math
-from Map import Map
+import sys
+
+import pygame
+
+from world.map import Map
 
 TERRAIN_WIDTH  = 300.0
 TERRAIN_HEIGHT = 200.0

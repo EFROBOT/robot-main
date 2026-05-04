@@ -168,6 +168,17 @@ class Map:
         return {
             "Robot": Zone("Robot", Position(14, 184), 32, 28)
             }
+
+    def _z2d(self, z):
+        return {
+            "name": z.name,
+            "center_x": z.center.x,
+            "center_y": z.center.y,
+            "width": z.width,
+            "height": z.height,
+            "x_min": z.x_min(),
+            "y_max": z.y_max(),
+        }
     
 
 

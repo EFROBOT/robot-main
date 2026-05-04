@@ -5,13 +5,14 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
+    "flask>=3.0.3",
     "numpy>=1.24.4",
     "opencv-python>=4.13.0.90",
     "pyserial>=3.5",
 ]
 
 [project.scripts]
-start = "main:main"
+start = "app.main:main"
 
 [dependency-groups]
 dev = [
