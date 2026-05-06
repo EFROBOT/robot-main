@@ -3,293 +3,167 @@ import cv2
 import cv2.aruco as aruco
 import numpy as np
 
+class CaisseNoisette:
+    def __init__(self, equipe, distance_cm, decalage_x_cm, angle_deg, rvec=None, tvec=None, box_corners=None, is_x_long=True):
+        self.equipe = equipe          
+        self.distance = distance_cm   
+        self.decalage_x = decalage_x_cm 
+        self.angle_longueur = angle_deg 
+        
+        self.rvec = rvec
+        self.tvec = tvec
+        self.box_corners = box_corners
+        self.is_x_long = is_x_long 
 
-class Marker:
-    def __init__(
-        self,
-        marker_id,
-        vect_trans,
-        vect_rot,
-        distance,
-        x_pos,
-        y_pos,
-        z_pos,
-        angle,
-        corners=None,
-        color_name="unknown",
-        rect_corners=None,
-        rect_size_px=None,
-        rect_angle_deg=None,
-    ):
-        self.id = marker_id
-        self.vect_trans = vect_trans
-        self.vect_rot = vect_rot
-        self.distance = distance
-        self.x_pos = x_pos
-        self.y_pos = y_pos
-        self.z_pos = z_pos
-        self.angle = angle
-        self.corners = corners
-        self.color_name = color_name
-        self.rect_corners = rect_corners
-        self.rect_size_px = rect_size_px
-        self.rect_angle_deg = rect_angle_deg
+    def __repr__(self):
+        return f"<Caisse {self.equipe.upper()} | Dist: {self.distance:.1f}cm | X: {self.decalage_x:+.1f}cm | Angle: {self.angle_longueur:+.1f}°>"
 
 
 class Aruco:
-    def __init__(
-        self,
-        marker_size=0.040,
-        box_width=0.150,
-        box_height=0.050,
-        box_depth=0.030,
-        dist_coeffs=None,
-        camera_matrix=None,
-        dictionary=aruco.DICT_4X4_100,
-    ):
+    def __init__(self, marker_size=0.040):
         self.marker_size = marker_size
-        self.box_width = box_width
-        self.box_height = box_height
-        self.box_depth = box_depth
-        self.dist_coeffs = dist_coeffs if dist_coeffs is not None else np.zeros((4, 1))
-        self.camera_matrix = camera_matrix
-
-        self.dictionary = cv2.aruco.getPredefinedDictionary(dictionary)
+        self.camera_matrix = None
+        self.dist_coeffs = None
+        
+        self.box_width = 0.150  
+        self.box_height = 0.050 
+        self.box_depth = 0.030 
+        
+        self.dictionary = cv2.aruco.getPredefinedDictionary(aruco.DICT_4X4_100)
         self.parameters = cv2.aruco.DetectorParameters()
         self.detector = cv2.aruco.ArucoDetector(self.dictionary, self.parameters)
-
-        half = marker_size / 2.0
-        self.obj_points = np.array(
-            [[-half, half, 0], [half, half, 0], [half, -half, 0], [-half, -half, 0]],
-            dtype=np.float32,
-        )
+        
+        half = self.marker_size / 2.0
+        self.obj_points = np.array([
+            [-half, half, 0], [half, half, 0], [half, -half, 0], [-half, -half, 0]
+        ], dtype=np.float32)
 
     def set_calibration(self, camera_matrix, dist_coeffs):
         self.camera_matrix = camera_matrix
-        self.dist_coeffs = dist_coeffs
-
-    def get_box_properties(self, marker_id):
-        if marker_id == 36:
-            return "blue", (140, 91, 0)
-        if marker_id == 47:
-            return "yellow", (0, 181, 247)
-        return "unknown", (0, 255, 0)
-
-    def _detect_box_by_color(self, image, marker_corners, color_name):
-        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-
-        if color_name == "blue":
-            lower_hsv = np.array([100, 100, 40])
-            upper_hsv = np.array([160, 255, 100])
-        elif color_name == "yellow":
-            lower_hsv = np.array([20, 100, 150])
-            upper_hsv = np.array([60, 255, 255])
-        else:
-            return None
-
-        mask = cv2.inRange(hsv, lower_hsv, upper_hsv)
-
-        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
-        mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-
-        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-        if not contours:
-            return None
-
-        marker_center = np.mean(marker_corners, axis=0)
-        best_contour = None
-        best_distance = float("inf")
-
-        for contour in contours:
-            area = cv2.contourArea(contour)
-            if area < 100:
-                continue
-
-            moments = cv2.moments(contour)
-            if moments["m00"] == 0:
-                continue
-
-            cx = moments["m10"] / moments["m00"]
-            cy = moments["m01"] / moments["m00"]
-            dist = np.sqrt((cx - marker_center[0]) ** 2 + (cy - marker_center[1]) ** 2)
-            if dist < best_distance:
-                best_distance = dist
-                best_contour = contour
-
-        if best_contour is None:
-            return None
-
-        rect = cv2.minAreaRect(best_contour)
-        box_corners = cv2.boxPoints(rect)
-        box_corners = np.float32(box_corners)
-
-        rect_w, rect_h = rect[1]
-        long_side = float(max(rect_w, rect_h))
-        short_side = float(min(rect_w, rect_h))
-        angle_deg = float(rect[2])
-        if rect_w < rect_h:
-            angle_deg += 90.0
-
-        return box_corners, (long_side, short_side), angle_deg
+        self.dist_coeffs = dist_coeffs if dist_coeffs is not None else np.zeros((4, 1))
 
     def detect_markers(self, image):
-        if image is None:
+        if image is None or self.camera_matrix is None:
             return []
 
-        if self.camera_matrix is None:
-            raise ValueError("camera_matrix manquante")
-
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         corners, ids, _ = self.detector.detectMarkers(gray)
 
-        list_markers = []
-        valid_ids = {36, 47}
+        pieces_valides = []
+        if ids is None:
+            return pieces_valides
 
-        if ids is not None:
-            for i in range(len(ids)):
-                marker_id = int(ids[i][0])
-                if marker_id not in valid_ids:
+        for i in range(len(ids)):
+            marker_id = int(ids[i][0])
+            
+            if cv2.contourArea(corners[i][0]) < 250: 
+                continue
+
+            if marker_id == 36:
+                equipe = "bleu"
+                lower_hsv = np.array([90, 80, 50])
+                upper_hsv = np.array([130, 255, 255])
+            elif marker_id == 47:
+                equipe = "jaune"
+                lower_hsv = np.array([15, 60, 80])
+                upper_hsv = np.array([45, 255, 255])
+            else:
+                continue 
+
+            mask = cv2.inRange(hsv, lower_hsv, upper_hsv)
+            kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (9, 9))
+            mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+            contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+            marker_center = np.mean(corners[i][0], axis=0)
+            best_contour = None
+
+            for contour in contours:
+                if cv2.contourArea(contour) < 400:
                     continue
+                
+                dist_to_edge = cv2.pointPolygonTest(contour, (float(marker_center[0]), float(marker_center[1])), True)
+                if dist_to_edge > -40: 
+                    best_contour = contour
+                    break 
 
-                color_name, _ = self.get_box_properties(marker_id)
-                rect_result = self._detect_box_by_color(
-                    image,
-                    np.array(corners[i], dtype=np.float32).reshape(-1, 2),
-                    color_name,
-                )
-                if rect_result is None:
-                    continue
+            if best_contour is None:
+                continue 
 
-                rect_corners, rect_size_px, rect_angle_deg = rect_result
-                image_points = np.array(corners[i], dtype=np.float32).reshape(-1, 2)
+            rect = cv2.minAreaRect(best_contour)
+            box_corners = cv2.boxPoints(rect)
+            rect_w, rect_h = rect[1]
+            rect_angle_deg = float(rect[2])
+            if rect_w < rect_h:
+                rect_angle_deg += 90.0
 
-                retval, rvec, tvec = cv2.solvePnP(
-                    self.obj_points,
-                    image_points,
-                    self.camera_matrix,
-                    self.dist_coeffs,
-                    flags=cv2.SOLVEPNP_IPPE_SQUARE,
-                )
+            image_points = np.array(corners[i], dtype=np.float32).reshape(-1, 2)
+            retval, rvec, tvec = cv2.solvePnP(
+                self.obj_points, image_points, self.camera_matrix, self.dist_coeffs, flags=cv2.SOLVEPNP_IPPE_SQUARE
+            )
 
-                if retval:
-                    x = float(tvec[0][0])
-                    y = float(tvec[1][0])
-                    z = float(tvec[2][0])
+            if not retval:
+                continue
 
-                    rmat, _ = cv2.Rodrigues(rvec)
-                    yaw = math.atan2(rmat[0][2], rmat[2][2])
+            x_m = float(tvec[0][0])
+            z_m = float(tvec[2][0])
+            distance_cm = math.sqrt(x_m**2 + z_m**2) * 100.0
+            decalage_x_cm = x_m * 100.0
 
-                    marker_aruco = Marker(
-                        marker_id=marker_id,
-                        vect_trans=tvec,
-                        vect_rot=rvec,
-                        distance=np.sqrt(x ** 2 + z ** 2),
-                        x_pos=x,
-                        y_pos=y,
-                        z_pos=z,
-                        angle=yaw,
-                        corners=image_points,
-                        color_name=color_name,
-                        rect_corners=rect_corners,
-                        rect_size_px=rect_size_px,
-                        rect_angle_deg=rect_angle_deg,
-                    )
-                    list_markers.append(marker_aruco)
+            pt_center, _ = cv2.projectPoints(np.array([[0.0, 0.0, 0.0]]), rvec, tvec, self.camera_matrix, self.dist_coeffs)
+            pt_x, _ = cv2.projectPoints(np.array([[1.0, 0.0, 0.0]]), rvec, tvec, self.camera_matrix, self.dist_coeffs)
+            dx = pt_x[0][0][0] - pt_center[0][0][0]
+            dy = pt_x[0][0][1] - pt_center[0][0][1]
+            aruco_x_angle_2d = math.degrees(math.atan2(dy, dx))
 
-        return list_markers
+            diff = abs(rect_angle_deg - aruco_x_angle_2d) % 180
+            if diff > 90:
+                diff = 180 - diff
 
-    def compute_alignment(self, marker, approach_dist_m=0.10):
-        x = float(marker.x_pos)
-        z = float(marker.z_pos)
+            is_x_long = (diff < 45)
+            rmat, _ = cv2.Rodrigues(rvec)
 
-        bearing_rad = math.atan2(x, z)
-        bearing_deg = math.degrees(bearing_rad)
-        bearing_deg = (bearing_deg + 180.0) % 360.0 - 180.0
+            if is_x_long:
+                vecteur_longueur = rmat[:, 0] 
+            else:
+                vecteur_longueur = rmat[:, 1] 
 
-        rmat, _ = cv2.Rodrigues(marker.vect_rot)
-        vec_z = rmat[:, 2]
-        approach_point = marker.vect_trans.flatten() + (vec_z * approach_dist_m)
+            angle_longueur_rad = math.atan2(vecteur_longueur[0], vecteur_longueur[2])
+            angle_longueur_deg = math.degrees(angle_longueur_rad)
 
-        return {
-            "distance_cm": float(marker.distance * 100.0),
-            "lateral_cm": float(x * 100.0),
-            "depth_cm": float(z * 100.0),
-            "bearing_deg": float(bearing_deg),
-            "rect_long_axis_deg": float(marker.rect_angle_deg or 0.0),
-            "approach_x_cm": float(approach_point[0] * 100.0),
-            "approach_z_cm": float(approach_point[2] * 100.0),
-        }
+            caisse = CaisseNoisette(equipe, distance_cm, decalage_x_cm, angle_longueur_deg, rvec, tvec, box_corners, is_x_long)
+            pieces_valides.append(caisse)
 
-    def draw_marker(self, image, list_markers):
-        if not list_markers:
+        return pieces_valides
+
+    def draw_marker(self, image, liste_caisses):
+        if image is None or not liste_caisses:
             return
 
-        for obs in list_markers:
-            _, rect_color = self.get_box_properties(obs.id)
+        for caisse in liste_caisses:
+            couleur = (255, 0, 0) if caisse.equipe == "bleu" else (0, 255, 255)
 
-            if obs.corners is not None:
-                contour = np.array(obs.corners, dtype=np.int32).reshape((-1, 1, 2))
-                cv2.polylines(image, [contour], True, (0, 0, 255), 1, cv2.LINE_AA)
+            if caisse.box_corners is not None:
+                contour = np.int32(caisse.box_corners).reshape(-1, 1, 2)
+                cv2.polylines(image, [contour], True, couleur, 2, cv2.LINE_AA)
 
-            if obs.rect_corners is not None:
-                rect_contour = np.array(obs.rect_corners, dtype=np.int32).reshape((-1, 1, 2))
-                cv2.polylines(image, [rect_contour], True, rect_color, 2, cv2.LINE_AA)
+            if caisse.rvec is not None and caisse.tvec is not None:
+                cv2.drawFrameAxes(
+                    image, self.camera_matrix, self.dist_coeffs, 
+                    caisse.rvec, caisse.tvec, self.marker_size * 0.8
+                )
+                
+                pt_center, _ = cv2.projectPoints(np.array([[0.0, 0.0, 0.0]]), caisse.rvec, caisse.tvec, self.camera_matrix, self.dist_coeffs)
+                tx, ty = int(pt_center[0][0][0]) - 80, int(pt_center[0][0][1]) - 50
 
-            hx = self.box_height / 2.0
-            hy = self.box_width / 2.0
-            depth = -self.box_depth
+                textes = [
+                    f"[{caisse.equipe.upper()}] Sens: {'X' if caisse.is_x_long else 'Y'}",
+                    f"Z (Dist) : {caisse.distance:.1f} cm",
+                    f"X (Centrage) : {caisse.decalage_x:+.1f} cm",
+                    f"Angle Robot : {caisse.angle_longueur:+.1f} deg"
+                ]
 
-            box_points_3d = np.array(
-                [
-                    [-hx, -hy, 0.0], [hx, -hy, 0.0], [hx, hy, 0.0], [-hx, hy, 0.0],
-                    [-hx, -hy, depth], [hx, -hy, depth], [hx, hy, depth], [-hx, hy, depth],
-                ],
-                dtype=np.float32,
-            )
-
-            box_image_points, _ = cv2.projectPoints(
-                box_points_3d,
-                obs.vect_rot,
-                obs.vect_trans,
-                self.camera_matrix,
-                self.dist_coeffs,
-            )
-            img_pts = np.round(box_image_points).astype(np.int32).reshape(-1, 2)
-
-            cv2.polylines(image, [img_pts[:4]], True, rect_color, 2, cv2.LINE_AA)
-            cv2.polylines(image, [img_pts[4:]], True, (150, 150, 150), 1, cv2.LINE_AA)
-            for i in range(4):
-                cv2.line(image, tuple(img_pts[i]), tuple(img_pts[i + 4]), rect_color, 2, cv2.LINE_AA)
-
-            box_center = np.mean(img_pts[:4], axis=0).astype(int)
-            cv2.circle(image, tuple(box_center), 4, rect_color, -1)
-            cv2.drawFrameAxes(
-                image,
-                self.camera_matrix,
-                self.dist_coeffs,
-                obs.vect_rot,
-                obs.vect_trans,
-                self.marker_size * 0.8,
-            )
-
-            align = self.compute_alignment(obs)
-            dist_x = align["lateral_cm"]
-            dist_z = align["depth_cm"]
-            bearing = align["bearing_deg"]
-            rect_axis = align["rect_long_axis_deg"]
-
-            text_team = f"[{obs.color_name.upper()}] ID: {obs.id}"
-            text_x = f"X (Centrage) : {dist_x:+.1f} cm"
-            text_z = f"Z (Distance) : {dist_z:.1f} cm"
-            text_bearing = f"Bearing (Rotation) : {bearing:+.1f}°"
-            text_axis = f"Axe Long (Image) : {rect_axis:+.1f}°"
-
-            tx, ty = int(box_center[0]) - 80, int(box_center[1]) - 50
-
-            cv2.putText(image, text_team, (tx, ty), cv2.FONT_HERSHEY_SIMPLEX, 0.5, rect_color, 2)
-            cv2.putText(image, text_x, (tx, ty + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-            cv2.putText(image, text_z, (tx, ty + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 2)
-            cv2.putText(image, text_bearing, (tx, ty + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 255), 2)
-            cv2.putText(image, text_axis, (tx, ty + 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (100, 255, 0), 2)
+                for i, texte in enumerate(textes):
+                    c = couleur if i == 0 else (0, 255, 0)
+                    cv2.putText(image, texte, (tx, ty + (i * 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, c, 2)

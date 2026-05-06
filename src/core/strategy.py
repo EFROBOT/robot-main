@@ -18,6 +18,7 @@ Strategie 3 :
 """
 
 import time
+import math
 from core.camera import Camera
 from core.robot import Robot
 
@@ -75,41 +76,54 @@ class Strategy:
     # Calibration fine ArUco
 
     def aligner_sur_aruco(self, timeout_s=10.0, frame_provider=None):
-        """
-        Alignement sur le marqueur ArUco visible par robot.camera.
-        Utilise les commandes discrètes du robot (rotation + avance).
-        Retourne True si aligné, False si timeout ou marqueur perdu.
-        """
         deadline = time.time() + timeout_s
 
         while time.time() < deadline:
-            ret, frame = self.robot.camera.read()
             if frame_provider is not None:
                 frame = frame_provider()
             else:
                 ret, frame = self.robot.camera.read()
                 if not ret:
-                    frame = None
+                    frame = self.robot.camera.get_latest_frame()
+                    if not frame:
+                        frame = None
 
             if frame is None:
                 self.robot.logs.log("WARN", "aligner_sur_aruco: pas de frame, attente...")
                 time.sleep(0.05)
                 continue
 
+            try:
+                caisses = self.robot.camera.aruco.detect_markers(frame)
+            except Exception as e:
+                self.robot.logs.log("ERR", f"detect_markers: {e}")
+                time.sleep(0.05)
+                continue
 
-            alignment = self.robot.camera.aruco.compute_alignment(markers[0])
+            if not caisses:
+                self.robot.logs.log("WARN", "aligner_sur_aruco: aucune caisse détectée.")
+                time.sleep(0.05)
+                continue
+
+            caisse   = caisses[0]
             bearing   = alignment["bearing_deg"]
             distance  = alignment["distance_cm"]
-            lateral   = alignment["lateral_cm"]
+            distance = caisse.distance
+            lateral  = caisse.decalage_x
 
             self.robot.logs.log(
                 "INFO",
-                f"ArUco → bearing={bearing:+.1f}° dist={distance:.1f}cm lateral={lateral:+.1f}cm"
+                f"ArUco → dist={distance:.1f}cm lateral={lateral:+.1f}cm angle={caisse.angle_longueur:+.1f}°"
             )
 
-            # 1. Corriger la rotation (bearing)
+            if distance > 45.0:
+                avance_cmd = 15 
+                self.robot.avancer(avance_cmd)
+                time.sleep(0.5)
+                continue
+
             if abs(bearing) > 5.0:
-                angle_cmd = round(abs(bearing))
+                angle_cmd = round(abs(bearing)) - 90
                 if bearing > 0:
                     self.robot.mecanum.rotation_droite(angle_cmd)
                 else:
@@ -117,29 +131,25 @@ class Strategy:
                 time.sleep(0.3)
                 continue
 
-            # 2. Corriger le décalage latéral
-            if abs(lateral) > 2.0:
+            if abs(lateral) > 5.0:
                 dist_cmd = round(abs(lateral))
                 if lateral > 0:
-                    self.robot.mecanum.droite(dist_cmd)
+                    self.robot.droite(dist_cmd)
                 else:
-                    self.robot.mecanum.gauche(dist_cmd)
+                    self.robot.gauche(dist_cmd)
                 time.sleep(0.3)
                 continue
 
-            # 3. Corriger la distance (cible : 7 cm)
-            TARGET_CM = 7.0
-            error = distance - TARGET_CM
-            if abs(error) > 2.0:
-                dist_cmd = round(abs(error))
-                if error > 0:
-                    self.robot.mecanum.avancer(dist_cmd)
-                else:
-                    self.robot.mecanum.reculer(dist_cmd)
-                time.sleep(0.3)
-                continue
+            hyp = distance - 10
+            if hyp > 29:
+                x = math.sqrt((hyp * hyp) - (29 * 29))
+                self.robot.logs.log("INFO", f"Le robot doit avancer de {x:.1f} cm")
+                
+                if x > 2.0: 
+                    self.robot.avancer(round(x))
+                    time.sleep(0.5)
+                    continue
 
-            # Tout est dans les deadzone → aligné
             self.robot.logs.log("INFO", "ArUco → ALIGNÉ ✓")
             return True
 
@@ -149,6 +159,7 @@ class Strategy:
 
     def test_alignement(self, frame_provider):
         """Test rapide : uniquement la calibration ArUco, sans navigation."""
+
         self.robot.logs.log("INFO", "Test alignement ArUco démarré...")
         result = self.aligner_sur_aruco(timeout_s=15.0, frame_provider=frame_provider)
         self.robot.logs.log("INFO", f"Test alignement ArUco terminé → {'OK ✓' if result else 'TIMEOUT ✗'}")

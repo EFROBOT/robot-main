@@ -160,14 +160,14 @@ class AffichageWeb:
 
                 if detector is not None:
                     try:
-                        markers = detector.detect_markers(frame)
-                        detector.draw_marker(frame, markers)
-                        if markers and hasattr(self.robot, "align_controller"):
+                        liste_caisses = detector.detect_markers(frame)
+                        detector.draw_marker(frame, liste_caisses)
+                        if liste_caisses and hasattr(self.robot, "align_controller"):
                             now_ms = time.time() * 1000
                             interval_ms = getattr(self.robot, "align_interval_ms", 100)
                             if now_ms - self._last_align_log_ms[slot] >= interval_ms:
                                 self._last_align_log_ms[slot] = now_ms
-                                self.robot.align_to_marker(markers[0])
+                                self.robot.align_to_marker(liste_caisses[0])
                     except Exception as e:
                         self.robot.logs.log("ERR", f"Aruco caméra {slot} : {e}")
 
@@ -480,7 +480,7 @@ class AffichageWeb:
 
             self.robot.logs.log("RPi", f"Aller à ({x}, {y})")
             threading.Thread(
-                target=lambda: self.robot.strategy.go_to_coord(x, y),
+                target=lambda: self.robot.aller_a_coord(x, y),
                 daemon=True
             ).start()
             return jsonify({"ok": True})

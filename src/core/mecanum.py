@@ -62,6 +62,7 @@ class Mecanum:
         self.logs.log("STM32", f"CONNECT port={self.port} baudrate={self.baudrate}")
         return True
 
+
     def lire_en_continu(self):
         while self.running and not self._stop_event.is_set():
             try:
@@ -72,6 +73,7 @@ class Mecanum:
 
                 raw = serial_port.readline()
                 if not raw:
+                    time.sleep(0.01)
                     continue
 
                 try:
@@ -81,9 +83,22 @@ class Mecanum:
 
                 if line:
                     self.logs.log("STM32", line)
+                    if line.startswith("POS"):
+                        self.traiter_position(line)
+
             except Exception as exc:
                 self.logs.log("ERR", f"Lecture série : {exc}")
-            time.sleep(0.01)
+                time.sleep(0.01)
+
+
+    def traiter_position(self, ligne):
+        try:
+            _, x, y, angle = ligne.split()
+            self.x = float(x)
+            self.y = float(y)
+            self.angle_deg = float(angle)
+        except Exception as e:
+            self.logs.log("ERR", f"Parse position : {e}")
 
     def send_raw(self, line):
         serial_port = self.serial_port
@@ -94,12 +109,6 @@ class Mecanum:
             serial_port.write(data)
         return True
 
-    def move(self, vx, vy, omega):
-        serial_port = self.serial_port
-        if not serial_port or not serial_port.is_open:
-            self.logs.log("STM32", f"CMD wheels vx={vx:.2f} vy={vy:.2f} omega={omega:.2f}")
-            return
-        self.send_raw(f"{vx:.2f},{vy:.2f},{omega:.2f}")
 
     def avancer(self, distance):
         self.send_raw(f"A {distance}")
@@ -107,10 +116,10 @@ class Mecanum:
     def reculer(self, distance):
         self.send_raw(f"R {distance}")
 
-    def gauche(self, distance):
+    def droite(self, distance):
         self.send_raw(f"G {distance}")
 
-    def droite(self, distance):
+    def gauche(self, distance):
         self.send_raw(f"D {distance}")
 
     def diagonale_gauche(self, distance):
