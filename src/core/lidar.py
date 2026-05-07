@@ -14,7 +14,7 @@ class Lidar:
         if self.logs:
             self.logs.log("RPi", f"Lidar connecté sur {port}")
 
-    def scan(self, distance_cm=80, min_distance_cm=5):
+    def scan(self, distance_cm=30, min_distance_cm=5):
         distance_mm = distance_cm * 10
         min_distance_mm = min_distance_cm * 10
         obstacles = []
