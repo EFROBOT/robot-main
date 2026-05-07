@@ -1,10 +1,7 @@
 """
 Module de strategie
 
-Strategy est l'orchestrateur principal.
-Elle reçoit la carte et le robot (qui contient déjà camera, lidar, moteurs).
-Elle NE connait PAS les détails hardware — elle appelle robot.aller_a_coord(),
-robot.tourner_vers_angle() et robot.camera.aruco pour la calibration fine.
+Strategy == Top level
 
 Strategie 1 :
     Faire dans l'ordre les différentes zones de ramassage / garde_manger
@@ -22,38 +19,45 @@ import math
 from core.camera import Camera
 from core.robot import Robot
 
-
-
 class Strategy:
-    def __init__(self, carte, robot, sim=False):
+    def __init__(self, carte, robot):
         self.carte = carte
         self.robot = robot
-
 
     # ------------------------------------------------------------------
     # Approche odométrique
 
     def approche_ramassage(self, zone):
         """Navigation odométrique vers le point d'approche de la zone de ramassage."""
-        dist_avant = 16.0
+        dist_avant = 15.0
 
         if zone.height > zone.width:
             if self.robot.y > zone.center.y:
-                x_cible, y_cible, angle_cible = zone.center.x, zone.y_max() + dist_avant, -90.0
+                x_cible = zone.center.x
+                y_cible = zone.y_max() + dist_avant
+                angle_cible = 270.0
             else:
-                x_cible, y_cible, angle_cible = zone.center.x, zone.y_min() - dist_avant, 90.0
+                x_cible = zone.center.x
+                y_cible = zone.y_min() - dist_avant
+                angle_cible = 90.0
         else:
             if self.robot.x > zone.center.x:
-                x_cible, y_cible, angle_cible = zone.x_max() + dist_avant, zone.center.y, 180.0
+                x_cible = zone.x_max() + dist_avant
+                y_cible = zone.center.y
+                angle_cible = 180.0
             else:
-                x_cible, y_cible, angle_cible = zone.x_min() - dist_avant, zone.center.y, 0.0
+                x_cible = zone.x_min() - dist_avant
+                y_cible = zone.center.y
+                angle_cible = 0.0
 
+        self.robot.logs.log("INFO", f"Approche → ({x_cible}, {y_cible}) angle={angle_cible}°")
         self.robot.aller_a_coord(x_cible, y_cible)
         self.robot.tourner_vers_angle(angle_cible)
 
+
     def approche_garde_manger(self, zone):
         """Navigation odométrique vers le point de dépôt du garde-manger."""
-        dist_arriere = 16.0
+        dist_arriere = 15.0
 
         dx = self.robot.x - zone.center.x
         dy = self.robot.y - zone.center.y
@@ -106,8 +110,7 @@ class Strategy:
                 continue
 
             caisse   = caisses[0]
-            bearing   = alignment["bearing_deg"]
-            distance  = alignment["distance_cm"]
+            bearing = caisse.angle_longueur
             distance = caisse.distance
             lateral  = caisse.decalage_x
 
@@ -124,19 +127,21 @@ class Strategy:
 
             if abs(bearing) > 5.0:
                 angle_cmd = round(abs(bearing)) - 90
-                if bearing > 0:
-                    self.robot.mecanum.rotation_droite(angle_cmd)
-                else:
-                    self.robot.mecanum.rotation_gauche(angle_cmd)
+                if angle_cmd > 5:
+                    if bearing > 0:
+                        self.robot.mecanum.rotation_droite(angle_cmd)
+                    else:
+                        self.robot.mecanum.rotation_gauche(angle_cmd)
                 time.sleep(0.3)
                 continue
 
             if abs(lateral) > 5.0:
-                dist_cmd = round(abs(lateral))
-                if lateral > 0:
-                    self.robot.droite(dist_cmd)
-                else:
-                    self.robot.gauche(dist_cmd)
+                dist_cmd = round(abs(lateral)) * 0.6 # Seulement de l'erreur calcule 
+                if dist_cmd > 5: 
+                    if lateral > 0:
+                        self.robot.droite(dist_cmd)
+                    else:
+                        self.robot.gauche(dist_cmd)
                 time.sleep(0.3)
                 continue
 
@@ -158,7 +163,6 @@ class Strategy:
 
 
     def test_alignement(self, frame_provider):
-        """Test rapide : uniquement la calibration ArUco, sans navigation."""
 
         self.robot.logs.log("INFO", "Test alignement ArUco démarré...")
         result = self.aligner_sur_aruco(timeout_s=15.0, frame_provider=frame_provider)
@@ -182,14 +186,11 @@ class Strategy:
         aligned = self.aligner_sur_aruco()
         self.robot.logs.log("INFO", f"R1 aligné={aligned}")
 
-
         time.sleep(1)
 
         # --- Dépôt G3 ---
         zone_g = self.carte.garde_mangers["G3"]
         self.approche_garde_manger(zone_g)
-        aligned = self.aligner_sur_aruco()
-        self.robot.logs.log("INFO", f"G3 aligné={aligned}")
 
 
     def strategy_2(self):

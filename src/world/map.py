@@ -70,13 +70,12 @@ class Zone:
 class Map:
     def __init__(self, team):
         self.team = team
+        self.ramassage = self.init_ramassage()
         self.nids = self.nids()
-        self.ramassage = self.ramassage()
         self.garde_mangers = self.garde_mangers()
         self.exclusion = self.exclusion()
         self.thermometre = self.thermometre()
         self.curseur = self.curseur()
-
         self.robot = self.get_robot_position()
         self.caisses = self.caisses()
 
@@ -90,7 +89,7 @@ class Map:
                 "blue": Zone("NB", Position(270, 182.5), 60, 55)
             }
 
-    def ramassage(self):
+    def init_ramassage(self):
         # 15 * 20 cm --> 4 caisses par zone de ramassage
         # 8 R
         return{

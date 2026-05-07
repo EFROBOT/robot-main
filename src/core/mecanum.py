@@ -11,6 +11,10 @@ Instruction de deplacement en fonction de la strategie --> Communication avec le
     Rotation anti horaire : RAH angle
     Diagonale gauche : DG distance
     Diagonale droite : DD distance
+    Set position : SP x y angle ? 
+
+Pour recevoir position 
+    POS x y angle 
 """
 
 import serial
@@ -149,6 +153,10 @@ class Mecanum:
 
     def fermer_pince(self):
         self.logs.log("RPi", "Pince fermée")
+
+    def set_position(self, x ,y ,angle):
+        self.send_raw(f"SP {x} {y} {angle}")
+        self.logs.log(f"INFO", "Nouvelle position : {x} {y} {angle}")
 
     def fermer(self):
         self.running = False

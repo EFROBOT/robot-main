@@ -428,7 +428,7 @@ class AffichageWeb:
                     if numero == 1:
                         self.strategy.test_alignement(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 2:
-                        self.strategy.strategy_2()
+                        self.strategy.strategy_1()
                     elif numero == 3:
                         self.strategy.strategy_3()
                 except Exception as exc:

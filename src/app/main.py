@@ -51,8 +51,10 @@ def main():
         team="yellow",
     )
 
+    carte = Map(team="yellow")
+
     strategy = Strategy(
-        carte = map, 
+        carte = carte, 
         robot = robot,
     )
 
