@@ -14,20 +14,19 @@ class Lidar:
         if self.logs:
             self.logs.log("RPi", f"Lidar connecté sur {port}")
 
-    def scan(self, distance_cm=20):
+    def scan(self, distance_cm=80, min_distance_cm=5):
         distance_mm = distance_cm * 10
+        min_distance_mm = min_distance_cm * 10
         obstacles = []
-
         for scan in self.lidar.iter_scans():
             for _, angle, dist in scan:
-                if 0 < dist < distance_mm:
+                if min_distance_mm <= dist < distance_mm:
                     obstacles.append({
                         "angle": round(angle, 1),
                         "distance_cm": round(dist / 10, 1),
                     })
             if obstacles:
                 return obstacles
-
         return obstacles
 
     def stop(self):
