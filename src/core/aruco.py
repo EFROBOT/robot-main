@@ -66,8 +66,8 @@ class Aruco:
                 upper_hsv = np.array([130, 255, 255])
             elif marker_id == 47:
                 equipe = "jaune"
-                lower_hsv = np.array([15, 60, 80])
-                upper_hsv = np.array([45, 255, 255])
+                lower_hsv = np.array([10, 40, 50])
+                upper_hsv = np.array([50, 255, 255])            
             else:
                 continue 
 

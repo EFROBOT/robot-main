@@ -54,7 +54,6 @@ class Strategy:
         self.robot.aller_a_coord(x_cible, y_cible)
         self.robot.tourner_vers_angle(angle_cible)
 
-
     def approche_garde_manger(self, zone):
         """Navigation odométrique vers le point de dépôt du garde-manger."""
         dist_arriere = 15.0
@@ -109,51 +108,57 @@ class Strategy:
                 time.sleep(0.05)
                 continue
 
-            caisse   = caisses[0]
-            bearing = caisse.angle_longueur
+            caisses.sort(key=lambda x: x.distance)
+            caisse = caisses[0]
             distance = caisse.distance
-            lateral  = caisse.decalage_x
+            lateral = caisse.decalage_x
+            angle = caisse.angle_longueur
 
-            self.robot.logs.log(
-                "INFO",
-                f"ArUco → dist={distance:.1f}cm lateral={lateral:+.1f}cm angle={caisse.angle_longueur:+.1f}°"
-            )
+            # Validation final
+            self.robot.logs.log("INFO", f"Cible :  à dist={distance:.1f}cm lateral={lateral:+.1f}cm angle={caisse.angle_longueur:+.1f}°")
+            distance_arret = 30 # distance final entre le robot et la caisse (peut etre prendre la deuxieme caisse ??)
+            if distance <= distance_arret and abs(lateral) <= 3:
+                self.robot.logs.log("INFO", f"ArUco → Cible atteinte ! Dist: {distance:.1f}cm")
+                ordre_blocs = {}
+                for index, bloc in enumerate(caisses):
+                    ordre_blocs[index + 1] = bloc.equipe
 
-            if distance > 45.0:
-                avance_cmd = 15 
-                self.robot.avancer(avance_cmd)
-                time.sleep(0.5)
+                self.robot.logs.log("INFO", f"ArUco → ALIGNÉ ✓ Ordre des blocs: {ordre_blocs}")
+                return True, ordre_blocs
+            
+            # Mouvement rotation
+            angle_cible = -90.0 
+            erreur_angle = angle - angle_cible
+            erreur_angle = (erreur_angle + 45) % 90 - 45
+            if abs(erreur_angle) > 5.0: 
+                if erreur_angle > 0:
+                    self.robot.rotation_gauche(int(abs(erreur_angle)) + 1) # sens inversé
+                else:
+                    self.robot.rotation_droite(int(abs(erreur_angle)) + 1)
                 continue
 
-            if abs(bearing) > 5.0:
-                angle_cmd = round(abs(bearing)) - 90
-                if angle_cmd > 5:
-                    if bearing > 0:
-                        self.robot.mecanum.rotation_droite(angle_cmd)
-                    else:
-                        self.robot.mecanum.rotation_gauche(angle_cmd)
-                time.sleep(0.3)
-                continue
+            # Mouvement lateral 
+            dist_cmd = round(abs(lateral))
+            if dist_cmd > 3: 
+                if lateral > 0:
+                    self.robot.droite(float(dist_cmd * 0.6))
+                else:
+                    self.robot.gauche(float(dist_cmd * 0.6))
+                time.sleep(0.5) 
+                continue 
 
-            if abs(lateral) > 5.0:
-                dist_cmd = round(abs(lateral)) * 0.6 # Seulement de l'erreur calcule 
-                if dist_cmd > 5: 
-                    if lateral > 0:
-                        self.robot.droite(dist_cmd)
-                    else:
-                        self.robot.gauche(dist_cmd)
-                time.sleep(0.3)
-                continue
-
+            # Mouvement distance
             hyp = distance - 10
-            if hyp > 29:
-                x = math.sqrt((hyp * hyp) - (29 * 29))
-                self.robot.logs.log("INFO", f"Le robot doit avancer de {x:.1f} cm")
-                
-                if x > 2.0: 
-                    self.robot.avancer(round(x))
-                    time.sleep(0.5)
-                    continue
+            if hyp > 2: 
+                if hyp > 29:
+                    x = float(round(math.sqrt((hyp * hyp) - (29 * 29))))
+                else:
+                    x = float(round(hyp))
+                step = min(x, 10.0)
+                self.robot.logs.log("INFO", f"Avance par palier: {step}")
+                self.robot.avancer(step)
+                time.sleep(0.5)
+                continue 
 
             self.robot.logs.log("INFO", "ArUco → ALIGNÉ ✓")
             return True
@@ -161,14 +166,101 @@ class Strategy:
         self.robot.logs.log("WARN", "aligner_sur_aruco: timeout.")
         return False
 
+    def aligner_sur_aruco_uniquement_lateral(self, timeout_s=10.0, frame_provider=None): 
+        # Ajuster la puissance latérale, petite puissance uniquement 
+        deadline = time.time() + timeout_s
 
-    def test_alignement(self, frame_provider):
+        while time.time() < deadline:
+            if frame_provider is not None:
+                frame = frame_provider()
+            else:
+                ret, frame = self.robot.camera.read()
+                if not ret:
+                    frame = self.robot.camera.get_latest_frame()
+                    if not frame:
+                        frame = None
 
-        self.robot.logs.log("INFO", "Test alignement ArUco démarré...")
+            if frame is None:
+                self.robot.logs.log("WARN", "aligner_sur_aruco: pas de frame, attente...")
+                time.sleep(0.05)
+                continue
+
+            try:
+                caisses = self.robot.camera.aruco.detect_markers(frame)
+            except Exception as e:
+                self.robot.logs.log("ERR", f"detect_markers: {e}")
+                time.sleep(0.05)
+                continue
+
+            if not caisses:
+                self.robot.logs.log("WARN", "aligner_sur_aruco: aucune caisse détectée.")
+                time.sleep(0.05)
+                continue
+
+            caisses.sort(key=lambda x: x.distance)
+            caisse = caisses[0]
+            lateral = caisse.decalage_x
+
+            self.robot.logs.log("INFO", f"Cible : lateral={lateral:+.1f}")
+            
+            if abs(lateral) <= 4:
+                ordre_blocs = {}
+                for index, bloc in enumerate(caisses):
+                    ordre_blocs[index + 1] = bloc.equipe
+
+                self.robot.logs.log("INFO", f"ArUco → ALIGNÉ ✓ Ordre des blocs: {ordre_blocs}")
+                return True, ordre_blocs
+
+            dist_cmd = round(abs(lateral))
+            if dist_cmd > 3: 
+                if lateral > 0:
+                    self.robot.droite(float(dist_cmd * 0.6))
+                else:
+                    self.robot.gauche(float(dist_cmd * 0.6))
+                time.sleep(0.5) 
+                continue 
+
+        return False
+
+    def prendre_set_caisse(self, frame_provider=None):
+        self.robot.logs.log("INFO", "Début de la séquence de ramassage...")
+        
         result = self.aligner_sur_aruco(timeout_s=15.0, frame_provider=frame_provider)
+        if not result:
+            self.robot.logs.log("WARN", "prendre_set_caisse: Échec de l'alignement initial.")
+            return False
+            
+        _, ordre_blocs = result
+        numero_caisse = 1
+
+        while ordre_blocs:
+            couleur_caisse = ordre_blocs.get(1)
+            self.robot.logs.log("INFO", f"Prise de la caisse n°{numero_caisse} ({couleur_caisse}) - Attente 10s")
+            
+            #self.robot.prendre_caisse(couleur_caisse)
+            time.sleep(15.0)
+
+            if len(ordre_blocs) <= 1:
+                break
+
+            self.robot.avancer(7.0)
+            
+            result_lat = self.aligner_sur_aruco_uniquement_lateral(timeout_s=10.0, frame_provider=frame_provider)
+            if not result_lat:
+                self.robot.logs.log("WARN", "Perte du signal ArUco ou timeout latéral.")
+                break
+                
+            _, ordre_blocs = result_lat
+            numero_caisse += 1
+
+        self.robot.logs.log("INFO", "Séquence de ramassage terminée ✓")
+        return True
+
+    def test_alignement(self, frame_provider=None):
+        self.robot.logs.log("INFO", "Test alignement ArUco démarré...")
+        result = self.prendre_set_caisse(frame_provider=frame_provider)
         self.robot.logs.log("INFO", f"Test alignement ArUco terminé → {'OK ✓' if result else 'TIMEOUT ✗'}")
         return result
-
 
     # ------------------------------------------------------------------
     # Stratégies de haut niveau
