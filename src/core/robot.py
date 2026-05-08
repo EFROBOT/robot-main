@@ -1,5 +1,6 @@
 import math
 import time
+import threading
 import cv2
 
 from core.logs import Logs
@@ -20,6 +21,7 @@ class Robot(Mecanum):
         y_init=0.0,
         angle_init_deg=0.0,
         team="yellow",
+        
     ):
         self.logs = Logs(maxlen=400)
         super().__init__(
@@ -38,6 +40,7 @@ class Robot(Mecanum):
                 self.lidar = Lidar(port=port_lidar, logs=self.logs)
             except Exception as exc:
                 self.logs.log("ERR", str(exc))
+        self.surveiller_lidar()
 
         self.map = Map(team=team)
         self.inventaire = []
@@ -123,3 +126,30 @@ class Robot(Mecanum):
 
     def get_logs(self):
         return self.logs.get_lines()
+            
+    def surveiller_lidar(self):
+            if not self.lidar:
+                return
+            def boucle():
+                ignorer_jusqu_a = 0
+                while self.lidar:
+                    try:
+                        for scan in self.lidar.lidar.iter_scans():
+                            if not self.lidar:
+                                break
+                            if time.time() < ignorer_jusqu_a:
+                                continue
+                            obstacles = [(a, d) for _, a, d in scan if 50 <= d < 300]
+                            if obstacles:
+                                self.logs.log("LIDAR", f"Obstacle détecté ({len(obstacles)} pts), arrêt 10s")
+                                self.send_raw("STOP")
+                                ignorer_jusqu_a = time.time() + 15
+                    except Exception as exc:
+                        self.logs.log("ERR", f"Lidar: {exc}")
+                        try:
+                            self.lidar.lidar.stop()
+                            self.lidar.lidar.clean_input()
+                        except Exception:
+                            pass
+                        time.sleep(1)
+            threading.Thread(target=boucle, daemon=True).start()

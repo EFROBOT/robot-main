@@ -148,10 +148,10 @@ class Mecanum:
     def stop(self):
         self.send_raw("STOP")
 
-    def ouvrir_pince(self):
+    def prendre_bloc(self):
         self.logs.log("RPi", "Pince ouverte")
 
-    def fermer_pince(self):
+    def lacher_bloc(self):
         self.logs.log("RPi", "Pince fermée")
 
     def set_position(self, x ,y ,angle):

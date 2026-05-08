@@ -167,3 +167,84 @@ class Aruco:
                 for i, texte in enumerate(textes):
                     c = couleur if i == 0 else (0, 255, 0)
                     cv2.putText(image, texte, (tx, ty + (i * 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, c, 2)
+
+    def detect_zone_ramassage(self, image):
+        if image is None or self.camera_matrix is None:
+            return None
+
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        
+        lower_green = np.array([35, 50, 50])
+        upper_green = np.array([85, 255, 255])
+        mask = cv2.inRange(hsv, lower_green, upper_green)
+
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
+        mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        # Taille du carré 20x20cm (0.10m du centre vers les bords)
+        obj_points = np.array([
+            [-0.10, 0.10, 0], [0.10, 0.10, 0], [0.10, -0.10, 0], [-0.10, -0.10, 0]
+        ], dtype=np.float32)
+
+        carres_trouves = []
+
+        for contour in contours:
+            area = cv2.contourArea(contour)
+            if area < 1000:
+                continue
+
+            peri = cv2.arcLength(contour, True)
+            approx = cv2.approxPolyDP(contour, 0.04 * peri, True)
+
+            if len(approx) == 4:
+                _, _, w, h = cv2.boundingRect(approx)
+                aspect_ratio = float(w) / h
+                
+                if 0.8 <= aspect_ratio <= 1.2:
+                    pts = approx.reshape(4, 2)
+                    rect = np.zeros((4, 2), dtype=np.float32)
+                    
+                    s = pts.sum(axis=1)
+                    rect[0] = pts[np.argmin(s)] 
+                    rect[2] = pts[np.argmax(s)] 
+                    
+                    diff = np.diff(pts, axis=1)
+                    rect[1] = pts[np.argmin(diff)] 
+                    rect[3] = pts[np.argmax(diff)] 
+
+                    # Vérification de la couleur blanche au centre du carré
+                    cx, cy = int(np.mean(pts[:, 0])), int(np.mean(pts[:, 1]))
+                    if 0 <= cy < hsv.shape[0] and 0 <= cx < hsv.shape[1]:
+                        pixel_center = hsv[cy, cx]
+                        # Rejet si le centre est trop saturé (pas blanc) ou trop sombre
+                        if pixel_center[1] > 60 or pixel_center[2] < 100: 
+                            continue
+
+                    retval, rvec, tvec = cv2.solvePnP(
+                        obj_points, rect, self.camera_matrix, self.dist_coeffs, flags=cv2.SOLVEPNP_IPPE_SQUARE
+                    )
+
+                    if retval:
+                        x_m = float(tvec[0][0])
+                        z_m = float(tvec[2][0])
+                        distance_cm = math.sqrt(x_m**2 + z_m**2) * 100.0
+                        decalage_x_cm = x_m * 100.0
+                        
+                        rmat, _ = cv2.Rodrigues(rvec)
+                        angle_deg = math.degrees(math.atan2(rmat[0, 0], rmat[2, 0]))
+
+                        carres_trouves.append({
+                            "distance": distance_cm,
+                            "decalage_x": decalage_x_cm,
+                            "angle": angle_deg,
+                            "rvec": rvec,
+                            "tvec": tvec,
+                            "corners": rect
+                        })
+
+        if carres_trouves:
+            carres_trouves.sort(key=lambda x: x["distance"])
+            return carres_trouves[0]
+            
+        return None

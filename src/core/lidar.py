@@ -6,7 +6,7 @@ except ImportError as exc:
 
 
 class Lidar:
-    def __init__(self, port="/dev/ttyACM1", logs=None):
+    def __init__(self, port="/dev/ttyUSB0", logs=None):
         if RPLidar is None:
             raise RuntimeError(f"Impossible d'importer rplidar: {_RPLIDAR_IMPORT_ERROR}")
         self.logs = logs
