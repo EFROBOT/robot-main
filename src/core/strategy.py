@@ -1,21 +1,6 @@
-"""
-Module de strategie
-
-Strategy == Top level
-
-Strategie 1 :
-    Faire dans l'ordre les différentes zones de ramassage / garde_manger
-    Au bout de la deuxième rotation --> curseur thermometre
-
-Strategie 2 :
-    Aller dans la zone la plus proche en fonction de la position du robot
-
-Strategie 3 :
-    (à définir)
-"""
-
 import time
 import math
+import threading
 from core.camera import Camera
 from core.robot import Robot
 
@@ -37,6 +22,12 @@ class Strategy:
     def retourner_zone_fin(self, x , y):
         self.robot.logs.log("INFO", "Trajet vers la zone de fin")
         self.robot.aller_a_coord(x, y)
+
+    def surveiller_temps(self):
+        while True:
+            if self.verifier_fin_match():
+                break
+            time.sleep(1.0)
 
     # ------------------------------------------------------------------
     # Approche odométrique
@@ -268,7 +259,6 @@ class Strategy:
             if len(ordre_blocs) <= 0:
                 break
 
-            # Calcul de l'état attendu (on retire la caisse 1, et on décale le reste)
             etat_attendu = {}
             for i in range(2, len(ordre_blocs) + 1):
                 if i in ordre_blocs:
@@ -283,19 +273,19 @@ class Strategy:
                 
             _, nouvel_ordre_blocs = result_lat
 
-            # Comparaison entre ce qu'on attendait et ce que la caméra voit réellement
             if nouvel_ordre_blocs == etat_attendu:
                 self.robot.logs.log("INFO", "Vérification OK: L'ordre des caisses correspond à l'état attendu.")
             else:
                 self.robot.logs.log("WARN", f"Désynchro détectée ! Attendu: {etat_attendu} | Vu: {nouvel_ordre_blocs}")
 
-            # Mise à jour avec la réalité du terrain
             ordre_blocs = nouvel_ordre_blocs
             numero_caisse += 1
 
         self.robot.logs.log("INFO", "Séquence de ramassage terminée ✓")
         return True
 
+    # ------------------------------------------------------------------
+    # Test (temporaire)
 
     def test_alignement(self, frame_provider=None):
         self.robot.logs.log("INFO", "Test alignement ArUco démarré...")
@@ -303,31 +293,76 @@ class Strategy:
         self.robot.logs.log("INFO", f"Test alignement ArUco terminé → {'OK ✓' if result else 'TIMEOUT ✗'}")
         return result
 
+
     # ------------------------------------------------------------------
     # Stratégies de haut niveau
 
-    def strategy_1(self):
-        """
-        Ordre fixe : R1 → G3 -> -> 
-        """
+    # Au début du match, interupteur pour connaitre notre équipe (Jaune Ou Bleu) 
+
+    # Le robot va dans la zone de ramassage la plus proche, puis dans le dépot le plus proche à l'aide des coordonnées
+    # Point sotcké en dur (differentes pour chaque équipe)
+    # Approche de chaque zone optimisé 
+
+    # A l'approche d'une zone de ramassage, le robot scan les caisses puis s'alignes
+    # Puis lancement de la phase de ramassage avec la pince (Coté STM)
+
+    # A chaque zone de ramassage / dépot --> recalibrage de la position du robot
+
+    # SI le robot va sur une zone de ramassage, pas de caisse, 
+    # ALOS le robot va à la prochaine zone de ramassage
+
+    # SI le robot detecte un obstacle (Lidar / (TOF ou Ultrasson)
+    # ALORS Arret complet du robot --> Class robot
+
+    # Au bout de 2.40 min le robot revient dans son nids 
+
+    # ------------------------------------------------------------------
+
+    # Jaune 
+    def strategy_1_jaune(self):
+        self.debut_match = time.time()
+        # Thread pour le temps 
+        monitor_thread = threading.Thread(target=self.surveiller_temps, daemon=True)
+        monitor_thread.start()
         time.sleep(1)
 
-        # --- Ramassage R1 ---
+        # ------------------------------------------------------------------
+        # PHASE 1
+        # ------------------------------------------------------------------
+
         zone_r = self.carte.ramassage["R1"]
         self.approche_ramassage(zone_r)
-        aligned = self.prendre_set_caisse()
-        self.robot.logs.log("INFO", f"R1 aligné={aligned}")
+
+        caisse = self.prendre_set_caisse()
+        if caisse:
+            time.sleep(1)
+            zone = self.carte.garde_mangers["G3"]
+            self.approche_garde_manger(zone)
+            time.sleep(1)
+        else:
+            self.robot.logs.log("WARN", "R1 vide ou ArUco introuvable -> Skip vers PHASE 2")
 
         time.sleep(1)
 
-        # --- Dépôt G3 ---
-        zone_g = self.carte.garde_mangers["G3"]
-        self.approche_garde_manger(zone_g)
+        # ------------------------------------------------------------------
+        # PHASE 2
+        # ------------------------------------------------------------------
 
+        zone_r = self.carte.ramassage["R5"]
+        self.approche_ramassage(zone_r)
+        caisse = self.prendre_set_caisse()
 
-    def strategy_2(self):
-        """Aller dans la zone la plus proche."""
-        pass
+        if caisse:
+            time.sleep(1)
+            zone = self.carte.garde_mangers["G4"]
+            self.approche_garde_manger(zone)
+            time.sleep(1)
+        else:
+            self.robot.logs.log("WARN", "R1 vide ou ArUco introuvable -> Skip vers PHASE 2")
 
-    def strategy_3(self):
+        time.sleep(1)
+
+    # ------------------------------------------------------------------
+
+    def strategy_1_bleu(self):
         pass

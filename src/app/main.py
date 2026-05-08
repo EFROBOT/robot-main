@@ -1,6 +1,7 @@
 """"""
 
 import time
+import RPi.GPIO as GPIO
 
 from app.options import Options
 from core.robot import Robot
@@ -11,6 +12,7 @@ from web.dashboard import AffichageWeb
 
 
 def main():
+
     devices = Options.init_devices()
 
     if devices["cameras"]:
@@ -38,6 +40,27 @@ def main():
         print("STM32 non détectée, connexion robot impossible.")
         connecter_robot = False
 
+    # Interupteur
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
+    GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    x = 0
+    
+    try:
+        while x < 25:
+            if GPIO.input(17) == GPIO.LOW:
+                team = "yellow"
+            else:
+                team = "blue"
+            time.sleep(0.05)
+            x += 1 
+
+    except KeyboardInterrupt:
+        print("\nArrêt du programme")
+        GPIO.cleanup()
+
+    print(f"Team = {team}")
+
     activer_web = Options.demander_oui_non("Activer le serveur web ?", defaut=True)
 
     robot = Robot(
@@ -48,7 +71,7 @@ def main():
         x_init=150,
         y_init=100,
         angle_init_deg=0,
-        team="yellow",
+        team=team
     )
 
     carte = Map(team="yellow")

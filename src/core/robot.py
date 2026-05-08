@@ -7,31 +7,14 @@ from core.logs import Logs
 from core.mecanum import Mecanum
 from core.camera import Camera
 from core.lidar import Lidar
+from core.ultrasson import Ultrasson
 from world.map import Map
 
 
 class Robot(Mecanum):
-    def __init__(
-        self,
-        port=None,
-        port_lidar=None,
-        baudrate=115200,
-        camera_id=0,
-        x_init=0.0,
-        y_init=0.0,
-        angle_init_deg=0.0,
-        team="yellow",
-        
-    ):
+    def __init__(self, team, port=None, port_lidar=None, baudrate=115200, camera_id=0, x_init=0.0, y_init=0.0, angle_init_deg=0.0):
         self.logs = Logs(maxlen=400)
-        super().__init__(
-            logs=self.logs,
-            port=port,
-            baudrate=baudrate,
-            x_init=x_init,
-            y_init=y_init,
-            angle_init_deg=angle_init_deg,
-        )
+        super().__init__(logs=self.logs, port=port, baudrate=baudrate, x_init=x_init, y_init=y_init, angle_init_deg=angle_init_deg)
 
         self.camera = Camera(camera_id=camera_id, logs=self.logs)
         self.lidar = None
@@ -42,12 +25,22 @@ class Robot(Mecanum):
                 self.logs.log("ERR", str(exc))
         self.surveiller_lidar()
 
+        self.team = team
+        self.set_team()
         self.map = Map(team=team)
-        self.inventaire = []
 
+        self.inventaire = []
         self.running = False
         self.last_align_time = 0.0
         self.align_interval_ms = 50
+
+        # if ultrasson alors 
+        """
+        self.ultrason_front = Ultrasson(
+            sensor_id="1", trig=23, echo=24, threshold=15
+            )
+        self.surveiller()"""
+
 
     def setup(self):
         if not self.camera.load_calibration():
@@ -57,6 +50,14 @@ class Robot(Mecanum):
         if not self.camera.open():
             raise RuntimeError(f"Impossible d'ouvrir la caméra {self.camera.camera_id}")
 
+    def set_team(self):
+        if self.team == "yellow":
+            self.send_raw("TJ")
+        elif self.team == "blue":
+            self.send_raw("TB")
+        else:
+            self.logs.log("ERR", "No team set")
+            
     def run(self):
         self.running = True
         try:
@@ -91,20 +92,6 @@ class Robot(Mecanum):
         if now - self.last_align_time >= self.align_interval_ms:
             self.last_align_time = now
 
-    def set_team(self, team):
-        self.map = Map(team=team)
-
-        half_x = 32 / 2
-        half_y = 28 / 2
-        if team == "yellow":
-            self.x = 0 + half_x
-            self.y = 2000 - half_y
-            self.angle_deg = 0
-        else:
-            self.x = 3000 - half_x
-            self.y = 2000 - half_y
-            self.angle_deg = 180
-
     def get_state(self):
         return {
             "robot": {
@@ -126,32 +113,70 @@ class Robot(Mecanum):
 
     def get_logs(self):
         return self.logs.get_lines()
-            
+
+
     def surveiller_lidar(self):
-            if not self.lidar:
-                return
-            def boucle():
-                while self.lidar:
+        if not self.lidar:
+            return
+        def boucle():
+            while self.lidar:
+                try:
+                    obstacles = self.lidar.scan()
+                except Exception as exc:
+                    self.logs.log("ERR", f"Lidar: {exc}")
                     try:
-                        obstacles = self.lidar.scan()
-                    except Exception as exc:
-                        self.logs.log("ERR", f"Lidar: {exc}")
-                        try:
-                            self.lidar.lidar.stop()
-                            self.lidar.lidar.clean_input()
-                        except Exception:
-                            pass
-                        time.sleep(0.2)
-                        continue
-                    if obstacles:
-                        self.logs.log("LIDAR", f"Obstacle détecté ({len(obstacles)} pts), arrêt 10s")
+                        self.lidar.lidar.stop()
+                        self.lidar.lidar.clean_input()
+                    except Exception:
+                        pass
+                    time.sleep(0.2)
+                    continue
+                if obstacles:
+                    self.logs.log("LIDAR", f"Obstacle détecté ({len(obstacles)} pts), arrêt 10s")
+                    self.send_raw("STOP")
+                    time.sleep(10)
+                    self.logs.log("LIDAR", "Reprise 5s")
+                    time.sleep(5)
+                    try:
+                        self.lidar.lidar.stop()
+                        self.lidar.lidar.clean_input()
+                    except Exception:
+                        pass
+        threading.Thread(target=boucle, daemon=True).start()
+    
+    """
+    def surveiller(self):
+            def boucle():
+                while True:
+                    # 1. Vérification des Ultrasons (Priorité haute, temps de réponse court)
+                    if hasattr(self, 'ultrason_front') and not self.ultrason_front.is_clear():
+                        self.logs.log("WARN", "ULTRASON: Obstacle proche, STOP")
                         self.send_raw("STOP")
-                        time.sleep(10)
-                        self.logs.log("LIDAR", "Reprise 5s")
-                        time.sleep(5)
+                        time.sleep(2)
+                        continue # On recommence la boucle immédiatement
+
+                    # 2. Vérification du Lidar
+                    if self.lidar:
                         try:
-                            self.lidar.lidar.stop()
-                            self.lidar.lidar.clean_input()
-                        except Exception:
-                            pass
-            threading.Thread(target=boucle, daemon=True).start()
+                            obstacles = self.lidar.scan()
+                            if obstacles:
+                                self.logs.log("LIDAR", f"Obstacle ({len(obstacles)} pts), arrêt 10s")
+                                self.send_raw("STOP")
+                                time.sleep(10)
+                                
+                                # Nettoyage après l'arrêt
+                                try:
+                                    self.lidar.lidar.stop()
+                                    self.lidar.lidar.clean_input()
+                                except: pass
+                                
+                                self.logs.log("LIDAR", "Reprise")
+                                time.sleep(2)
+                        except Exception as exc:
+                            self.logs.log("ERR", f"Lidar: {exc}")
+                            time.sleep(0.5)
+
+                    # Petite pause pour ne pas surcharger le CPU
+                    time.sleep(0.05)
+
+            threading.Thread(target=boucle, daemon=True).start()"""
