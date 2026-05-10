@@ -324,3 +324,94 @@ body.camera-expanded::before {
     font-size: 14px;
 }
 .btn.stop:hover { background: #ff2e63; }
+
+
+.panneau {
+    background: #16213e;
+    border-radius: 12px;
+    padding: 10px; 
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.manette {
+    display: grid;
+    grid-template-columns: repeat(3, 44px); 
+    grid-template-rows:    repeat(3, 44px);
+    gap: 4px; 
+    margin: 4px 0;
+    justify-content: center;
+}
+.btn {
+    width: 44px; height: 44px; 
+    border-radius: 8px;
+    border: none;
+    background: #0f3460;
+    color: #eee;
+    font-size: 16px; 
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.1s;
+}
+.btn:active { background: #e94560; }
+.btn.vide { background: transparent; cursor: default; pointer-events: none; }
+.btn.wide { 
+    width: auto; 
+    flex: 1;
+    padding: 6px; 
+    height: auto; 
+    font-size: 11px; 
+}
+
+.btn.stop {
+    background: #e94560;
+    font-weight: bold;
+    font-size: 11px; 
+}
+
+.distance-row input {
+    width: 50px; padding: 4px; 
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #0f3460;
+    color: #eee;
+    font-size: 12px;
+}
+
+.strat-btn {
+    width: 100%;
+    padding: 6px; 
+    border-radius: 8px;
+    border: none;
+    background: #1b4332;
+    color: #a5d6a7;
+    font-size: 12px; 
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 4px; 
+    transition: background 0.15s;
+}
+
+.nav-row input, .nav-row select {
+    flex: 1;
+    min-width: 0;
+    padding: 4px; 
+    border-radius: 6px;
+    border: 1px solid #333;
+    background: #0f3460;
+    color: #eee;
+    font-size: 11px; 
+}
+.nav-btn {
+    padding: 4px 6px; 
+    border-radius: 6px;
+    border: none;
+    background: #0f3460;
+    color: #4fc3f7;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.1s;
+}

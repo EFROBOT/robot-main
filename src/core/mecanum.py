@@ -30,6 +30,10 @@ class Mecanum:
         self.serial_port = None
         self._serial_lock = threading.Lock()
         self._stop_event = threading.Event()
+        self.mouvement_termine = threading.Event()
+        self.mouvement_pince_termine = threading.Event()
+        self.mouvement_ramassage_termine = threading.Event()
+
         self._thread = None
         self.running = False
 
@@ -89,6 +93,12 @@ class Mecanum:
                     self.logs.log("STM32", line)
                     if line.startswith("POS"):
                         self.traiter_position(line)
+                    elif line == "Mouv Ok":
+                        self.mouvement_termine.set()
+                    elif line == "Mouv Pince Ok":
+                        self.mouvement_pince_termine.set()
+                    elif line == "Mouv Ramassage Ok":
+                        self.mouvement_ramassage_termine.set()
 
             except Exception as exc:
                 self.logs.log("ERR", f"Lecture série : {exc}")
@@ -132,27 +142,41 @@ class Mecanum:
     def diagonale_droite(self, distance):
         self.send_raw(f"DD {distance}")
 
-    def tourner_vers_angle(self, angle):
-        self.send_raw(f"TVA {angle}")
-
     def rotation_gauche(self, angle):
         self.send_raw(f"RH {angle}")
 
     def rotation_droite(self, angle):
         self.send_raw(f"RAH {angle}")
 
-    def aller_a_coord(self, x, y):
-        self.logs.log("STM32", f"CMD AC x={x} y={y}")
+    def aller_a_coord(self, x, y, attendre=True, timeout=20):
+        self.mouvement_termine.clear()
+        self.logs.log("STM32", f"AC x={x} y={y}")
         self.send_raw(f"AC {x} {y}")
+        if attendre:
+            ok = self.mouvement_termine.wait(timeout=timeout)
+            if not ok:
+                self.logs.log("ERR", f"Timeout mouvement AC ({x},{y})")
+            return ok
+        return True
+
+    def tourner_vers_angle(self, angle, attendre=True, timeout=10):
+        self.mouvement_termine.clear()
+        self.logs.log("STM32", f"TVA angle={angle}")
+        self.send_raw(f"TVA {angle}")
+        if attendre:
+            ok = self.mouvement_termine.wait(timeout=timeout)
+            if not ok:
+                self.logs.log("ERR", f"Timeout rotation TVA ({angle})")
+            return ok
+        return True
+
+
+    def aller_a_coord_angle(self, x, y, angle):
+        self.aller_a_coord(x, y)
+        self.tourner_vers_angle(angle)
 
     def stop(self):
         self.send_raw("STOP")
-
-    def prendre_bloc(self):
-        self.logs.log("RPi", "Pince ouverte")
-
-    def lacher_bloc(self):
-        self.logs.log("RPi", "Pince fermée")
 
     def set_position(self, x ,y ,angle):
         self.send_raw(f"SP {x} {y} {angle}")

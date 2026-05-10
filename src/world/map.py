@@ -19,10 +19,14 @@ HEIGHT --> axe y
 """
 
 import math
+from enum import Enum
 
 TERRAIN_WIDTH  = 300.0
 TERRAIN_HEIGHT = 200.0
 
+class EtatZone(Enum):
+    VIDE = 0
+    PLEINE = 1
 
 class Position:
     def __init__(self, x ,y, angle=None):
@@ -41,11 +45,12 @@ class Position:
 
 
 class Zone:
-    def __init__(self, name, center, width, height):
+    def __init__(self, name, center, width, height, etat=EtatZone.VIDE):
         self.name = name
         self.center = center
         self.width = width
         self.height = height
+        self.etat = etat
         
     def x_min(self):
         return self.center.x - self.width / 2
@@ -76,7 +81,6 @@ class Map:
         self.exclusion = self.exclusion()
         self.thermometre = self.thermometre()
         self.curseur = self.curseur()
-        self.robot = self.get_robot_position()
         self.caisses = self.caisses()
 
     def nids(self):
@@ -93,17 +97,17 @@ class Map:
         # 15 * 20 cm --> 4 caisses par zone de ramassage
         # 8 R
         return{
-            "R1": Zone("R1", Position(20, 120), 15, 20),
-            "R2": Zone("R2", Position(280, 120), 15, 20),
+            "R1": Zone("R1", Position(20, 120), 15, 20, etat=EtatZone.PLEINE),
+            "R2": Zone("R2", Position(280, 120), 15, 20, etat=EtatZone.PLEINE),
 
-            "R3": Zone("R3", Position(115, 80), 20, 15),
-            "R4": Zone("R4", Position(185, 80), 20, 15),
+            "R3": Zone("R3", Position(115, 80), 20, 15, etat=EtatZone.PLEINE),
+            "R4": Zone("R4", Position(185, 80), 20, 15, etat=EtatZone.PLEINE),
 
-            "R5": Zone("R5", Position(20, 40), 15, 20),
-            "R6": Zone("R6", Position(280, 40), 15, 20),
+            "R5": Zone("R5", Position(20, 40), 15, 20, etat=EtatZone.PLEINE),
+            "R6": Zone("R6", Position(280, 40), 15, 20, etat=EtatZone.PLEINE),
 
-            "R7": Zone("R7", Position(110, 20), 20, 15),
-            "R8": Zone("R8", Position(190, 20), 20, 15),
+            "R7": Zone("R7", Position(110, 20), 20, 15, etat=EtatZone.PLEINE),
+            "R8": Zone("R8", Position(190, 20), 20, 15, etat=EtatZone.PLEINE),
         }
     
     def caisses(self):
@@ -143,6 +147,15 @@ class Map:
             "G10": Zone("G10", Position(230, 10), 20, 20),
         }
 
+
+    def vider_zone(self, nom_zone):
+        if nom_zone in self.ramassage:
+            self.ramassage[nom_zone].etat = EtatZone.VIDE
+
+    def remplir_garde_manger(self, nom_zone):
+        if nom_zone in self.garde_mangers:
+            self.garde_mangers[nom_zone].etat = EtatZone.PLEINE
+
     def exclusion(self):
         return{
             "Exclusion": Zone("E", Position(150, 180), 180, 40)
@@ -163,11 +176,6 @@ class Map:
                 "C": Zone("C", Position(275, 5), 10, 10)
             }
         
-    def get_robot_position(self):
-        return {
-            "Robot": Zone("Robot", Position(14, 184), 32, 28)
-            }
-
     def _z2d(self, z):
         return {
             "name": z.name,

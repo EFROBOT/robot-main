@@ -6,13 +6,13 @@ except ImportError as exc:
 
 
 class Lidar:
-    def __init__(self, port="/dev/ttyttyUSB0", logs=None):
+    def __init__(self, port="/dev/ttyUSB0", logs=None):
         if RPLidar is None:
             raise RuntimeError(f"Impossible d'importer rplidar: {_RPLIDAR_IMPORT_ERROR}")
         self.logs = logs
         self.lidar = RPLidar(port)
         if self.logs:
-            self.logs.log("RPi", f"Lidar connecté sur {port}")
+            self.logs.log("RPi", f"Lidar connecte sur {port}")
 
     def scan(self, distance_cm=30, min_distance_cm=5):
         distance_mm = distance_cm * 10
@@ -38,4 +38,4 @@ class Lidar:
         finally:
             self.lidar = None
             if self.logs:
-                self.logs.log("RPi", "Lidar déconnecté")
+                self.logs.log("RPi", "Lidar déconnecte")

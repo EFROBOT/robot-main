@@ -162,6 +162,11 @@ class AffichageWeb:
                     try:
                         liste_caisses = detector.detect_markers(frame)
                         detector.draw_marker(frame, liste_caisses)
+
+                        zone = detector.detect_zone_ramassage(frame)
+                        self.robot.zone_ramassage = zone
+                        detector.draw_zone_ramassage(frame, zone)
+                        
                         if liste_caisses and hasattr(self.robot, "align_controller"):
                             now_ms = time.time() * 1000
                             interval_ms = getattr(self.robot, "align_interval_ms", 100)
@@ -416,7 +421,7 @@ class AffichageWeb:
             except (TypeError, ValueError):
                 return jsonify({"ok": False, "erreur": "numéro de stratégie invalide"}), 400
 
-            if numero not in (1, 2, 3):
+            if numero not in (1, 2, 3, 4, 5):
                 return jsonify({"ok": False, "erreur": "stratégie inconnue"}), 400
 
             if self.strategie_en_cours:
@@ -426,11 +431,17 @@ class AffichageWeb:
                 self.strategie_en_cours = True
                 try:
                     if numero == 1:
-                        self.strategy.test_alignement(frame_provider=lambda: self.get_frame(slot=0))
+                        self.strategy.aligner_sur_aruco(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 2:
-                        self.strategy.strategy_1()
+                        self.strategy.test_alignement(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 3:
-                        self.strategy.strategy_3()
+                        self.strategy.aligner_sur_zone_de_ramassage(frame_provider=lambda: self.get_frame(slot=0))
+                    elif numero == 4:
+                        pass
+                    elif numero == 5:
+                        self.strategy.strategy_1_jaune()
+
+
                 except Exception as exc:
                     self.robot.logs.log("ERR", f"Stratégie {numero} : {exc}")
                 finally:
@@ -439,31 +450,35 @@ class AffichageWeb:
             threading.Thread(target=run, daemon=True).start()
             return jsonify({"ok": True, "message": f"Stratégie {numero} lancée"})
 
-
         @self.app.route("/commande", methods=["POST"])
         def commande():
             data = request.get_json(silent=True) or {}
             action = str(data.get("action", ""))
+            option_val = int(data.get("option", 0))
+            
             try:
                 distance = float(data.get("distance", 10))
             except (TypeError, ValueError):
                 return jsonify({"ok": False, "erreur": "distance invalide"}), 400
 
-            self.robot.logs.log("RPi", f"Commande : {action} {distance}cm")
+            self.robot.logs.log("RPi", f"Commande : {action} {distance}cm (opt: {option_val})")
 
             actions = {
-                "avancer"    : lambda: self.robot.avancer(distance),
-                "reculer"    : lambda: self.robot.reculer(distance),
-                "gauche"     : lambda: self.robot.gauche(distance),
-                "droite"     : lambda: self.robot.droite(distance),
-                "diag_gauche": lambda: self.robot.diagonale_gauche(distance),
-                "diag_droite": lambda: self.robot.diagonale_droite(distance),
-                "rot_gauche" : lambda: self.robot.rotation_gauche(distance),
-                "rot_droite" : lambda: self.robot.rotation_droite(distance),
-                "pince_open" : lambda: self.robot.ouvrir_pince(),
-                "pince_close": lambda: self.robot.fermer_pince(),
-                "stop"       : lambda: self.robot.stop(),
+                "avancer"      : lambda: self.robot.avancer(distance),
+                "reculer"      : lambda: self.robot.reculer(distance),
+                "gauche"       : lambda: self.robot.gauche(distance),
+                "droite"       : lambda: self.robot.droite(distance),
+                "diag_gauche"  : lambda: self.robot.diagonale_gauche(distance),
+                "diag_droite"  : lambda: self.robot.diagonale_droite(distance),
+                "rot_gauche"   : lambda: self.robot.rotation_gauche(distance),
+                "rot_droite"   : lambda: self.robot.rotation_droite(distance),
+                "pince_open"   : lambda: self.robot.recuperer_caisses(option_val),
+                "pince_close"  : lambda: self.robot.pince_navigation(),
+                "stockage"     : lambda: self.robot.securiser_caisses(),
+                "lacher_caisse": lambda: self.robot.lacher_caisses(),
+                "stop"         : lambda: self.robot.stop(),
             }
+            
             if action in actions:
                 actions[action]()
                 return jsonify({"ok": True})

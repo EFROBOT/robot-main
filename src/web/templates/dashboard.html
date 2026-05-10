@@ -19,15 +19,16 @@
         <div class="valeur" id="val-x">--</div><div class="label">X (cm)</div>
         <div class="valeur" id="val-y">--</div><div class="label">Y (cm)</div>
         <div class="valeur" id="val-angle">--</div><div class="label">Angle (°)</div>
-
-        <h2>Inventaire</h2>
-        <div class="valeur" id="val-caisses">--</div><div class="label">caisses</div>
         <div id="status">en attente...</div>
 
-        <h2>Stratégie</h2>
-        <button class="strat-btn" id="btn-strat1" onclick="lancerStrategie(1)">▶ Stratégie 1</button>
-        <button class="strat-btn" id="btn-strat2" onclick="lancerStrategie(2)">▶ Stratégie 2</button>
-        <button class="strat-btn" id="btn-strat3" onclick="lancerStrategie(3)">▶ Stratégie 3</button>
+        
+        <h2>Actioneur</h2>
+        <button class="strat-btn" id="btn-strat1" onclick="lancerStrategie(1)">Alignement aruco </button>
+        <button class="strat-btn" id="btn-strat2" onclick="lancerStrategie(2)">Prendre caisses</button>
+        <button class="strat-btn" id="btn-strat3" onclick="lancerStrategie(3)">Alignement zone de ramassage</button>
+        <button class="strat-btn" id="btn-strat4" onclick="lancerStrategie(4)">Gagner des points</button>
+        <button class="strat-btn" id="btn-strat5" onclick="lancerStrategie(5)">Stratégie</button>
+
     </div>
 
     <div class="carte-wrap">
@@ -55,9 +56,16 @@
         </div>
 
         <h2>Pince</h2>
+        <div style="display:flex; gap:4px; align-items:center;">
+            <button class="btn wide" id="btn-pince-open">Recuperer</button>
+            <input type="checkbox" id="opt-recup" style="width:18px; height:18px; cursor:pointer;" title="Option récupération">
+            <button class="btn wide" id="btn-pince-close">Nav</button>
+        </div>
+
+        <h2>Depot caisse</h2>
         <div style="display:flex; gap:6px;">
-            <button class="btn wide" id="btn-pince-open">Ouvrir</button>
-            <button class="btn wide" id="btn-pince-close">Fermer</button>
+            <button class="btn wide" id="btn-stockage">Stockage caisses</button>
+            <button class="btn wide" id="btn-lacher">Lacher caisses</button>
         </div>
 
         <h2>Navigation</h2>

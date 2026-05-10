@@ -125,14 +125,12 @@ async function fetchEtat() {
         document.getElementById("val-x").textContent      = d.robot.x.toFixed(1);
         document.getElementById("val-y").textContent      = d.robot.y.toFixed(1);
         document.getElementById("val-angle").textContent  = d.robot.angle_deg.toFixed(1);
-        document.getElementById("val-caisses").textContent = d.robot.nb_caisses;
         document.getElementById("status").textContent     = "màj " + new Date().toLocaleTimeString();
 
         if (!d.strategie_en_cours) {
             [1,2,3].forEach(n => {
                 const b = document.getElementById("btn-strat" + n);
                 b.classList.remove("running");
-                b.textContent = "▶ Stratégie " + n;
             });
         }
 
@@ -339,8 +337,8 @@ function viderTerminal() { toutes_les_lignes = []; afficherLignes(); }
 
 // ── Team ─────────────────────────────────────────────────────
 const POSES_DEPART = {
-    yellow: { x: 16,   y: 1986, angle: 0   },
-    blue:   { x: 2984, y: 1986, angle: 180  },
+    yellow: { x: 16,   y: 184, angle: 270   },
+    blue:   { x: 284, y: 184, angle: 270  },
 };
 
 async function setTeam(team) {
@@ -402,10 +400,21 @@ function log_local(source, msg) {
 // ── Commandes ────────────────────────────────────────────────
 async function envoyerCommande(action) {
     const dist = parseFloat(document.getElementById("distance").value) || 10;
+    
+    let optVal = 0;
+    const checkbox = document.getElementById("opt-recup");
+    if (checkbox) {
+        optVal = checkbox.checked ? 1 : 0;
+    }
+
     await fetch("/commande", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({action, distance: dist})
+        body: JSON.stringify({
+            action: action, 
+            distance: dist,
+            option: optVal
+        })
     });
 }
 
@@ -420,10 +429,16 @@ const boutons = {
     "btn-rot-droite":  "rot_droite",
     "btn-pince-open":  "pince_open",
     "btn-pince-close": "pince_close",
-    "btn-stop" : "stop",
+    "btn-stockage":    "stockage",
+    "btn-lacher":      "lacher_caisse",
+    "btn-stop":        "stop"
 };
+
 Object.entries(boutons).forEach(([id, action]) => {
-    document.getElementById(id).addEventListener("click", () => envoyerCommande(action));
+    const btn = document.getElementById(id);
+    if (btn) {
+        btn.addEventListener("click", () => envoyerCommande(action));
+    }
 });
 
 const touches = {

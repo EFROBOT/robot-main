@@ -23,13 +23,17 @@ class Robot(Mecanum):
                 self.lidar = Lidar(port=port_lidar, logs=self.logs)
             except Exception as exc:
                 self.logs.log("ERR", str(exc))
-        self.surveiller_lidar()
 
+        self.surveiller_lidar()
+        #self.surveiller_bord_map()
+        self.surveiller_zone_exclusion()
+ 
+        self.set_team(team)
         self.team = team
-        self.set_team()
         self.map = Map(team=team)
 
         self.inventaire = []
+        self.zone_ramassage = None 
         self.running = False
         self.last_align_time = 0.0
         self.align_interval_ms = 50
@@ -50,14 +54,14 @@ class Robot(Mecanum):
         if not self.camera.open():
             raise RuntimeError(f"Impossible d'ouvrir la caméra {self.camera.camera_id}")
 
-    def set_team(self):
-        if self.team == "yellow":
+    def set_team(self, team):
+        if team == "yellow":
             self.send_raw("TJ")
-        elif self.team == "blue":
+        elif team == "blue":
             self.send_raw("TB")
         else:
             self.logs.log("ERR", "No team set")
-            
+
     def run(self):
         self.running = True
         try:
@@ -69,6 +73,10 @@ class Robot(Mecanum):
 
                 markers = self.camera.aruco.detect_markers(frame)
                 self.camera.aruco.draw_marker(frame, markers)
+                
+                zone = self.camera.aruco.detect_zone_ramassage(frame)
+                self.zone_ramassage = zone
+                self.camera.aruco.draw_zone_ramassage(frame, zone)
 
                 if markers:
                     self.align_to_marker(markers[0])
@@ -93,6 +101,14 @@ class Robot(Mecanum):
             self.last_align_time = now
 
     def get_state(self):
+        zone_view = None
+        if self.zone_ramassage is not None:
+            zone_view = {
+                "distance": self.zone_ramassage["distance"],
+                "decalage_x": self.zone_ramassage["decalage_x"],
+                "angle": self.zone_ramassage["angle"],
+            }
+
         return {
             "robot": {
                 "x": self.x,
@@ -108,41 +124,188 @@ class Robot(Mecanum):
             "exclusion": [self.map._z2d(z) for z in self.map.exclusion.values()],
             "ramassage": [self.map._z2d(z) for z in self.map.ramassage.values()],
             "caisses": [self.map._z2d(z) for z in self.map.caisses.values()],
+            "zone_ramassage_detectee": zone_view,
             "strategie_en_cours": False,
         }
 
     def get_logs(self):
         return self.logs.get_lines()
 
+    # ------------------------------------------------------------------
+    # Option pince
+
+    def recuperer_caisses(self, recup, attendre=True, timeout=30):
+        self.mouvement_pince_termine.clear()
+        self.send_raw(f"Recuperer caisses {recup}")
+        if attendre:
+            ok = self.mouvement_pince_termine.wait(timeout=timeout)
+            if not ok:
+                self.logs.log("ERR", f"Timeout récupération caisses ({recup})")
+            return ok
+        return True
+
+    def pince_navigation(self):
+        self.send_raw("Pince Navigation")
+
+    # Option servo
+    def securiser_caisses(self):
+        self.send_raw("Securiser caisses")
+
+    def lacher_caisses(self, attendre=True, timeout=8):
+        self.mouvement_ramassage_termine.clear()
+        self.logs.log("STM32", "CMD Lacher caisses")
+        self.send_raw("Lacher caisses")
+        if attendre:
+            ok = self.mouvement_ramassage_termine.wait(timeout=timeout)
+            if not ok:
+                self.logs.log("ERR", "Timeout lâcher caisses")
+            return ok
+        return True
+
+    # ------------------------------------------------------------------
+    
+    def calculer_chemin_esquive(self, x_actuel, y_actuel, x_cible, y_cible, zones_a_eviter):
+        marge = 20.0 
+        
+        for zone in zones_a_eviter:
+            excl_x_min = (zone.center.x - (zone.width / 2.0)) - marge
+            excl_x_max = (zone.center.x + (zone.width / 2.0)) + marge
+            excl_y_min = (zone.center.y - (zone.height / 2.0)) - marge
+            excl_y_max = (zone.center.y + (zone.height / 2.0)) + marge
+
+            traverse_y = (y_actuel < excl_y_min and y_cible > excl_y_min) or (y_actuel > excl_y_max and y_cible < excl_y_max)
+            traverse_x = (x_actuel > excl_x_min and x_actuel < excl_x_max) or (x_cible > excl_x_min and x_cible < excl_x_max)
+
+            if traverse_y and traverse_x:
+                x_contournement = excl_x_min - 10 if x_cible < zone.center.x else excl_x_max + 10
+                y_contournement = excl_y_min - 10 
+                
+                self.logs.log("WARN", f"Obstacle esquivé : {zone.name}")
+                return [(x_contournement, y_contournement), (x_cible, y_cible)]
+        
+        return [(x_cible, y_cible)]
+        
+    def attendre_fin_trajet(self, timeout=25.0):
+        succes = self.mouvement_termine.wait(timeout)
+        
+        if not succes:
+            self.logs.log("WARN", "Timeout: La STM32 n'a pas renvoyé 'C Ok'")
+
+    # Top level for évitement objet
+    def aller_a_coord_intelligent(self, x_cible, y_cible, zones_a_eviter=None):
+        if zones_a_eviter is None:
+            zones_a_eviter = []
+
+        waypoints = self.calculer_chemin_esquive(self.x, self.y, x_cible, y_cible, zones_a_eviter)
+        
+        for point in waypoints:
+            px, py = point
+            self.aller_a_coord(px, py)
+            self.attendre_fin_trajet()
+            self.x, self.y = px, py
+
+    # ------------------------------------------------------------------
+    # Surveiller map
+
+    def surveiller_bord_map(self):
+        marge = 5.0
+        demi_largeur = 32.0 / 2
+        demi_longueur = 28.0 / 2
+
+        x_min = marge + demi_largeur
+        x_max = 300.0 - (marge + demi_largeur)
+        y_min = marge + demi_longueur
+        y_max = 200.0 - (marge + demi_longueur)
+
+        def boucle():
+            while True:
+                if getattr(self, 'match_demarre', False):
+                    x, y = self.x, self.y
+                    
+                    if x < x_min or x > x_max or y < y_min or y > y_max:
+                        self.send_raw("STOP")
+                        self.logs.log("WARN", f"Limite carte atteinte: x={x:.1f}, y={y:.1f}")
+                        
+                        self.degager_du_bord(x, y, x_min, x_max, y_min, y_max)
+                        time.sleep(2)
+
+                time.sleep(0.1)
+
+        threading.Thread(target=boucle, daemon=True).start()
+
+
+    def surveiller_zone_exclusion(self):
+        # Paramètres de sécurité
+        marge = 5.0
+        demi_largeur = 32.0 / 2  # 16.0
+        demi_longueur = 28.0 / 2 # 14.0
+
+        # Limites réelles de la zone (Centre: 150,180 | Largeur: 180 | Hauteur: 40)
+        zone_x_min = 150.0 - (180.0 / 2) # 60.0
+        zone_x_max = 150.0 + (180.0 / 2) # 240.0
+        zone_y_min = 180.0 - (40.0 / 2)  # 160.0
+        zone_y_max = 180.0 + (40.0 / 2)  # 200.0
+
+        # Zone critique pour le CENTRE du robot (Zone + Marge + Taille Robot)
+        excl_x_min = zone_x_min - marge - demi_largeur # 39.0
+        excl_x_max = zone_x_max + marge + demi_largeur # 261.0
+        excl_y_min = zone_y_min - marge - demi_longueur # 141.0
+        excl_y_max = zone_y_max + marge + demi_longueur # 219.0
+
+        def boucle():
+            while True:
+                x, y = self.x, self.y
+                
+                # Si le centre du robot rentre dans le rectangle critique
+                if excl_x_min < x < excl_x_max and excl_y_min < y < excl_y_max:
+                    self.send_raw("STOP")
+                    self.logs.log("WARN", f"Zone d'exclusion atteinte ! x={x:.1f}, y={y:.1f}")
+                    
+                    self.degager_du_bord(x, y, excl_x_min, excl_x_max, excl_y_min, excl_y_max)
+                    time.sleep(2) 
+
+                time.sleep(0.1)
+
+        # On lance le thread en arrière-plan
+        threading.Thread(target=boucle, daemon=True).start()
+
+    def degager_du_bord(self, x, y, x_min, x_max, y_min, y_max):
+        x_cible = max(x_min + 10, min(x, x_max - 10))
+        y_cible = max(y_min + 10, min(y, y_max - 10))
+        
+        self.logs.log("INFO", f"Dégagement vers x={x_cible:.1f}, y={y_cible:.1f}")
+        self.aller_a_coord(x_cible, y_cible)
+
+    # Surveiller obstacle (Lidar + Ultrason Ou TOF)
+    # ------------------------------------------------------------------
 
     def surveiller_lidar(self):
-        if not self.lidar:
-            return
-        def boucle():
-            while self.lidar:
-                try:
-                    obstacles = self.lidar.scan()
-                except Exception as exc:
-                    self.logs.log("ERR", f"Lidar: {exc}")
+            if not self.lidar:
+                return
+            def boucle():
+                while self.lidar:
                     try:
-                        self.lidar.lidar.stop()
-                        self.lidar.lidar.clean_input()
-                    except Exception:
-                        pass
-                    time.sleep(0.2)
-                    continue
-                if obstacles:
-                    self.logs.log("LIDAR", f"Obstacle détecté ({len(obstacles)} pts), arrêt 10s")
-                    self.send_raw("STOP")
-                    time.sleep(10)
-                    self.logs.log("LIDAR", "Reprise 5s")
-                    time.sleep(5)
-                    try:
-                        self.lidar.lidar.stop()
-                        self.lidar.lidar.clean_input()
-                    except Exception:
-                        pass
-        threading.Thread(target=boucle, daemon=True).start()
+                        obstacles = self.lidar.scan()
+                    except Exception as exc:
+                        self.logs.log("ERR", f"Lidar: {exc}")
+                        try:
+                            self.lidar.lidar.stop()
+                            self.lidar.lidar.clean_input()
+                        except Exception:
+                            pass
+                        time.sleep(0.2)
+                        continue
+                    if obstacles:
+                        details = ", ".join(f"{o['angle']}°/{o['distance_cm']}cm" for o in obstacles)
+                        self.logs.log("LIDAR", f"Obstacle détecté ({len(obstacles)} pts): {details}, arrêt 10s")
+                        self.send_raw("STOP")
+                        time.sleep(10)
+                        try:
+                            self.lidar.lidar.stop()
+                            self.lidar.lidar.clean_input()
+                        except Exception:
+                            pass
+            threading.Thread(target=boucle, daemon=True).start()
     
     """
     def surveiller(self):
