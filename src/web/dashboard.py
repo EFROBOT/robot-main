@@ -464,19 +464,20 @@ class AffichageWeb:
             self.robot.logs.log("RPi", f"Commande : {action} {distance}cm (opt: {option_val})")
 
             actions = {
-                "avancer"      : lambda: self.robot.avancer(distance),
-                "reculer"      : lambda: self.robot.reculer(distance),
-                "gauche"       : lambda: self.robot.gauche(distance),
-                "droite"       : lambda: self.robot.droite(distance),
-                "diag_gauche"  : lambda: self.robot.diagonale_gauche(distance),
-                "diag_droite"  : lambda: self.robot.diagonale_droite(distance),
-                "rot_gauche"   : lambda: self.robot.rotation_gauche(distance),
-                "rot_droite"   : lambda: self.robot.rotation_droite(distance),
-                "pince_open"   : lambda: self.robot.recuperer_caisses(option_val),
-                "pince_close"  : lambda: self.robot.pince_navigation(),
-                "stockage"     : lambda: self.robot.securiser_caisses(),
-                "lacher_caisse": lambda: self.robot.lacher_caisses(),
-                "stop"         : lambda: self.robot.stop(),
+                "avancer"           : lambda: self.robot.avancer(distance),
+                "reculer"           : lambda: self.robot.reculer(distance),
+                "gauche"            : lambda: self.robot.gauche(distance),
+                "droite"            : lambda: self.robot.droite(distance),
+                "diag_gauche"       : lambda: self.robot.diagonale_gauche(distance),
+                "diag_droite"       : lambda: self.robot.diagonale_droite(distance),
+                "rot_gauche"        : lambda: self.robot.rotation_gauche(distance),
+                "rot_droite"        : lambda: self.robot.rotation_droite(distance),
+                "pince_open"        : lambda: self.robot.recuperer_caisses(option_val),
+                "pince_close"       : lambda: self.robot.pince_navigation(),
+                "pince_homologation": lambda: self.robot.pince_homologation(),
+                "stockage"          : lambda: self.robot.securiser_caisses(),
+                "lacher_caisse"     : lambda: self.robot.lacher_caisses(),
+                "stop"              : lambda: self.robot.stop(),
             }
             
             if action in actions:

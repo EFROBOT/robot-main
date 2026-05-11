@@ -147,6 +147,9 @@ class Robot(Mecanum):
     def pince_navigation(self):
         self.send_raw("Pince Navigation")
 
+    def pince_homologation(self):
+        self.send_raw("Pince Homologation")
+
     # Option servo
     def securiser_caisses(self):
         self.send_raw("Securiser caisses")
