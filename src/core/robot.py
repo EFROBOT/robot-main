@@ -8,6 +8,7 @@ from core.mecanum import Mecanum
 from core.camera import Camera
 from core.lidar import Lidar
 from core.ultrasson import Ultrasson
+from core.servomoteur import init_servo, set_angle_servo
 from world.map import Map
 
 
@@ -31,12 +32,14 @@ class Robot(Mecanum):
         self.set_team(team)
         self.team = team
         self.map = Map(team=team)
-
         self.inventaire = []
         self.zone_ramassage = None 
         self.running = False
         self.last_align_time = 0.0
         self.align_interval_ms = 50
+
+        # Init 
+        init_servo()
 
         # if ultrasson alors 
         """
@@ -152,18 +155,10 @@ class Robot(Mecanum):
 
     # Option servo
     def securiser_caisses(self):
-        self.send_raw("Securiser caisses")
+        set_angle_servo(103)
 
-    def lacher_caisses(self, attendre=True, timeout=8):
-        self.mouvement_ramassage_termine.clear()
-        self.logs.log("STM32", "CMD Lacher caisses")
-        self.send_raw("Lacher caisses")
-        if attendre:
-            ok = self.mouvement_ramassage_termine.wait(timeout=timeout)
-            if not ok:
-                self.logs.log("ERR", "Timeout lâcher caisses")
-            return ok
-        return True
+    def lacher_caisses(self):
+        set_angle_servo(0)
 
     # ------------------------------------------------------------------
     
@@ -211,7 +206,7 @@ class Robot(Mecanum):
     # Surveiller map
 
     def surveiller_bord_map(self):
-        marge = 5.0
+        marge = 2.0
         demi_largeur = 32.0 / 2
         demi_longueur = 28.0 / 2
 
@@ -279,9 +274,17 @@ class Robot(Mecanum):
         self.logs.log("INFO", f"Dégagement vers x={x_cible:.1f}, y={y_cible:.1f}")
         self.aller_a_coord(x_cible, y_cible)
 
-    # Surveiller obstacle (Lidar + Ultrason Ou TOF)
+    # ------------------------------------------------------------------
+    # Evitement obstacle avec camera (caisses)
+
+    def evitement_obstacle():
+        pass
+
+    # Surveiller obstacle (Lidar + Ultrason Ou TOF Ou Camera)
+    # Camera --> A implementer
     # ------------------------------------------------------------------
 
+    # Only lidar
     def surveiller_lidar(self):
             if not self.lidar:
                 return
@@ -310,6 +313,11 @@ class Robot(Mecanum):
                             pass
             threading.Thread(target=boucle, daemon=True).start()
     
+    # Lidar & camera 
+    def surveiller(self):
+        pass
+
+    # Lidar & ultrasson
     """
     def surveiller(self):
             def boucle():

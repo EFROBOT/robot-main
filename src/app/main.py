@@ -164,6 +164,18 @@ def main():
         robot.fermer()
         GPIO.cleanup()
 
+# A faire tourner en continue sur la raspy
+def ficelle(team):
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    while(True):
+        if GPIO.input(2) == GPIO.LOW:
+            if team == "yellow":
+                Strategy.strategy_1_jaune
+            elif team == "bleu":
+                Strategy.strategy_1_bleu
+            else:
+                print("Err")
 
 if __name__ == "__main__":
     main_bis()

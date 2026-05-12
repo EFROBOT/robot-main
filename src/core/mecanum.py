@@ -32,7 +32,6 @@ class Mecanum:
         self._stop_event = threading.Event()
         self.mouvement_termine = threading.Event()
         self.mouvement_pince_termine = threading.Event()
-        self.mouvement_ramassage_termine = threading.Event()
 
         self._thread = None
         self.running = False
@@ -97,8 +96,6 @@ class Mecanum:
                         self.mouvement_termine.set()
                     elif line == "Mouv Pince Ok":
                         self.mouvement_pince_termine.set()
-                    elif line == "Mouv Ramassage Ok":
-                        self.mouvement_ramassage_termine.set()
 
             except Exception as exc:
                 self.logs.log("ERR", f"Lecture série : {exc}")
@@ -169,7 +166,6 @@ class Mecanum:
                 self.logs.log("ERR", f"Timeout rotation TVA ({angle})")
             return ok
         return True
-
 
     def aller_a_coord_angle(self, x, y, angle):
         self.aller_a_coord(x, y)

@@ -433,13 +433,15 @@ class AffichageWeb:
                     if numero == 1:
                         self.strategy.aligner_sur_aruco(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 2:
-                        self.strategy.test_alignement(frame_provider=lambda: self.get_frame(slot=0))
+                        self.strategy.prendre_set_caisse(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 3:
                         self.strategy.aligner_sur_zone_de_ramassage(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 4:
-                        pass
+                        self.strategy.depot_set_caisse(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 5:
-                        self.strategy.strategy_1_jaune()
+                        self.strategy.strategy_1_jaune(frame_provider=lambda: self.get_frame(slot=0))
+                    elif numero == 6:
+                        self.strategy.strategy_1_bleu(frame_provider=lambda: self.get_frame(slot=0))
 
 
                 except Exception as exc:

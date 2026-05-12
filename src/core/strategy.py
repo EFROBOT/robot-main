@@ -16,9 +16,9 @@ class Strategy:
         if temps_ecoule >= 80.0: 
             self.robot.logs.log("WARN", "85 seconde atteintes")
             if self.robot.team == "yellow":
-                self.retourner_zone_fin(0, 0) # Ajuster en fonction de la zone de départ A CALCULER
+                self.retourner_zone_fin(20, 180) 
             elif self.robot.team == "bleu":
-                self.retourner_zone_fin(0, 0) # Ajuster en fonction de la zone de départ
+                self.retourner_zone_fin(280, 180) 
 
             return True
         return False
@@ -249,7 +249,7 @@ class Strategy:
 
     def prendre_set_caisse(self, team, frame_provider=None):
         self.robot.logs.log("INFO", "Début de la séquence de ramassage...")
-        
+        self.robot.securiser_caisses()
         result = self.aligner_sur_aruco(timeout_s=15.0, frame_provider=frame_provider)
         if not result:
             self.robot.logs.log("WARN", "prendre_set_caisse: Échec de l'alignement initial.")
@@ -400,9 +400,35 @@ class Strategy:
         return False
 
     def depot_set_caisse(self, frame_provider=None):
+        self.robot.logs.log("INFO", "Début de la séquence de dépot de caisses...")
+        
+        result = self.aligner_sur_zone_de_ramassage(timeout_s=15.0, frame_provider=frame_provider)
+        if not result:
+            self.robot.logs.log("WARN", "prendre_set_caisse: Échec de l'alignement initial.")
+            return False
+
+        if result: 
+            self.robot.logs.log("INFO", "Le robot est aligné sur la zone de dépot")
+
+            def sequence_depot():
+                time.sleep(1) # to check 
+                self.robot.lacher_caisses()
+
+            thread_action = threading.Thread(target=sequence_depot)
+            thread_action.start()
+
+            self.robot.avancer(25)
+
+            self.robot.logs.log("INFO", "Séquence de dépot terminée --> 4 points marqué ?")
+            return True
+
+
+    # ------------------------------------------------------------------
+    # Recalibrage de la position du robot a chaque approche de zone de ramassage ou de caisses 
+    # Pas le temps de le faire
+
+    def recalibrage_position(self, zone):
         pass
-
-
 
     # ------------------------------------------------------------------
     # Zone a éviter
@@ -450,7 +476,7 @@ class Strategy:
     # ------------------------------------------------------------------
 
     # Jaune 
-    def strategy_1_jaune(self):
+    def strategy_1_jaune(self, frame_provider):
         self.robot.logs.log("INFO", "Start strategy")
         self.debut_match = time.time()
         # Thread pour le temps 
@@ -467,11 +493,12 @@ class Strategy:
         self.approche_ramassage(zone_r)
         self.robot.match_demarre = True
 
-        caisse = self.prendre_set_caisse(team = "yellow")
+        caisse = self.prendre_set_caisse(team = "yellow", frame_provider=frame_provider)
         if caisse:
             time.sleep(1)
-            zone = self.carte.garde_mangers["G3"]
+            zone = self.carte.garde_mangers["G4"]
             self.approche_garde_manger(zone)
+            self.depot_set_caisse(frame_provider=frame_provider)
             time.sleep(1)
         else:
             self.robot.logs.log("WARN", "R1 vide ou ArUco introuvable -> Skip vers PHASE 2")
@@ -508,48 +535,144 @@ class Strategy:
         # PHASE 2
         # ------------------------------------------------------------------
 
-        zone_r = self.carte.ramassage["R5"]
+        zone_r = self.carte.ramassage["R3"]
         self.approche_ramassage(zone_r)
         caisse = self.prendre_set_caisse()
 
         if caisse:
             time.sleep(1)
-            zone = self.carte.garde_mangers["G4"]
+            zone = self.carte.garde_mangers["G5"]
             self.approche_garde_manger(zone)
+            self.depot_set_caisse(frame_provider=frame_provider)
+            time.sleep(1)
+        else:
+            self.robot.logs.log("WARN", "R3 vide ou ArUco introuvable -> Skip vers PHASE 2")
+
+        time.sleep(1)     
+
+        # ------------------------------------------------------------------
+        # PHASE 3
+        # ------------------------------------------------------------------
+
+        zone_r = self.carte.ramassage["R7"]
+        self.approche_ramassage(zone_r)
+        caisse = self.prendre_set_caisse()
+
+        if caisse:
+            time.sleep(1)
+            zone = self.carte.garde_mangers["G8"]
+            self.approche_garde_manger(zone)
+            self.depot_set_caisse(frame_provider=frame_provider)
             time.sleep(1)
         else:
             self.robot.logs.log("WARN", "R1 vide ou ArUco introuvable -> Skip vers PHASE 2")
 
         time.sleep(1)
 
-        """
-        zone = self.carte.ramassage["R5"]
-        
-        # On vérifie si la zone contient encore des caisses
-        if zone.etat == EtatZone.PLEINE:
-            self.approche_ramassage(zone)
-            caisse = self.prendre_set_caisse()
-            
-            if caisse:
-                self.carte.vider_zone("R5")
-                time.sleep(1)
-                                
-                zone_g3 = self.carte.garde_mangers["G4"]
-                self.approche_garde_manger(zone_g3)
-                
+        # ------------------------------------------------------------------
+        # PHASE 4
+        # ------------------------------------------------------------------
 
-                self.carte.remplir_garde_manger("G4")
-                time.sleep(1)
-            else:
-                self.robot.logs.log("WARN", "R1 vide ou ArUco introuvable -> Skip vers PHASE 2")
+        zone_r = self.carte.ramassage["R5"]
+        self.approche_ramassage(zone_r)
+        caisse = self.prendre_set_caisse()
+
+        if caisse:
+            time.sleep(1)
+            zone = self.carte.garde_mangers["G3"]
+            self.approche_garde_manger(zone)
+            self.depot_set_caisse(frame_provider=frame_provider)
+            time.sleep(1)
         else:
-            self.robot.logs.log("WARN", "Zone R1 déjà enregistrée comme VIDE -> Skip.")
+            self.robot.logs.log("WARN", "R1 vide ou ArUco introuvable -> Skip vers PHASE 2")
 
         time.sleep(1)
-        """
-
 
     # ------------------------------------------------------------------
 
-    def strategy_1_bleu(self):
-        pass
+    def strategy_1_bleu(self, frame_provider):
+        self.robot.logs.log("INFO", "Start strategy")
+        self.debut_match = time.time()
+        # Thread pour le temps 
+        monitor_thread = threading.Thread(target=self.surveiller_temps, daemon=True)
+        monitor_thread.start()
+        time.sleep(1)
+
+        # ------------------------------------------------------------------
+        # PHASE 1
+        # ------------------------------------------------------------------
+
+        zone_r = self.carte.ramassage["R2"]
+        self.robot.logs.log("INFO", f"Le robot se dirige vers la zone {zone_r} ")
+        self.approche_ramassage(zone_r)
+        self.robot.match_demarre = True
+
+        caisse = self.prendre_set_caisse(team = "yellow", frame_provider=frame_provider)
+        if caisse:
+            time.sleep(1)
+            zone = self.carte.garde_mangers["G6"]
+            self.approche_garde_manger(zone)
+            self.depot_set_caisse(frame_provider=frame_provider)
+            time.sleep(1)
+        else:
+            self.robot.logs.log("WARN", "R2 vide ou ArUco introuvable -> Skip vers PHASE 2")
+
+        time.sleep(1)
+
+        # ------------------------------------------------------------------
+        # PHASE 2
+        # ------------------------------------------------------------------
+
+        zone_r = self.carte.ramassage["R4"]
+        self.approche_ramassage(zone_r)
+        caisse = self.prendre_set_caisse()
+
+        if caisse:
+            time.sleep(1)
+            zone = self.carte.garde_mangers["G5"]
+            self.approche_garde_manger(zone)
+            self.depot_set_caisse(frame_provider=frame_provider)
+            time.sleep(1)
+        else:
+            self.robot.logs.log("WARN", "R4 vide ou ArUco introuvable -> Skip vers PHASE 2")
+
+        time.sleep(1)
+
+        # ------------------------------------------------------------------
+        # PHASE 3
+        # ------------------------------------------------------------------
+
+        zone_r = self.carte.ramassage["R8"]
+        self.approche_ramassage(zone_r)
+        caisse = self.prendre_set_caisse()
+
+        if caisse:
+            time.sleep(1)
+            zone = self.carte.garde_mangers["G10"]
+            self.approche_garde_manger(zone)
+            self.depot_set_caisse(frame_provider=frame_provider)
+            time.sleep(1)
+        else:
+            self.robot.logs.log("WARN", "R8 vide ou ArUco introuvable -> Skip vers PHASE 2")
+
+        time.sleep(1)
+
+        # ------------------------------------------------------------------
+        # PHASE 4
+        # ------------------------------------------------------------------
+
+        zone_r = self.carte.ramassage["R6"]
+        self.approche_ramassage(zone_r)
+        caisse = self.prendre_set_caisse()
+
+        if caisse:
+            time.sleep(1)
+            zone = self.carte.garde_mangers["G7"]
+            self.approche_garde_manger(zone)
+            self.depot_set_caisse(frame_provider=frame_provider)
+            time.sleep(1)
+        else:
+            self.robot.logs.log("WARN", "R6 vide ou ArUco introuvable -> Skip vers PHASE 2")
+
+        time.sleep(1)
+
