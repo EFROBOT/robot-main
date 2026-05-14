@@ -21,7 +21,7 @@ class AffichageWeb:
         port=5000,
         image_path=None,
         aruco_detection=False,
-        camera_refresh_hz=15,
+        camera_refresh_hz=20,
     ):
         """
         camera_indices : liste d'indices V4L2 retournée par init_devices()["cameras"]
@@ -68,9 +68,9 @@ class AffichageWeb:
             if cap.isOpened():
                 cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)   # latence minimale
                 cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter.fourcc(*"MJPG"))
-                cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-                cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-                cap.set(cv2.CAP_PROP_FPS, 12)
+                cap.set(cv2.CAP_PROP_FRAME_WIDTH, 720)
+                cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480 )
+                cap.set(cv2.CAP_PROP_FPS, 10)
                 self._caps.append(cap)
                 self._locks.append(threading.Lock())
                 self._camera_ids.append(idx)
@@ -123,7 +123,7 @@ class AffichageWeb:
         ok, buf = cv2.imencode(
             ".jpg",
             frame,
-            [cv2.IMWRITE_JPEG_QUALITY, 75],
+            [cv2.IMWRITE_JPEG_QUALITY, 50],
         )
         if not ok:
             return None
@@ -166,6 +166,10 @@ class AffichageWeb:
                         zone = detector.detect_zone_ramassage(frame)
                         self.robot.zone_ramassage = zone
                         detector.draw_zone_ramassage(frame, zone)
+
+                        robots = detector.detect_robots(frame)
+                        detector.draw_robots(frame, robots)
+                        print(f"robots: {len(robots)}", robots[:1])
                         
                         if liste_caisses and hasattr(self.robot, "align_controller"):
                             now_ms = time.time() * 1000
@@ -439,9 +443,9 @@ class AffichageWeb:
                     elif numero == 4:
                         self.strategy.depot_set_caisse(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 5:
-                        self.strategy.strategy_1_jaune(frame_provider=lambda: self.get_frame(slot=0))
+                        self.strategy.homologation()
                     elif numero == 6:
-                        self.strategy.strategy_1_bleu(frame_provider=lambda: self.get_frame(slot=0))
+                        self.strategy.homologation()
 
 
                 except Exception as exc:

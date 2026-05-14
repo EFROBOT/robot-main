@@ -167,14 +167,13 @@ class Aruco:
                 for i, texte in enumerate(textes):
                     c = couleur if i == 0 else (0, 255, 0)
                     cv2.putText(image, texte, (tx, ty + (i * 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, c, 2)
-
     def detect_zone_ramassage(self, image):
         if image is None or self.camera_matrix is None:
             return None
     
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     
-        # Masque blanc tres permissif
+        # Masque blanc permissif
         lower_white = np.array([0, 0, 140])
         upper_white = np.array([180, 80, 255])
         mask = cv2.inRange(hsv, lower_white, upper_white)
@@ -186,10 +185,16 @@ class Aruco:
     
         contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     
-        # Carre 20x20cm dans le repere monde
+        # Carre 20x20cm dans le repere monde (0.10m du centre vers les bords)
         obj_points = np.array([
             [-0.10, 0.10, 0], [0.10, 0.10, 0], [0.10, -0.10, 0], [-0.10, -0.10, 0]
         ], dtype=np.float32)
+    
+        # Tolerance sur la taille reelle : entre 15 et 30 cm de cote
+        TAILLE_MIN_CM = 15.0
+        TAILLE_MAX_CM = 30.0
+        # Tolerance sur le ratio largeur/hauteur en cm reels
+        RATIO_MAX = 1.4
     
         carres_trouves = []
     
@@ -198,34 +203,28 @@ class Aruco:
             if area < 400:
                 continue
     
-            # Approximation polygonale tres tolerante
             peri = cv2.arcLength(contour, True)
             approx = cv2.approxPolyDP(contour, 0.08 * peri, True)
     
-            # Si on a plus de 4 points, on garde les 4 coins extremes
             if len(approx) < 4:
                 continue
     
             if len(approx) > 4:
-                # Reduit a 4 points en augmentant epsilon jusqu'a obtenir 4 points
                 for eps in [0.10, 0.12, 0.15, 0.18, 0.20]:
                     approx2 = cv2.approxPolyDP(contour, eps * peri, True)
                     if len(approx2) == 4:
                         approx = approx2
                         break
                 else:
-                    # Fallback : on prend la boite englobante orientee
                     rect_min = cv2.minAreaRect(contour)
                     approx = cv2.boxPoints(rect_min).reshape(-1, 1, 2).astype(np.int32)
     
             if len(approx) != 4:
                 continue
     
-            # Verifie que la forme est convexe (un trapezoide reste convexe)
             if not cv2.isContourConvex(approx):
                 continue
     
-            # Verifie le remplissage : la forme doit remplir sa boite englobante
             rect_min = cv2.minAreaRect(contour)
             (_, _), (rw, rh), _ = rect_min
             if rw == 0 or rh == 0:
@@ -234,48 +233,83 @@ class Aruco:
             if area / rect_area < 0.65:
                 continue
     
-            # Tri des 4 coins : top-left, top-right, bottom-right, bottom-left
+            # Tri des coins
             pts = approx.reshape(4, 2).astype(np.float32)
             rect = np.zeros((4, 2), dtype=np.float32)
-    
             s = pts.sum(axis=1)
-            rect[0] = pts[np.argmin(s)]   # top-left (x+y min)
-            rect[2] = pts[np.argmax(s)]   # bottom-right (x+y max)
-    
+            rect[0] = pts[np.argmin(s)]
+            rect[2] = pts[np.argmax(s)]
             d = np.diff(pts, axis=1)
-            rect[1] = pts[np.argmin(d)]   # top-right (x-y min, donc x grand y petit)
-            rect[3] = pts[np.argmax(d)]   # bottom-left (x-y max, donc x petit y grand)
+            rect[1] = pts[np.argmin(d)]
+            rect[3] = pts[np.argmax(d)]
     
-            # solvePnP standard (pas IPPE_SQUARE qui exige un vrai carre)
             retval, rvec, tvec = cv2.solvePnP(
                 obj_points, rect, self.camera_matrix, self.dist_coeffs,
                 flags=cv2.SOLVEPNP_ITERATIVE
             )
+            if not retval:
+                continue
     
-            if retval:
-                x_m = float(tvec[0][0])
-                z_m = float(tvec[2][0])
-                distance_cm = math.sqrt(x_m**2 + z_m**2) * 100.0
-                decalage_x_cm = x_m * 100.0
+            # Verification de la TAILLE REELLE de la forme
+            # On reprojette les 4 coins du modele 3D et on compare aux coins detectes
+            # pour estimer la taille reelle visible
+            # Methode : on calcule la distance reelle entre coins en utilisant solvePnP
     
-                rmat, _ = cv2.Rodrigues(rvec)
-                angle_deg = math.degrees(math.atan2(rmat[0, 0], rmat[2, 0]))
+            # On fait un 2eme solvePnP avec un objet "unite" pour mesurer la taille
+            # Plus simple : on mesure la taille pixel et on convertit grace a la distance
+            x_m = float(tvec[0][0])
+            z_m = float(tvec[2][0])
+            distance_m = math.sqrt(x_m**2 + z_m**2)
+            if distance_m < 0.05:
+                continue
     
-                carres_trouves.append({
-                    "distance": distance_cm,
-                    "decalage_x": decalage_x_cm,
-                    "angle": angle_deg,
-                    "rvec": rvec,
-                    "tvec": tvec,
-                    "corners": rect,
-                    "area": area,
-                })
+            # Taille en pixels du quadrilatere
+            largeur_px = np.linalg.norm(rect[1] - rect[0])
+            hauteur_px = np.linalg.norm(rect[3] - rect[0])
+            if largeur_px == 0 or hauteur_px == 0:
+                continue
+    
+            # Conversion pixels -> cm grace a la focale et la distance
+            fx = self.camera_matrix[0, 0]
+            fy = self.camera_matrix[1, 1]
+            largeur_cm = (largeur_px * distance_m / fx) * 100.0
+            hauteur_cm = (hauteur_px * distance_m / fy) * 100.0
+    
+            # Filtre taille reelle
+            if largeur_cm < TAILLE_MIN_CM or largeur_cm > TAILLE_MAX_CM:
+                continue
+            if hauteur_cm < TAILLE_MIN_CM or hauteur_cm > TAILLE_MAX_CM:
+                continue
+    
+            # Filtre ratio reel (ni trop allonge dans un sens ni dans l'autre)
+            ratio = max(largeur_cm, hauteur_cm) / min(largeur_cm, hauteur_cm)
+            if ratio > RATIO_MAX:
+                continue
+    
+            distance_cm = distance_m * 100.0
+            decalage_x_cm = x_m * 100.0
+    
+            rmat, _ = cv2.Rodrigues(rvec)
+            angle_deg = math.degrees(math.atan2(rmat[0, 0], rmat[2, 0]))
+    
+            carres_trouves.append({
+                "distance": distance_cm,
+                "decalage_x": decalage_x_cm,
+                "angle": angle_deg,
+                "rvec": rvec,
+                "tvec": tvec,
+                "corners": rect,
+                "area": area,
+                "largeur_cm": largeur_cm,
+                "hauteur_cm": hauteur_cm,
+            })
     
         if carres_trouves:
-            # Tri par taille (le plus grand = le plus probable)
             carres_trouves.sort(key=lambda x: -x["area"])
             result = carres_trouves[0]
             result.pop("area", None)
+            result.pop("largeur_cm", None)
+            result.pop("hauteur_cm", None)
             return result
     
         return None
@@ -309,3 +343,146 @@ class Aruco:
             for i, texte in enumerate(textes):
                 c = couleur if i == 0 else (255, 255, 255)
                 cv2.putText(image, texte, (tx, ty + (i * 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, c, 2)
+
+    def detect_robots(
+        self,
+        image,
+        caisses_couleurs=None,
+        robot_size_m=0.30,
+        min_area_px=2500,
+        min_side_mm=60.0,
+        max_perimeter_mm=700.0,
+    ):
+        """
+        Détecte les autres robots (grosses caisses rectangulaires/carrées)
+        indépendamment de leur couleur et avec une grande tolérance au mouvement.
+        """
+        if image is None or self.camera_matrix is None:
+            return []
+
+        # 1. Traitement de l'image (Indépendant de la couleur)
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        blurred = cv2.GaussianBlur(gray, (7, 7), 0) # Réduit le bruit et le flou de mouvement
+        edges = cv2.Canny(blurred, 40, 120)         # Détection des bords
+        
+        # Fermeture morphologique pour relier les bords discontinus (très utile si le robot bouge)
+        kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (9, 9))
+        closed = cv2.morphologyEx(edges, cv2.MORPH_CLOSE, kernel)
+
+        contours, _ = cv2.findContours(closed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+        min_side_m = float(min_side_mm) / 1000.0
+        max_perimeter_m = float(max_perimeter_mm) / 1000.0
+        max_side_m = max_perimeter_m / 4.0
+        nominal_side_m = min(max(robot_size_m, min_side_m), max_side_m)
+        half = nominal_side_m / 2.0
+
+        # Taille nominale pour la pose (le filtre taille se fait ensuite).
+        obj_points = np.array([
+            [-half,  half, 0],
+            [ half,  half, 0],
+            [ half, -half, 0],
+            [-half, -half, 0]
+        ], dtype=np.float32)
+
+        robots_trouves = []
+
+        for contour in contours:
+            area = cv2.contourArea(contour)
+            
+            # 2. Ignorer les petites caisses
+            # On fixe un seuil très haut pour ne garder que les GROS objets (les robots).
+            # (Vos petites caisses font environ 400px, ici on vise > 5000)
+            if area < 5000:
+                continue
+
+            # 3. Tolérance pour la forme rectangulaire (Boîte englobante)
+            rect = cv2.minAreaRect(contour)
+            box = cv2.boxPoints(rect)
+            
+            (_, _), (rw, rh), _ = rect
+            if rw == 0 or rh == 0:
+                continue
+                
+            box_area = rw * rh
+            extent = area / box_area # Ratio de remplissage
+
+            # Si la forme remplit moins de 60% de son rectangle englobant, ce n'est pas une caisse
+            if extent < 0.60:
+                continue
+
+            # Tri des 4 coins pour le calcul de distance (Top-Left, Top-Right, Bottom-Right, Bottom-Left)
+            pts = box.astype(np.float32)
+            rect_sorted = np.zeros((4, 2), dtype=np.float32)
+            
+            s = pts.sum(axis=1)
+            rect_sorted[0] = pts[np.argmin(s)]
+            rect_sorted[2] = pts[np.argmax(s)]
+            
+            d = np.diff(pts, axis=1)
+            rect_sorted[1] = pts[np.argmin(d)]
+            rect_sorted[3] = pts[np.argmax(d)]
+
+            # 4. Calcul de la distance du robot détecté
+            retval, rvec, tvec = cv2.solvePnP(
+                obj_points, rect_sorted, self.camera_matrix, self.dist_coeffs,
+                flags=cv2.SOLVEPNP_ITERATIVE
+            )
+
+            if retval:
+                x_m = float(tvec[0][0])
+                z_m = float(tvec[2][0])
+                distance_cm = math.sqrt(x_m**2 + z_m**2) * 100.0
+                decalage_x_cm = x_m * 100.0
+
+                fx = float(self.camera_matrix[0, 0])
+                fy = float(self.camera_matrix[1, 1])
+                if fx > 0.0 and fy > 0.0 and z_m > 0.0:
+                    size_x_m = (rw * z_m) / fx
+                    size_y_m = (rh * z_m) / fy
+                    min_side_est = min(size_x_m, size_y_m)
+                    perimeter_est = 2.0 * (size_x_m + size_y_m)
+
+                    if min_side_est < min_side_m or perimeter_est > max_perimeter_m:
+                        continue
+
+                robots_trouves.append({
+                    "distance": distance_cm,
+                    "decalage_x": decalage_x_cm,
+                    "rvec": rvec,
+                    "tvec": tvec,
+                    "box_corners": box,
+                    "area": area
+                })
+
+        # Trier par taille pour avoir le robot le plus proche/gros en premier
+        robots_trouves.sort(key=lambda x: -x["area"])
+        return robots_trouves
+
+    def draw_robots(self, image, liste_robots):
+        """
+        Dessine les robots adverses détectés sur l'image (en rouge).
+        """
+        if image is None or not liste_robots:
+            return
+
+        couleur = (0, 0, 255) # Rouge pour alerter d'un robot
+
+        for robot in liste_robots:
+            if robot.get("box_corners") is not None:
+                contour = np.int32(robot["box_corners"]).reshape(-1, 1, 2)
+                cv2.polylines(image, [contour], True, couleur, 3, cv2.LINE_AA)
+
+            if robot.get("rvec") is not None and robot.get("tvec") is not None:
+                # Dessiner le centre
+                pt_center, _ = cv2.projectPoints(np.array([[0.0, 0.0, 0.0]]), robot["rvec"], robot["tvec"], self.camera_matrix, self.dist_coeffs)
+                tx, ty = int(pt_center[0][0][0]) - 80, int(pt_center[0][0][1]) - 30
+
+                textes = [
+                    "[ROBOT ADVERSE]",
+                    f"Dist : {robot['distance']:.1f} cm",
+                    f"Decalage X : {robot['decalage_x']:+.1f} cm"
+                ]
+
+                for i, texte in enumerate(textes):
+                    cv2.putText(image, texte, (tx, ty + (i * 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.6, couleur, 2)

@@ -420,8 +420,16 @@ class Strategy:
             self.robot.avancer(25)
 
             self.robot.logs.log("INFO", "Séquence de dépot terminée --> 4 points marqué ?")
-            return True
-
+            return True     
+        
+    def positions_depots_dur(self):
+        """Calibration en dur des zones de dépôt"""
+        # L'info dans le tuple est orgnaisée de la sorte : (coordX, coordY, angle par rapport à l'IMU au démarrage)
+        if self.robot.team == "yellow":
+            zones = {"zone1" : (650, 800, 90), "zone2" : (1350, 800, 90)}
+        elif self.robot.team == "blue":
+            zones = {"zone1" : (2350, 800, 270), "zone2" : (1650, 800, 270)}
+        return zones
 
     # ------------------------------------------------------------------
     # Recalibrage de la position du robot a chaque approche de zone de ramassage ou de caisses 
@@ -475,6 +483,37 @@ class Strategy:
 
     # ------------------------------------------------------------------
 
+    def homologation(self):
+        #self.robot.set_position(150, 150, -90)
+         
+        self.robot.logs.log("INFO", f"Le robot se dirige vers la zone ")
+
+        if self.robot.team=="yellow":
+            self.robot.aller_a_coord(16, 110)
+            time.sleep(5)
+            self.robot.aller_a_coord(self.robot.x, 180)
+            time.sleep(5)
+        else :
+
+            self.robot.aller_a_coord(284, 110)
+            time.sleep(5)
+            self.robot.aller_a_coord(self.robot.x, 180)
+            time.sleep(5)
+        
+        #self.robot.aller_a_coord(16, )
+        
+        time.sleep(5)
+        
+        #self.robot.aller_a_coord(self.robot.x, 184)
+    def strategie_homologation(self, frame_provider=None):
+        self.robot.logs.log("INFO", f"Stratégie homologation lancée (équipe : {self.robot.team})")
+        if self.robot.team == "yellow":
+            return self.strategy_1_jaune(frame_provider=frame_provider)
+        elif self.robot.team == "blue":
+            return self.strategy_1_bleu(frame_provider=frame_provider)
+        else:
+            self.robot.logs.log("ERR", f"Équipe inconnue : {self.robot.team}")
+            return False    
     # Jaune 
     def strategy_1_jaune(self, frame_provider):
         self.robot.logs.log("INFO", "Start strategy")
@@ -490,13 +529,12 @@ class Strategy:
 
         zone_r = self.carte.ramassage["R1"]
         self.robot.logs.log("INFO", f"Le robot se dirige vers la zone {zone_r} ")
-        self.approche_ramassage(zone_r)
         self.robot.match_demarre = True
 
         caisse = self.prendre_set_caisse(team = "yellow", frame_provider=frame_provider)
         if caisse:
             time.sleep(1)
-            zone = self.carte.garde_mangers["G4"]
+            zone = self.positions_depots_dur()["zone1"]
             self.approche_garde_manger(zone)
             self.depot_set_caisse(frame_provider=frame_provider)
             time.sleep(1)
@@ -541,7 +579,7 @@ class Strategy:
 
         if caisse:
             time.sleep(1)
-            zone = self.carte.garde_mangers["G5"]
+            zone = self.positions_depots_dur()["zone2"]
             self.approche_garde_manger(zone)
             self.depot_set_caisse(frame_provider=frame_provider)
             time.sleep(1)
@@ -553,7 +591,8 @@ class Strategy:
         # ------------------------------------------------------------------
         # PHASE 3
         # ------------------------------------------------------------------
-
+        ''' pas de phase 3 et 4 car pas le temps
+        
         zone_r = self.carte.ramassage["R7"]
         self.approche_ramassage(zone_r)
         caisse = self.prendre_set_caisse()
@@ -587,6 +626,7 @@ class Strategy:
             self.robot.logs.log("WARN", "R1 vide ou ArUco introuvable -> Skip vers PHASE 2")
 
         time.sleep(1)
+        '''
 
     # ------------------------------------------------------------------
 
@@ -610,7 +650,7 @@ class Strategy:
         caisse = self.prendre_set_caisse(team = "yellow", frame_provider=frame_provider)
         if caisse:
             time.sleep(1)
-            zone = self.carte.garde_mangers["G6"]
+            zone = self.positions_depots_dur()["zone1"]
             self.approche_garde_manger(zone)
             self.depot_set_caisse(frame_provider=frame_provider)
             time.sleep(1)
@@ -629,7 +669,7 @@ class Strategy:
 
         if caisse:
             time.sleep(1)
-            zone = self.carte.garde_mangers["G5"]
+            zone = self.positions_depots_dur()["zone2"]
             self.approche_garde_manger(zone)
             self.depot_set_caisse(frame_provider=frame_provider)
             time.sleep(1)
@@ -641,7 +681,8 @@ class Strategy:
         # ------------------------------------------------------------------
         # PHASE 3
         # ------------------------------------------------------------------
-
+        ''' pas de phase 3 et 4 car pas le temps
+        
         zone_r = self.carte.ramassage["R8"]
         self.approche_ramassage(zone_r)
         caisse = self.prendre_set_caisse()
@@ -675,4 +716,4 @@ class Strategy:
             self.robot.logs.log("WARN", "R6 vide ou ArUco introuvable -> Skip vers PHASE 2")
 
         time.sleep(1)
-
+        '''

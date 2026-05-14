@@ -39,6 +39,10 @@ class Mecanum:
         self.x = float(x_init)
         self.y = float(y_init)
         self.angle_deg = float(angle_init_deg)
+        # Last motion command (used to resume after Lidar stop)
+        self._last_motion_cmd = None  # e.g. ("AC", x, y)
+        self._paused_by_lidar = False
+        self._resume_lock = threading.Lock()
 
     def connecter(self, port=None):
         if port is not None:
@@ -107,7 +111,7 @@ class Mecanum:
             _, x, y, angle = ligne.split()
             self.x = float(x)
             self.y = float(y)
-            self.angle_deg = float(angle)
+            self.angle_deg = float(angle) - 90
         except Exception as e:
             self.logs.log("ERR", f"Parse position : {e}")
 
@@ -147,6 +151,13 @@ class Mecanum:
 
     def aller_a_coord(self, x, y, attendre=True, timeout=20):
         self.mouvement_termine.clear()
+        # Remember last motion command so we can resume after obstacle
+        try:
+            self._last_motion_cmd = ("AC", float(x), float(y))
+        except Exception:
+            self._last_motion_cmd = ("AC", x, y)
+        # If we were paused by lidar, mark that we're attempting a new motion
+        self._paused_by_lidar = False
         self.logs.log("STM32", f"AC x={x} y={y}")
         self.send_raw(f"AC {x} {y}")
         if attendre:
@@ -155,6 +166,24 @@ class Mecanum:
                 self.logs.log("ERR", f"Timeout mouvement AC ({x},{y})")
             return ok
         return True
+
+    def resume_last_motion(self):
+        """Attempt to resume the last stored motion command (only AC supported).
+        Returns True if a resume command was sent, False otherwise.
+        """
+        with self._resume_lock:
+            if not self._last_motion_cmd:
+                return False
+            cmd = self._last_motion_cmd
+            if cmd[0] == "AC":
+                x, y = cmd[1], cmd[2]
+                self.mouvement_termine.clear()
+                self.logs.log("STM32", f"RESUME AC x={x} y={y}")
+                sent = self.send_raw(f"AC {x} {y}")
+                if sent:
+                    self._paused_by_lidar = False
+                return sent
+            return False
 
     def tourner_vers_angle(self, angle, attendre=True, timeout=10):
         self.mouvement_termine.clear()

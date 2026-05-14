@@ -21,7 +21,7 @@ class Camera:
 
         self.width = 1280
         self.height = 720
-        self.fps = 60
+        self.fps = 30
 
         self.aruco = Aruco(marker_size=0.040)
 

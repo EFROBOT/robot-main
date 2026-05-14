@@ -9,7 +9,7 @@ from core.camera import Camera
 from core.lidar import Lidar
 from core.ultrasson import Ultrasson
 from core.servomoteur import init_servo, set_angle_servo
-from world.map import Map
+from world.map import Map, TERRAIN_WIDTH, TERRAIN_HEIGHT
 
 
 class Robot(Mecanum):
@@ -33,10 +33,15 @@ class Robot(Mecanum):
         self.team = team
         self.map = Map(team=team)
         self.inventaire = []
-        self.zone_ramassage = None 
+        self.zone_ramassage = None
+        self.tirette_en_place = True
+        self.match_demarre = False 
         self.running = False
         self.last_align_time = 0.0
         self.align_interval_ms = 50
+        # Distance de sécurité pour ignorer les retours Lidar venant des bords
+        # du terrain (en cm, dans le repère monde).
+        self.lidar_ignore_margin_cm = 45.0
 
         # Init 
         init_servo()
@@ -116,6 +121,9 @@ class Robot(Mecanum):
             "robot": {
                 "x": self.x,
                 "y": self.y,
+                "team": self.team,
+                "tirette_en_place": self.tirette_en_place,
+                "match_demarre": self.match_demarre,
                 "angle_deg": self.angle_deg,
                 "angle_rad": math.radians(self.angle_deg),
                 "nb_caisses": len(self.inventaire),
@@ -133,6 +141,8 @@ class Robot(Mecanum):
 
     def get_logs(self):
         return self.logs.get_lines()
+
+    
 
     # ------------------------------------------------------------------
     # Option pince
@@ -285,32 +295,101 @@ class Robot(Mecanum):
     # ------------------------------------------------------------------
 
     # Only lidar
+    def _pres_du_bord_de_carte(self, marge=18.0):
+        return (
+            self.x <= marge
+            or self.x >= TERRAIN_WIDTH - marge
+            or self.y <= marge
+            or self.y >= TERRAIN_HEIGHT - marge
+        )
+
+    def _bords_de_carte_proches(self, marge=None):
+        if marge is None:
+            marge = self.lidar_ignore_margin_cm
+        bords = set()
+        if self.x <= marge:
+            bords.add("left")
+        if self.x >= TERRAIN_WIDTH - marge:
+            bords.add("right")
+        if self.y <= marge:
+            bords.add("bottom")
+        if self.y >= TERRAIN_HEIGHT - marge:
+            bords.add("top")
+        return bords
+
+    def _cote_obstacle_lidar(self, angle_deg):
+        # Convertit l'angle Lidar vers le repère terrain et le ramène entre 0° et 360°
+        angle = (float(angle_deg) + float(self.angle_deg)) % 360.0
+        if 45.0 <= angle < 135.0:
+            return "top"
+        elif 135.0 <= angle < 225.0:
+            return "right"
+        elif 225.0 <= angle < 315.0:
+            return "bottom"
+        else:
+            return "left"
+
+    def _obstacle_peut_etre_ignored(self, obstacle, bords_proches):
+        cote_obstacle = self._cote_obstacle_lidar(obstacle["angle"])
+        return cote_obstacle in bords_proches
+
     def surveiller_lidar(self):
             if not self.lidar:
                 return
             def boucle():
+                last_heartbeat = time.time()
+                heartbeat_interval_s = 3.0
+                clear_consecutive = 0
+                required_clear = 3
                 while self.lidar:
                     try:
                         obstacles = self.lidar.scan()
                     except Exception as exc:
-                        self.logs.log("ERR", f"Lidar: {exc}")
-                        try:
-                            self.lidar.lidar.stop()
-                            self.lidar.lidar.clean_input()
-                        except Exception:
-                            pass
-                        time.sleep(0.2)
+                        self.logs.log("ERR", f"Lidar scan error: {exc}")
+                        time.sleep(0.5)
                         continue
                     if obstacles:
+                        bords_proches = self._bords_de_carte_proches()
+                        if bords_proches and all(self._obstacle_peut_etre_ignored(o, bords_proches) for o in obstacles):
+                            #self.logs.log(
+                            #   "LIDAR",
+                            #    f"Obstacle bord ignoré: x={self.x:.1f}, y={self.y:.1f}, bords={sorted(bords_proches)}",
+                            #)
+                            time.sleep(0.2)
+                            continue
+
                         details = ", ".join(f"{o['angle']}°/{o['distance_cm']}cm" for o in obstacles)
-                        self.logs.log("LIDAR", f"Obstacle détecté ({len(obstacles)} pts): {details}, arrêt 10s")
-                        self.send_raw("STOP")
-                        time.sleep(10)
-                        try:
-                            self.lidar.lidar.stop()
-                            self.lidar.lidar.clean_input()
-                        except Exception:
-                            pass
+                        #self.logs.log("LIDAR", f"Obstacle détecté ({len(obstacles)} pts): {details}")
+
+                        # Prioritise Lidar: stop robot and mark paused state
+                        if not getattr(self, "_paused_by_lidar", False):
+                            self._paused_by_lidar = True
+                            self.send_raw("STOP")
+                            self.logs.log("LIDAR", "Arrêt prioritaire Lidar")
+
+                        clear_consecutive = 0
+                    else:
+                        # No obstacles seen in this scan
+                        if getattr(self, "_paused_by_lidar", False):
+                            clear_consecutive += 1
+                            if clear_consecutive >= required_clear:
+                                self.logs.log("LIDAR", "Obstacle disparu, tentative de reprise")
+                                try:
+                                    resumed = False
+                                    if hasattr(self, "resume_last_motion"):
+                                        resumed = self.resume_last_motion()
+                                    if resumed:
+                                        self.logs.log("LIDAR", "Reprise mouvement envoyé")
+                                    else:
+                                        self.logs.log("LIDAR", "Aucun mouvement à reprendre")
+                                    self._paused_by_lidar = False
+                                except Exception as exc:
+                                    self.logs.log("ERR", f"Erreur reprise Lidar: {exc}")
+                                    self._paused_by_lidar = False
+                                clear_consecutive = 0
+
+                    time.sleep(0.1)
+            
             threading.Thread(target=boucle, daemon=True).start()
     
     # Lidar & camera 

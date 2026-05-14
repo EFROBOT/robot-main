@@ -22,7 +22,7 @@ class Options:
             elif port.vid == vid_lidar:
                 devices["lidar"] = port.device
 
-        devices["cameras"] = Options.list_available_cameras(max_index=10)[:2]
+        devices["cameras"] = Options.list_available_cameras(max_index=10)[:3]
 
         return devices
 
@@ -99,7 +99,7 @@ class Options:
         for index, camera in enumerate(cameras_detectees, start=1):
             print(f"  {index}. {camera}")
 
-        nb_max = min(2, len(cameras_detectees))
+        nb_max = min(3, len(cameras_detectees))
         nb_cameras = Options.demander_entier(f"Combien de caméras utiliser ? (1 à {nb_max})", nb_max)
         nb_cameras = max(1, min(nb_cameras, nb_max))
 
