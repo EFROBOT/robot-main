@@ -12,6 +12,7 @@ from core.camera import Camera
 from core.robot import Robot
 from core.affinite_cpu import fixer_affinite_cpu
 
+from core.alignement_tri_caisses import AlignementTriCaisses
 
 class AffichageWeb:
     def __init__(
@@ -42,6 +43,7 @@ class AffichageWeb:
             static_folder=os.path.join(base_dir, "static"),
         )
         self.strategie_en_cours = False
+        self.aligneur_tri = AlignementTriCaisses(strategy=self.strategy, logs=self.robot.logs)
 
         # ── Ouverture persistante des caméras ──────────────────
         # Une VideoCapture + un Lock par caméra détectée.
@@ -429,7 +431,7 @@ class AffichageWeb:
             except (TypeError, ValueError):
                 return jsonify({"ok": False, "erreur": "numéro de stratégie invalide"}), 400
 
-            if numero not in (1, 2, 3, 4, 5):
+            if numero not in (1, 2, 3, 4, 5, 6):
                 return jsonify({"ok": False, "erreur": "stratégie inconnue"}), 400
 
             if self.strategie_en_cours:
@@ -450,12 +452,21 @@ class AffichageWeb:
                     elif numero == 5:
                         self.strategy.strategie_homologation(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 6:
-                        self.strategy.homologation()
+                        resultat = self.aligneur_tri.lancer(
+                            frame_provider=lambda: self.get_frame(slot=0),
+                            timeout_alignement_s=15.0,
+                        )
+                        ordre = resultat.get("ordre_couleurs", [])
+                        self.robot.logs.log("RPi", f"AlignementTri terminé, ordre: {ordre}")
+                        print(f"[WEB] Caisses trouvées: {ordre}")
 
 
                 except Exception as exc:
                     self.robot.logs.log("ERR", f"Stratégie {numero} : {exc}")
                 finally:
+                    if numero == 6:
+                        self.robot.stop()
+                        self.robot.logs.log("RPi", "AlignementTri terminé: robot STOP et retour attente")
                     self.strategie_en_cours = False
 
             threading.Thread(target=run, daemon=True).start()
