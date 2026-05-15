@@ -13,7 +13,7 @@ from core.robot import Robot
 from core.affinite_cpu import fixer_affinite_cpu
 
 from core.alignement_tri_caisses import AlignementTriCaisses
-
+from core.recuperation_caisses import RecuperationCaisses
 class AffichageWeb:
     def __init__(
         self,
@@ -44,6 +44,8 @@ class AffichageWeb:
         )
         self.strategie_en_cours = False
         self.aligneur_tri = AlignementTriCaisses(strategy=self.strategy, logs=self.robot.logs)
+        self.recuperation_caisses = RecuperationCaisses(robot=self.robot, logs=self.robot.logs)
+        self.dernier_ordre_couleurs = []
 
         # ── Ouverture persistante des caméras ──────────────────
         # Une VideoCapture + un Lock par caméra détectée.
@@ -431,7 +433,7 @@ class AffichageWeb:
             except (TypeError, ValueError):
                 return jsonify({"ok": False, "erreur": "numéro de stratégie invalide"}), 400
 
-            if numero not in (1, 2, 3, 4, 5, 6):
+            if numero not in (1, 2, 3, 4, 5, 6, 7):
                 return jsonify({"ok": False, "erreur": "stratégie inconnue"}), 400
 
             if self.strategie_en_cours:
@@ -460,13 +462,21 @@ class AffichageWeb:
                         self.robot.logs.log("RPi", f"AlignementTri terminé, ordre: {ordre}")
                         print(f"[WEB] Caisses trouvées: {ordre}")
 
+                        self.dernier_ordre_couleurs = list(ordre)
+                    elif numero == 7:
+                        if not self.dernier_ordre_couleurs:
+                            self.robot.logs.log("WARN", "Aucun ordre couleurs disponible. Lance d'abord la stratégie 6.")
+                        else:
+                            ok = self.recuperation_caisses.executer_cycle(self.dernier_ordre_couleurs)
+                            self.robot.logs.log("RPi", f"Cycle récupération depuis web terminé: {ok}")
+
 
                 except Exception as exc:
                     self.robot.logs.log("ERR", f"Stratégie {numero} : {exc}")
                 finally:
-                    if numero == 6:
+                    if numero in (6, 7):
                         self.robot.stop()
-                        self.robot.logs.log("RPi", "AlignementTri terminé: robot STOP et retour attente")
+                        self.robot.logs.log("RPi", f"Stratégie {numero} terminée: robot STOP et retour attente")
                     self.strategie_en_cours = False
 
             threading.Thread(target=run, daemon=True).start()

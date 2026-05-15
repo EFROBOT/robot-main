@@ -171,6 +171,24 @@ class Robot(Mecanum):
     def pince_homologation(self):
         self.send_raw("Pince Homologation")
 
+    def pince_recuperer_avancer_et_stocker(self, rotation_active, attendre=True, timeout=30):
+        self.send_raw(f"Pince_RecupererAvancerEtStocker {int(rotation_active)}")
+        if attendre:
+            ok = self.mouvement_pince_termine.wait(timeout=timeout)
+            if not ok:
+                self.logs.log("ERR", f"Timeout Pince_RecupererAvancerEtStocker ({rotation_active})")
+            return ok
+        return True
+
+    def pince_recuperer_et_stocker(self, rotation_active, attendre=True, timeout=30):
+        self.send_raw(f"Pince_RecupererEtStocker {int(rotation_active)}")
+        if attendre:
+            ok = self.mouvement_pince_termine.wait(timeout=timeout)
+            if not ok:
+                self.logs.log("ERR", f"Timeout Pince_RecupererEtStocker ({rotation_active})")
+            return ok
+        return True
+
     # Option servo
     def securiser_caisses(self):
         set_angle_servo(103)
