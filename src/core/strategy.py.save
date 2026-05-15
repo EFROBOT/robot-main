@@ -493,24 +493,22 @@ class Strategy:
     # ------------------------------------------------------------------
 
     def homologation(self):
+        #self.robot.set_position(150, 150, -90)
          
         self.robot.logs.log("INFO", f"Le robot se dirige vers la zone ")
-
-        if self.robot.team=="yellow":
-            self.robot.avancer(75)
+	self.robot.recuperer_caisses(0)
+"""
+        if self.robot.team=="yellowc":
+            self.robot.aller_a_coord(self.robot.x, 80)
             time.sleep(5)
-            self.robot.rotation_droite(190)
-            time.sleep(5)
-            self.robot.avancer(75)
-            time.sleep(5)
+            #self.robot.aller_a_coord(self.robot.x, 160)
+            #time.sleep(5)
         else :
-            self.robot.avancer(75)
+            self.robot.aller_a_coord(self.robot.x, 80)
             time.sleep(5)
-            self.robot.rotation_gauche(190)
-            time.sleep(5)
-            self.robot.avancer(75)
-            time.sleep(5)  
-
+            #self.robot.aller_a_coord(self.robot.x, 180)
+            #time.sleep(5)
+                
         time.sleep(5)
         
         #self.robot.aller_a_coord(self.robot.x, 184)

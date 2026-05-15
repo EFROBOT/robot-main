@@ -102,6 +102,14 @@ class Robot(Mecanum):
         super().stop()
         self.camera.release()
         cv2.destroyAllWindows()
+        
+    def stop(self):
+        """Arrête les mouvements du robot et ferme la caméra."""
+        self.running = False
+        super().stop()  # Envoie "STOP" au STM32
+        self.camera.release()
+        cv2.destroyAllWindows()
+
 
     def align_to_marker(self, marker):
         now = time.time() * 1000
@@ -319,6 +327,7 @@ class Robot(Mecanum):
     def _cote_obstacle_lidar(self, angle_deg):
         # Convertit l'angle Lidar vers le repère terrain et le ramène entre 0° et 360°
         angle = (float(angle_deg) + float(self.angle_deg)) % 360.0
+
         if 45.0 <= angle < 135.0:
             return "top"
         elif 135.0 <= angle < 225.0:
@@ -348,12 +357,20 @@ class Robot(Mecanum):
                         time.sleep(0.5)
                         continue
                     if obstacles:
+                        self.send_raw("STOP")
+                        """
+                        while True:
+                                self.send_raw("STOP")
+                                time.sleep(1)
+                                self.logs.log("LIDAR", "Arrêt prioritaire Lidar")
+                        """
+                        
                         bords_proches = self._bords_de_carte_proches()
                         if bords_proches and all(self._obstacle_peut_etre_ignored(o, bords_proches) for o in obstacles):
-                            #self.logs.log(
-                            #   "LIDAR",
-                            #    f"Obstacle bord ignoré: x={self.x:.1f}, y={self.y:.1f}, bords={sorted(bords_proches)}",
-                            #)
+                            self.logs.log(
+                               "LIDAR",
+                                f"Obstacle bord ignoré: x={self.x:.1f}, y={self.y:.1f}, bords={sorted(bords_proches)}",
+                            )
                             time.sleep(0.2)
                             continue
 
@@ -367,11 +384,13 @@ class Robot(Mecanum):
                             self.logs.log("LIDAR", "Arrêt prioritaire Lidar")
 
                         clear_consecutive = 0
+                       
                     else:
                         # No obstacles seen in this scan
                         if getattr(self, "_paused_by_lidar", False):
                             clear_consecutive += 1
                             if clear_consecutive >= required_clear:
+                                clear_consecutive = 0
                                 self.logs.log("LIDAR", "Obstacle disparu, tentative de reprise")
                                 try:
                                     resumed = False
@@ -385,7 +404,7 @@ class Robot(Mecanum):
                                 except Exception as exc:
                                     self.logs.log("ERR", f"Erreur reprise Lidar: {exc}")
                                     self._paused_by_lidar = False
-                                clear_consecutive = 0
+                                
 
                     time.sleep(0.1)
             
@@ -400,7 +419,11 @@ class Robot(Mecanum):
     def surveiller(self):
             def boucle():
                 while True:
-                    # 1. Vérification des Ultrasons (Priorité haute, temps de réponse court)
+                    # 1. Vérification des Ultrason
+                    # 
+                    # 
+                    # 
+                    # s (Priorité haute, temps de réponse court)
                     if hasattr(self, 'ultrason_front') and not self.ultrason_front.is_clear():
                         self.logs.log("WARN", "ULTRASON: Obstacle proche, STOP")
                         self.send_raw("STOP")

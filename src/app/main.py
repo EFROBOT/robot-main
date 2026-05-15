@@ -11,8 +11,9 @@ from web.dashboard import AffichageWeb
 
 
 def ficelle(robot, strategy, web, utiliser_camera):
+    x = False
     GPIO.setup(2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-
+    
     while True:
         # Suivi de l'interrupteur d'équipe (uniquement si changement)
         nouvelle_team = "yellow" if GPIO.input(17) == GPIO.LOW else "blue"
@@ -28,7 +29,10 @@ def ficelle(robot, strategy, web, utiliser_camera):
         if GPIO.input(2) == GPIO.LOW:
             robot.logs.log("RPi", f"Tirette retirée → stratégie homologation ({robot.team})")
             strategy.homologation()
-            break
+            robot.fermer()
+            GPIO.cleanup()
+            while True:
+                x=0
 
         time.sleep(0.05)
 
@@ -78,7 +82,9 @@ def main():
         web_thread = threading.Thread(target=web.run, daemon=True)
         web_thread.start()
 
-        ficelle(robot, strategy, web, utiliser_camera)
+        x = True
+        if x :
+            ficelle(robot, strategy, web, utiliser_camera)
 
     finally:
         robot.fermer()

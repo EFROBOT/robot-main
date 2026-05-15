@@ -17,6 +17,7 @@ Pour recevoir position
     POS x y angle 
 """
 
+import math
 import serial
 import threading
 import time
@@ -41,6 +42,11 @@ class Mecanum:
         self.angle_deg = float(angle_init_deg)
         # Last motion command (used to resume after Lidar stop)
         self._last_motion_cmd = None  # e.g. ("AC", x, y)
+        self._last_motion_resumable = False
+        self._motion_start_pose = None
+        self._motion_total_distance = None
+        self._motion_direction_offset_deg = None
+        self._motion_target = None
         self._paused_by_lidar = False
         self._resume_lock = threading.Lock()
 
@@ -126,54 +132,94 @@ class Mecanum:
             serial_port.write(data)
         return True
 
+    def _start_motion_tracking(self, cmd_type, value, resumable, direction_offset_deg=None, target=None):
+        self._motion_start_pose = (self.x, self.y, self.angle_deg)
+        self._motion_total_distance = float(value) if value is not None else None
+        self._motion_direction_offset_deg = direction_offset_deg
+        self._motion_target = target
+        self._last_motion_cmd = (cmd_type, value) if target is None else (cmd_type, target[0], target[1])
+        self._last_motion_resumable = resumable
+
+    def _estimate_remaining_linear_distance(self):
+        if self._motion_start_pose is None or self._last_motion_cmd is None or self._motion_total_distance is None:
+            return None
+
+        start_x, start_y, start_angle_deg = self._motion_start_pose
+        current_dx = self.x - start_x
+        current_dy = self.y - start_y
+
+        if self._motion_direction_offset_deg is None:
+            return None
+
+        move_angle_deg = start_angle_deg + float(self._motion_direction_offset_deg)
+
+        move_angle_rad = math.radians(move_angle_deg)
+        axis_x = math.cos(move_angle_rad)
+        axis_y = math.sin(move_angle_rad)
+        progress = (current_dx * axis_x) + (current_dy * axis_y)
+        remaining = self._motion_total_distance - progress
+        if remaining <= 0.0:
+            return 0.0
+        return remaining
+
 
     def avancer(self, distance):
         self.mouvement_termine.clear()
+        try:
+            distance_value = float(distance)
+        except Exception:
+            distance_value = distance
+        self._start_motion_tracking("A", distance_value, True, direction_offset_deg=0.0)
         self._paused_by_lidar = False
         self.send_raw(f"A {distance}")
 
     def reculer(self, distance):
         self.mouvement_termine.clear()
         try:
-            self._last_motion_cmd = ("R", float(distance))
+            distance_value = float(distance)
         except Exception:
-            self._last_motion_cmd = ("R", distance)
+            distance_value = distance
+        self._start_motion_tracking("R", distance_value, True, direction_offset_deg=180.0)
         self._paused_by_lidar = False
         self.send_raw(f"R {distance}")
 
     def droite(self, distance):
         self.mouvement_termine.clear()
         try:
-            self._last_motion_cmd = ("G", float(distance))
+            distance_value = float(distance)
         except Exception:
-            self._last_motion_cmd = ("G", distance)
+            distance_value = distance
+        self._start_motion_tracking("G", distance_value, True, direction_offset_deg=-90.0)
         self._paused_by_lidar = False
         self.send_raw(f"G {distance}")
 
     def gauche(self, distance):
         self.mouvement_termine.clear()
         try:
-            self._last_motion_cmd = ("D", float(distance))
+            distance_value = float(distance)
         except Exception:
-            self._last_motion_cmd = ("D", distance)
+            distance_value = distance
+        self._start_motion_tracking("D", distance_value, True, direction_offset_deg=90.0)
         self._paused_by_lidar = False
         self.send_raw(f"D {distance}")
 
     def diagonale_gauche(self, distance):
         self.mouvement_termine.clear()
         try:
-            self._last_motion_cmd = ("DG", float(distance))
+            distance_value = float(distance)
         except Exception:
-            self._last_motion_cmd = ("DG", distance)
+            distance_value = distance
+        self._start_motion_tracking("DG", distance_value, True, direction_offset_deg=45.0)
         self._paused_by_lidar = False
         self.send_raw(f"DG {distance}")
 
     def diagonale_droite(self, distance):
         self.mouvement_termine.clear()
         try:
-            self._last_motion_cmd = ("DD", float(distance))
+            distance_value = float(distance)
         except Exception:
-            self._last_motion_cmd = ("DD", distance)
+            distance_value = distance
+        self._start_motion_tracking("DD", distance_value, True, direction_offset_deg=-45.0)
         self._paused_by_lidar = False
         self.send_raw(f"DD {distance}")
 
@@ -183,6 +229,11 @@ class Mecanum:
             self._last_motion_cmd = ("RH", float(angle))
         except Exception:
             self._last_motion_cmd = ("RH", angle)
+        self._motion_start_pose = (self.x, self.y, self.angle_deg)
+        self._motion_total_distance = None
+        self._motion_direction_offset_deg = None
+        self._motion_target = None
+        self._last_motion_resumable = True
         self._paused_by_lidar = False
         self.send_raw(f"RH {angle}")
 
@@ -192,6 +243,11 @@ class Mecanum:
             self._last_motion_cmd = ("RAH", float(angle))
         except Exception:
             self._last_motion_cmd = ("RAH", angle)
+        self._motion_start_pose = (self.x, self.y, self.angle_deg)
+        self._motion_total_distance = None
+        self._motion_direction_offset_deg = None
+        self._motion_target = None
+        self._last_motion_resumable = True
         self._paused_by_lidar = False
         self.send_raw(f"RAH {angle}")
 
@@ -199,52 +255,95 @@ class Mecanum:
         self.mouvement_termine.clear()
         # Remember last motion command so we can resume after obstacle
         try:
-            self._last_motion_cmd = ("AC", float(x), float(y))
+            x_target = float(x)
+            y_target = float(y)
         except Exception:
-            self._last_motion_cmd = ("AC", x, y)
-
+            x_target = x
+            y_target = y
+        self._start_motion_tracking("AC", None, True, target=(x_target, y_target))
+        self._last_motion_resumable = True
+        # If we were paused by lidar, mark that we're attempting a new motion
+        self._paused_by_lidar = False
         self.logs.log("STM32", f"AC x={x} y={y}")
         self.send_raw(f"AC {x} {y}")
+        if attendre:
+            ok = self.mouvement_termine.wait(timeout=timeout)
+            if not ok:
+                self.logs.log("ERR", f"Timeout mouvement AC ({x},{y})")
+            return ok
+        return True
 
+    def _motion_to_command(self, cmd):
+        cmd_type = cmd[0]
+        if cmd_type == "AC" and self._motion_target is not None:
+            return f"AC {self._motion_target[0]} {self._motion_target[1]}"
+        if cmd_type in {"A", "R", "G", "D", "DG", "DD", "RH", "RAH", "TVA"} and len(cmd) == 2:
+            return f"{cmd_type} {cmd[1]}"
+        return None
+
+    def _motion_remaining_value(self):
+        if self._last_motion_cmd is None:
+            return None
+
+        cmd_type = self._last_motion_cmd[0]
+        if cmd_type == "AC":
+            if self._motion_target is None:
+                return None
+            start_x, start_y, _ = self._motion_start_pose if self._motion_start_pose is not None else (None, None, None)
+            if start_x is None or start_y is None:
+                return None
+            target_x, target_y = self._motion_target
+            total_dx = target_x - start_x
+            total_dy = target_y - start_y
+            total_distance = math.hypot(total_dx, total_dy)
+            if total_distance <= 0.0:
+                return 0.0
+            axis_x = total_dx / total_distance
+            axis_y = total_dy / total_distance
+            progress = ((self.x - start_x) * axis_x) + ((self.y - start_y) * axis_y)
+            remaining = total_distance - progress
+            return 0.0 if remaining <= 0.0 else remaining
+
+        if self._motion_total_distance is None or self._motion_start_pose is None:
+            return None
+
+        if cmd_type not in {"A", "R", "G", "D", "DG", "DD"}:
+            return None
+
+        return self._estimate_remaining_linear_distance()
 
     def resume_last_motion(self):
         """Attempt to resume the last stored motion command.
-        Supports all movement types: AC, A, R, G, D, DG, DD, RH, RAH, TVA
+        Replays only the remaining distance when the start pose and current POS
+        allow a reliable estimate.
         Returns True if a resume command was sent, False otherwise.
         """
         with self._resume_lock:
-            if not self._last_motion_cmd:
+            if not self._last_motion_cmd or not self._last_motion_resumable:
                 return False
-            
-            cmd = self._last_motion_cmd
-            cmd_type = cmd[0]
-            sent = False
-            
+
+            remaining_value = self._motion_remaining_value()
+            if remaining_value is None:
+                return False
+
+            cmd_type = self._last_motion_cmd[0]
+            if cmd_type in {"A", "R", "G", "D", "DG", "DD"}:
+                if remaining_value <= 0.5:
+                    return False
+                command = f"{cmd_type} {round(remaining_value, 1)}"
+            else:
+                command = self._motion_to_command(self._last_motion_cmd)
+                if command is None:
+                    return False
+
+            self.mouvement_termine.clear()
+            self.logs.log("STM32", f"RESUME {command}")
             try:
-                if cmd_type == "AC" and len(cmd) == 3:
-                    # Aller à coordonnée
-                    x, y = cmd[1], cmd[2]
-                    self.mouvement_termine.clear()
-                    self.logs.log("STM32", f"RESUME AC x={x} y={y}")
-                    sent = self.send_raw(f"AC {x} {y}")
-                
-                elif cmd_type in ["A", "R", "G", "D", "DG", "DD"] and len(cmd) == 2:
-                    # Mouvement de distance (avancer, reculer, latéral, diagonal)
-                    distance = cmd[1]
-                    self.logs.log("STM32", f"RESUME {cmd_type} {distance}")
-                    sent = self.send_raw(f"{cmd_type} {distance}")
-                
-                elif cmd_type in ["RH", "RAH", "TVA"] and len(cmd) == 2:
-                    # Mouvement de rotation/angle
-                    angle = cmd[1]
-                    self.mouvement_termine.clear()
-                    self.logs.log("STM32", f"RESUME {cmd_type} {angle}")
-                    sent = self.send_raw(f"{cmd_type} {angle}")
-            
+                sent = self.send_raw(command)
             except Exception as exc:
                 self.logs.log("ERR", f"Erreur resume_last_motion: {exc}")
-                sent = False
-            
+                return False
+
             if sent:
                 self._paused_by_lidar = False
             return sent
@@ -255,6 +354,7 @@ class Mecanum:
             self._last_motion_cmd = ("TVA", float(angle))
         except Exception:
             self._last_motion_cmd = ("TVA", angle)
+        self._last_motion_resumable = True
         self._paused_by_lidar = False
         self.logs.log("STM32", f"TVA angle={angle}")
         self.send_raw(f"TVA {angle}")
@@ -279,22 +379,12 @@ class Mecanum:
     def fermer(self):
         self.running = False
         self._stop_event.set()
-        
-        # Attendre la fin du thread de lecture
         if self._thread:
-            try:
-                self._thread.join(timeout=2.0)
-            except Exception:
-                pass
+            self._thread.join(timeout=2.0)
             self._thread = None
-        
-        # Fermeture du port série
         if self.serial_port and self.serial_port.is_open:
             try:
                 self.serial_port.close()
-            except Exception as exc:
-                self.logs.log("ERR", f"Erreur fermeture port série: {exc}")
-            finally:
-                self.serial_port = None
-        
-        self.logs.log("STM32", "Mecanum fermé")
+            except Exception:
+                pass
+            self.serial_port = None
