@@ -10,6 +10,7 @@ import cv2
 
 from core.camera import Camera
 from core.robot import Robot
+from core.affinite_cpu import fixer_affinite_cpu
 
 
 class AffichageWeb:
@@ -130,6 +131,8 @@ class AffichageWeb:
         return buf.tobytes()
 
     def _camera_worker(self, slot):
+        if slot == 0:
+            fixer_affinite_cpu(1, logs=self.robot.logs, nom_thread="camera_slot_0")
         cap = self._caps[slot]
         lock = self._locks[slot]
         detector = self._detectors[slot]
@@ -359,6 +362,7 @@ class AffichageWeb:
             state["last_result"] = None
 
             def run_calibration():
+                fixer_affinite_cpu(3, logs=self.robot.logs, nom_thread="calibration")
                 try:
                     cam = Camera(camera_id=camera_id)
                     result = cam.calibrate_charuco(
@@ -432,6 +436,7 @@ class AffichageWeb:
                 return jsonify({"ok": False, "erreur": "stratégie déjà en cours"}), 409
 
             def run():
+                fixer_affinite_cpu(3, logs=self.robot.logs, nom_thread="strategie")
                 self.strategie_en_cours = True
                 try:
                     if numero == 1:
@@ -501,10 +506,11 @@ class AffichageWeb:
                 return jsonify({"ok": False, "erreur": "coordonnées invalides"}), 400
 
             self.robot.logs.log("RPi", f"Aller à ({x}, {y})")
-            threading.Thread(
-                target=lambda: self.robot.aller_a_coord(x, y),
-                daemon=True
-            ).start()
+            def run_nav_coord():
+                fixer_affinite_cpu(3, logs=self.robot.logs, nom_thread="nav_coord")
+                self.robot.aller_a_coord(x, y)
+
+            threading.Thread(target=run_nav_coord, daemon=True).start()
             return jsonify({"ok": True})
 
         @self.app.route("/nav_angle", methods=["POST"])
@@ -516,13 +522,15 @@ class AffichageWeb:
                 return jsonify({"ok": False, "erreur": "angle invalide"}), 400
 
             self.robot.logs.log("RPi", f"Tourner vers {angle}°")
-            threading.Thread(
-                target=lambda: self.robot.tourner_vers_angle(angle),
-                daemon=True
-            ).start()
+            def run_nav_angle():
+                fixer_affinite_cpu(3, logs=self.robot.logs, nom_thread="nav_angle")
+                self.robot.tourner_vers_angle(angle)
+
+            threading.Thread(target=run_nav_angle, daemon=True).start()
             return jsonify({"ok": True})
 
     def run(self):
+        fixer_affinite_cpu(3, logs=self.robot.logs, nom_thread="flask_main")
         self.robot.logs.log("RPi", f"Dashboard : http://localhost:{self.port}")
         self.app.run(host="0.0.0.0", port=self.port, debug=False, use_reloader=False)
 

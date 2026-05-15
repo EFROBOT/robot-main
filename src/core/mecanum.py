@@ -21,6 +21,7 @@ import serial
 import threading
 import time
 
+from core.affinite_cpu import fixer_affinite_cpu
 
 class Mecanum:
     def __init__(self, logs, port=None, baudrate=115200, x_init=0.0, y_init=0.0, angle_init_deg=0.0):
@@ -75,6 +76,7 @@ class Mecanum:
 
 
     def lire_en_continu(self):
+        fixer_affinite_cpu(0, logs=self.logs, nom_thread="serial_stm32")
         while self.running and not self._stop_event.is_set():
             try:
                 serial_port = self.serial_port

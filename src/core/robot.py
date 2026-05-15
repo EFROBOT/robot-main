@@ -9,6 +9,7 @@ from core.camera import Camera
 from core.lidar import Lidar
 from core.ultrasson import Ultrasson
 from core.servomoteur import init_servo, set_angle_servo
+from core.affinite_cpu import fixer_affinite_cpu
 from world.map import Map, TERRAIN_WIDTH, TERRAIN_HEIGHT
 
 
@@ -345,6 +346,7 @@ class Robot(Mecanum):
             if not self.lidar:
                 return
             def boucle():
+                fixer_affinite_cpu(0, logs=self.logs, nom_thread="lidar")
                 last_heartbeat = time.time()
                 heartbeat_interval_s = 3.0
                 clear_consecutive = 0
