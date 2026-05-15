@@ -27,7 +27,7 @@ class Robot(Mecanum):
 
         self.surveiller_lidar()
         #self.surveiller_bord_map()
-        self.surveiller_zone_exclusion()
+        #self.surveiller_zone_exclusion()
  
         self.set_team(team)
         self.team = team
@@ -81,11 +81,11 @@ class Robot(Mecanum):
 
                 markers = self.camera.aruco.detect_markers(frame)
                 self.camera.aruco.draw_marker(frame, markers)
-                """
+                
                 zone = self.camera.aruco.detect_zone_ramassage(frame)
                 self.zone_ramassage = zone
                 self.camera.aruco.draw_zone_ramassage(frame, zone)
-                """
+
                 if markers:
                     self.align_to_marker(markers[0])
                 else:
@@ -148,7 +148,6 @@ class Robot(Mecanum):
     # Option pince
 
     def recuperer_caisses(self, recup, attendre=True, timeout=30):
-        self.mouvement_pince_termine.clear()
         self.send_raw(f"Recuperer caisse {recup}")
         if attendre:
             ok = self.mouvement_pince_termine.wait(timeout=timeout)
@@ -214,7 +213,7 @@ class Robot(Mecanum):
 
     # ------------------------------------------------------------------
     # Surveiller map
-
+    """
     def surveiller_bord_map(self):
         marge = 2.0
         demi_largeur = 32.0 / 2
@@ -282,7 +281,7 @@ class Robot(Mecanum):
         y_cible = max(y_min + 10, min(y, y_max - 10))
         
         self.logs.log("INFO", f"Dégagement vers x={x_cible:.1f}, y={y_cible:.1f}")
-        self.aller_a_coord(x_cible, y_cible)
+        self.aller_a_coord(x_cible, y_cible)"""
 
     # ------------------------------------------------------------------
     # Evitement obstacle avec camera (caisses)

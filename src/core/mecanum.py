@@ -128,27 +128,71 @@ class Mecanum:
 
 
     def avancer(self, distance):
+        self.mouvement_termine.clear()
+        self._paused_by_lidar = False
         self.send_raw(f"A {distance}")
 
     def reculer(self, distance):
+        self.mouvement_termine.clear()
+        try:
+            self._last_motion_cmd = ("R", float(distance))
+        except Exception:
+            self._last_motion_cmd = ("R", distance)
+        self._paused_by_lidar = False
         self.send_raw(f"R {distance}")
 
     def droite(self, distance):
+        self.mouvement_termine.clear()
+        try:
+            self._last_motion_cmd = ("G", float(distance))
+        except Exception:
+            self._last_motion_cmd = ("G", distance)
+        self._paused_by_lidar = False
         self.send_raw(f"G {distance}")
 
     def gauche(self, distance):
+        self.mouvement_termine.clear()
+        try:
+            self._last_motion_cmd = ("D", float(distance))
+        except Exception:
+            self._last_motion_cmd = ("D", distance)
+        self._paused_by_lidar = False
         self.send_raw(f"D {distance}")
 
     def diagonale_gauche(self, distance):
+        self.mouvement_termine.clear()
+        try:
+            self._last_motion_cmd = ("DG", float(distance))
+        except Exception:
+            self._last_motion_cmd = ("DG", distance)
+        self._paused_by_lidar = False
         self.send_raw(f"DG {distance}")
 
     def diagonale_droite(self, distance):
+        self.mouvement_termine.clear()
+        try:
+            self._last_motion_cmd = ("DD", float(distance))
+        except Exception:
+            self._last_motion_cmd = ("DD", distance)
+        self._paused_by_lidar = False
         self.send_raw(f"DD {distance}")
 
     def rotation_gauche(self, angle):
+        self.mouvement_termine.clear()
+        try:
+            self._last_motion_cmd = ("RH", float(angle))
+        except Exception:
+            self._last_motion_cmd = ("RH", angle)
+        self._paused_by_lidar = False
         self.send_raw(f"RH {angle}")
 
     def rotation_droite(self, angle):
+        self.mouvement_termine.clear()
+        try:
+            self._last_motion_cmd = ("RAH", float(angle))
+        except Exception:
+            self._last_motion_cmd = ("RAH", angle)
+        self._paused_by_lidar = False
         self.send_raw(f"RAH {angle}")
 
     def aller_a_coord(self, x, y, attendre=True, timeout=20):
@@ -170,25 +214,54 @@ class Mecanum:
         return True
 
     def resume_last_motion(self):
-        """Attempt to resume the last stored motion command (only AC supported).
+        """Attempt to resume the last stored motion command.
+        Supports all movement types: AC, A, R, G, D, DG, DD, RH, RAH, TVA
         Returns True if a resume command was sent, False otherwise.
         """
         with self._resume_lock:
             if not self._last_motion_cmd:
                 return False
+            
             cmd = self._last_motion_cmd
-            if cmd[0] == "AC":
-                x, y = cmd[1], cmd[2]
-                self.mouvement_termine.clear()
-                self.logs.log("STM32", f"RESUME AC x={x} y={y}")
-                sent = self.send_raw(f"AC {x} {y}")
-                if sent:
-                    self._paused_by_lidar = False
-                return sent
-            return False
+            cmd_type = cmd[0]
+            sent = False
+            
+            try:
+                if cmd_type == "AC" and len(cmd) == 3:
+                    # Aller à coordonnée
+                    x, y = cmd[1], cmd[2]
+                    self.mouvement_termine.clear()
+                    self.logs.log("STM32", f"RESUME AC x={x} y={y}")
+                    sent = self.send_raw(f"AC {x} {y}")
+                
+                elif cmd_type in ["A", "R", "G", "D", "DG", "DD"] and len(cmd) == 2:
+                    # Mouvement de distance (avancer, reculer, latéral, diagonal)
+                    distance = cmd[1]
+                    self.logs.log("STM32", f"RESUME {cmd_type} {distance}")
+                    sent = self.send_raw(f"{cmd_type} {distance}")
+                
+                elif cmd_type in ["RH", "RAH", "TVA"] and len(cmd) == 2:
+                    # Mouvement de rotation/angle
+                    angle = cmd[1]
+                    self.mouvement_termine.clear()
+                    self.logs.log("STM32", f"RESUME {cmd_type} {angle}")
+                    sent = self.send_raw(f"{cmd_type} {angle}")
+            
+            except Exception as exc:
+                self.logs.log("ERR", f"Erreur resume_last_motion: {exc}")
+                sent = False
+            
+            if sent:
+                self._paused_by_lidar = False
+            return sent
 
     def tourner_vers_angle(self, angle, attendre=True, timeout=10):
         self.mouvement_termine.clear()
+        try:
+            self._last_motion_cmd = ("TVA", float(angle))
+        except Exception:
+            self._last_motion_cmd = ("TVA", angle)
+        self._paused_by_lidar = False
         self.logs.log("STM32", f"TVA angle={angle}")
         self.send_raw(f"TVA {angle}")
         if attendre:

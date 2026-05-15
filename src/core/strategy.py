@@ -136,7 +136,7 @@ class Strategy:
             angle = caisse.angle_longueur
 
             self.robot.logs.log("INFO", f"Cible :  à dist={distance:.1f}cm lateral={lateral:+.1f}cm angle={caisse.angle_longueur:+.1f}°")
-            distance_arret = 36            
+            distance_arret = 38            
             if distance <= distance_arret and abs(lateral) <= 3:
                 self.robot.logs.log("INFO", f"ArUco → Cible atteinte ! Dist: {distance:.1f}cm")
                 self.robot.logs.log("INFO", f"ArUco → ALIGNÉ ✓ Ordre des blocs: {meilleur_ordre_blocs}")
@@ -272,13 +272,10 @@ class Strategy:
             self.robot.logs.log("INFO", f"Prise {numero_caisse} couleur {couleur_caisse}")
             
             if couleur_caisse == team:
-                ok = self.robot.recuperer_caisses(1)
+                self.robot.recuperer_caisses(1)
             else:
-                ok = self.robot.recuperer_caisses(0)
+                self.robot.recuperer_caisses(0)
 
-            if not ok:
-                self.robot.logs.log("ERR", "Blocage")
-                break
 
             if numero_caisse == nb_caisses or len(ordre_blocs) <= 1:
                 self.robot.logs.log("INFO", "Dernier")
@@ -515,11 +512,11 @@ class Strategy:
         
         #self.robot.aller_a_coord(self.robot.x, 184)
     def strategie_homologation(self, frame_provider=None):
-        zone_r = self.carte.ramassage["R2"]
-        self.robot.logs.log("INFO", f"Le robot se dirige vers la zone {zone_r} ")
+        #zone_r = self.carte.ramassage["R2"]
+        #self.robot.logs.log("INFO", f"Le robot se dirige vers la zone {zone_r} ")
         self.robot.match_demarre = True
 
-        caisse = self.prendre_set_caisse(team = "blue", frame_provider=frame_provider)
+        caisse = self.prendre_set_caisse(team = self.robot.team, frame_provider=frame_provider)
         
     # Jaune 
     def strategy_1_jaune(self, frame_provider):

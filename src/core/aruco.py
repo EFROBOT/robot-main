@@ -43,7 +43,9 @@ class Aruco:
         self.dist_coeffs = dist_coeffs if dist_coeffs is not None else np.zeros((4, 1))
 
     def detect_markers(self, image):
-        if image is None or self.camera_matrix is None:
+        return self.detect_markers_v2(image)
+        
+        """if image is None or self.camera_matrix is None:
             return []
 
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -133,6 +135,81 @@ class Aruco:
             angle_longueur_deg = math.degrees(angle_longueur_rad)
 
             caisse = CaisseNoisette(equipe, distance_cm, decalage_x_cm, angle_longueur_deg, rvec, tvec, box_corners, is_x_long)
+            pieces_valides.append(caisse)
+
+        return pieces_valides"""
+    
+    def detect_markers_v2(self, image):
+        """Détecte les marqueurs ArUco et détermine l'orientation de la boîte
+        uniquement à partir de l'axe rouge (X) du marqueur, sans détection de couleur.
+        """
+
+        if image is None or self.camera_matrix is None:
+            return []
+
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        corners, ids, _ = self.detector.detectMarkers(gray)
+
+        pieces_valides = []
+        if ids is None:
+            return pieces_valides
+
+        for i in range(len(ids)):
+            marker_id = int(ids[i][0])
+            
+            if cv2.contourArea(corners[i][0]) < 250: 
+                continue
+
+            if marker_id == 36:
+                equipe = "bleu"
+            elif marker_id == 47:
+                equipe = "jaune"            
+            else:
+                continue 
+
+            image_points = np.array(corners[i], dtype=np.float32).reshape(-1, 2)
+            retval, rvec, tvec = cv2.solvePnP(
+                self.obj_points, image_points, self.camera_matrix, self.dist_coeffs, 
+                flags=cv2.SOLVEPNP_IPPE_SQUARE
+            )
+
+            if not retval:
+                continue
+
+            x_m = float(tvec[0][0])
+            z_m = float(tvec[2][0])
+            distance_cm = math.sqrt(x_m**2 + z_m**2) * 100.0
+            decalage_x_cm = x_m * 100.0
+
+            # Projeter le centre et un point sur l'axe X pour obtenir l'angle 2D de l'axe X
+            pt_center, _ = cv2.projectPoints(np.array([[0.0, 0.0, 0.0]]), rvec, tvec, self.camera_matrix, self.dist_coeffs)
+            pt_x, _ = cv2.projectPoints(np.array([[1.0, 0.0, 0.0]]), rvec, tvec, self.camera_matrix, self.dist_coeffs)
+            dx = pt_x[0][0][0] - pt_center[0][0][0]
+            dy = pt_x[0][0][1] - pt_center[0][0][1]
+            aruco_x_angle_2d = math.degrees(math.atan2(dy, dx))
+
+            angle_norm = abs(aruco_x_angle_2d) % 180
+            if angle_norm > 90:
+                angle_norm = 180 - angle_norm
+            is_x_long = (angle_norm < 45)
+
+            # Obtenir le vecteur de longueur de la boîte
+            rmat, _ = cv2.Rodrigues(rvec)
+            if is_x_long:
+                vecteur_longueur = rmat[:, 0]  # Axe X
+            else:
+                vecteur_longueur = rmat[:, 1]  # Axe Y
+
+            angle_longueur_rad = math.atan2(vecteur_longueur[0], vecteur_longueur[2])
+            angle_longueur_deg = math.degrees(angle_longueur_rad)
+
+            # Utiliser les coins du marqueur ArUco directement
+            box_corners = corners[i][0].reshape(-1, 2)
+
+            caisse = CaisseNoisette(
+                equipe, distance_cm, decalage_x_cm, angle_longueur_deg, 
+                rvec, tvec, box_corners, is_x_long
+            )
             pieces_valides.append(caisse)
 
         return pieces_valides
