@@ -166,11 +166,11 @@ class AffichageWeb:
                         zone = detector.detect_zone_ramassage(frame)
                         self.robot.zone_ramassage = zone
                         detector.draw_zone_ramassage(frame, zone)
-
+                        """
                         robots = detector.detect_robots(frame)
                         detector.draw_robots(frame, robots)
                         print(f"robots: {len(robots)}", robots[:1])
-                        
+                        """
                         if liste_caisses and hasattr(self.robot, "align_controller"):
                             now_ms = time.time() * 1000
                             interval_ms = getattr(self.robot, "align_interval_ms", 100)
@@ -443,7 +443,7 @@ class AffichageWeb:
                     elif numero == 4:
                         self.strategy.depot_set_caisse(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 5:
-                        self.strategy.homologation()
+                        self.strategy.strategie_homologation(frame_provider=lambda: self.get_frame(slot=0))
                     elif numero == 6:
                         self.strategy.homologation()
 
@@ -479,7 +479,7 @@ class AffichageWeb:
                 "rot_gauche"        : lambda: self.robot.rotation_gauche(distance),
                 "rot_droite"        : lambda: self.robot.rotation_droite(distance),
                 "pince_open"        : lambda: self.robot.recuperer_caisses(option_val),
-                "pince_close"       : lambda: self.robot.pince_navigation(),
+                "Pince Navigation"  : lambda: self.robot.pince_navigation(),
                 "pince_homologation": lambda: self.robot.pince_homologation(),
                 "stockage"          : lambda: self.robot.securiser_caisses(),
                 "lacher_caisse"     : lambda: self.robot.lacher_caisses(),

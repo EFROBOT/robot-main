@@ -428,7 +428,7 @@ const boutons = {
     "btn-rot-gauche":  "rot_gauche",
     "btn-rot-droite":  "rot_droite",
     "btn-pince-open":  "pince_open",
-    "btn-pince-close": "pince_close",
+    "btn-pince-close": "Pince Navigation",
     "btn-pince-homo":  "pince_homologation",
     "btn-stockage":    "stockage",
     "btn-lacher":      "lacher_caisse",

@@ -92,7 +92,7 @@ class Strategy:
     # ------------------------------------------------------------------
     # Calibration fine ArUco
 
-    def aligner_sur_aruco(self, timeout_s=30.0, frame_provider=None):
+    def aligner_sur_aruco(self, timeout_s=50.0, frame_provider=None):
         deadline = time.time() + timeout_s
         meilleur_ordre_blocs = {}
 
@@ -136,8 +136,7 @@ class Strategy:
             angle = caisse.angle_longueur
 
             self.robot.logs.log("INFO", f"Cible :  à dist={distance:.1f}cm lateral={lateral:+.1f}cm angle={caisse.angle_longueur:+.1f}°")
-            distance_arret = 41 
-            
+            distance_arret = 36            
             if distance <= distance_arret and abs(lateral) <= 3:
                 self.robot.logs.log("INFO", f"ArUco → Cible atteinte ! Dist: {distance:.1f}cm")
                 self.robot.logs.log("INFO", f"ArUco → ALIGNÉ ✓ Ordre des blocs: {meilleur_ordre_blocs}")
@@ -147,7 +146,7 @@ class Strategy:
             erreur_angle = angle - angle_cible
             erreur_angle = (erreur_angle + 45) % 90 - 45
             
-            if abs(erreur_angle) > 3.0: 
+            if abs(erreur_angle) > 4.0: 
                 if erreur_angle > 0:
                     self.robot.rotation_gauche(int(abs(erreur_angle)) + 3)
                 else:
@@ -155,7 +154,7 @@ class Strategy:
                 continue
 
             dist_cmd = round(abs(lateral))
-            if dist_cmd > 3: 
+            if dist_cmd > 5: 
                 if lateral > 0:
                     self.robot.droite(float(dist_cmd * 0.6))
                 else:
@@ -247,55 +246,68 @@ class Strategy:
 
         return False
 
+
     def prendre_set_caisse(self, team, frame_provider=None):
-        self.robot.logs.log("INFO", "Début de la séquence de ramassage...")
+        self.robot.logs.log("INFO", "Démarrage")
         self.robot.securiser_caisses()
+        
+        self.robot.logs.log("INFO", "Ciblage")
         result = self.aligner_sur_aruco(timeout_s=15.0, frame_provider=frame_provider)
+        
         if not result:
-            self.robot.logs.log("WARN", "prendre_set_caisse: Échec de l'alignement initial.")
+            self.robot.logs.log("WARN", "Echec")
             return False
 
         _, ordre_blocs = result
-        numero_caisse = 1
+        nb_caisses = len(ordre_blocs)
 
-        while ordre_blocs:
+        self.robot.logs.log("INFO", f"Collecte ordre: {ordre_blocs}")
+
+        for numero_caisse in range(1, nb_caisses + 1):
+            if not ordre_blocs:
+                self.robot.logs.log("INFO", "Vide")
+                break
+
             couleur_caisse = ordre_blocs.get(1)
-            self.robot.logs.log("INFO", f"Prise de la caisse n°{numero_caisse} ({couleur_caisse}) - Attente 15s")
+            self.robot.logs.log("INFO", f"Prise {numero_caisse} couleur {couleur_caisse}")
+            
             if couleur_caisse == team:
                 ok = self.robot.recuperer_caisses(1)
             else:
                 ok = self.robot.recuperer_caisses(0)
 
             if not ok:
-                self.robot.logs.log("ERR", "Échec récupération caisse")
+                self.robot.logs.log("ERR", "Blocage")
                 break
 
-            if len(ordre_blocs) <= 0:
+            if numero_caisse == nb_caisses or len(ordre_blocs) <= 1:
+                self.robot.logs.log("INFO", "Dernier")
                 break
 
-            etat_attendu = {}
-            for i in range(2, len(ordre_blocs) + 1):
-                if i in ordre_blocs:
-                    etat_attendu[i - 1] = ordre_blocs[i]
+            etat_attendu = {i - 1: ordre_blocs[i] for i in range(2, len(ordre_blocs) + 1) if i in ordre_blocs}
+            self.robot.logs.log("INFO", f"Etat attendu: {etat_attendu}")
 
+            self.robot.logs.log("INFO", "Avance")
             self.robot.avancer(7.0)
             
+            self.robot.logs.log("INFO", "Ajustement")
             result_lat = self.aligner_sur_aruco_uniquement_lateral(timeout_s=10.0, frame_provider=frame_provider)
+            
             if not result_lat:
-                self.robot.logs.log("WARN", "Perte du signal ArUco ou timeout latéral.")
+                self.robot.logs.log("WARN", "Perdu")
                 break
                 
             _, nouvel_ordre_blocs = result_lat
+            self.robot.logs.log("INFO", f"Nouvel ordre vu: {nouvel_ordre_blocs}")
 
             if nouvel_ordre_blocs == etat_attendu:
-                self.robot.logs.log("INFO", "Vérification OK: L'ordre des caisses correspond à l'état attendu.")
+                self.robot.logs.log("INFO", "Valide")
             else:
-                self.robot.logs.log("WARN", f"Désynchro détectée ! Attendu: {etat_attendu} | Vu: {nouvel_ordre_blocs}")
+                self.robot.logs.log("WARN", "Desynchro")
 
             ordre_blocs = nouvel_ordre_blocs
-            numero_caisse += 1
 
-        self.robot.logs.log("INFO", "Séquence de ramassage terminée ✓")
+        self.robot.logs.log("INFO", "Termine")
         return True
 
     # ------------------------------------------------------------------
@@ -489,31 +501,26 @@ class Strategy:
         self.robot.logs.log("INFO", f"Le robot se dirige vers la zone ")
 
         if self.robot.team=="yellow":
-            self.robot.aller_a_coord(16, 110)
+            self.robot.avancer(85)
             time.sleep(5)
-            self.robot.aller_a_coord(self.robot.x, 180)
+            self.robot.reculer(70)
             time.sleep(5)
         else :
-
-            self.robot.aller_a_coord(284, 110)
+            self.robot.avancer(85)
             time.sleep(5)
-            self.robot.aller_a_coord(self.robot.x, 180)
+            self.robot.reculer(70)
             time.sleep(5)
-        
-        #self.robot.aller_a_coord(16, )
-        
+                
         time.sleep(5)
         
         #self.robot.aller_a_coord(self.robot.x, 184)
     def strategie_homologation(self, frame_provider=None):
-        self.robot.logs.log("INFO", f"Stratégie homologation lancée (équipe : {self.robot.team})")
-        if self.robot.team == "yellow":
-            return self.strategy_1_jaune(frame_provider=frame_provider)
-        elif self.robot.team == "blue":
-            return self.strategy_1_bleu(frame_provider=frame_provider)
-        else:
-            self.robot.logs.log("ERR", f"Équipe inconnue : {self.robot.team}")
-            return False    
+        zone_r = self.carte.ramassage["R2"]
+        self.robot.logs.log("INFO", f"Le robot se dirige vers la zone {zone_r} ")
+        self.robot.match_demarre = True
+
+        caisse = self.prendre_set_caisse(team = "blue", frame_provider=frame_provider)
+        
     # Jaune 
     def strategy_1_jaune(self, frame_provider):
         self.robot.logs.log("INFO", "Start strategy")

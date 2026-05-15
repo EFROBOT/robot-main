@@ -81,11 +81,11 @@ class Robot(Mecanum):
 
                 markers = self.camera.aruco.detect_markers(frame)
                 self.camera.aruco.draw_marker(frame, markers)
-                
+                """
                 zone = self.camera.aruco.detect_zone_ramassage(frame)
                 self.zone_ramassage = zone
                 self.camera.aruco.draw_zone_ramassage(frame, zone)
-
+                """
                 if markers:
                     self.align_to_marker(markers[0])
                 else:
@@ -149,7 +149,7 @@ class Robot(Mecanum):
 
     def recuperer_caisses(self, recup, attendre=True, timeout=30):
         self.mouvement_pince_termine.clear()
-        self.send_raw(f"Recuperer caisses {recup}")
+        self.send_raw(f"Recuperer caisse {recup}")
         if attendre:
             ok = self.mouvement_pince_termine.wait(timeout=timeout)
             if not ok:

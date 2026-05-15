@@ -1,0 +1,4140 @@
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 726.106 189.086 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 726.106 189.086 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 726.106 189.086 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[STM32] POS 726.106 189.086 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] AC x=284 y=80
+[STM32] [STM32] CMD recue: [AC 284 80]
+[STM32] x_cible:284.00 robot_pos.x:726.11 y_cible:80.00 robot_pos.y:189.09 enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:7 enc2:6 enc3:2 enc4:65531
+[STM32] enc1:10 enc2:6 enc3:2 enc4:65529
+[STM32] enc1:12 enc2:10 enc3:3 enc4:65529
+[STM32] enc1:19 enc2:14 enc3:4 enc4:65529
+[STM32] enc1:21 enc2:19 enc3:20 enc4:65528
+[STM32] enc1:22 enc2:19 enc3:58 enc4:65528
+[STM32] enc1:25 enc2:19 enc3:78 enc4:65526
+[STM32] enc1:25 enc2:19 enc3:100 enc4:65526
+[STM32] enc1:38 enc2:19 enc3:162 enc4:65515
+[STM32] enc1:62 enc2:20 enc3:232 enc4:65515
+[STM32] enc1:63 enc2:20 enc3:287 enc4:65515
+[STM32] enc1:68 enc2:20 enc3:359 enc4:65515
+[STM32] enc1:81 enc2:20 enc3:466 enc4:65515
+[STM32] enc1:99 enc2:20 enc3:569 enc4:65515
+[STM32] enc1:139 enc2:20 enc3:634 enc4:65513
+[STM32] enc1:180 enc2:20 enc3:706 enc4:65513
+[STM32] enc1:230 enc2:20 enc3:786 enc4:65513
+[STM32] enc1:296 enc2:20 enc3:871 enc4:65513
+[STM32] enc1:349 enc2:20 enc3:951 enc4:65513
+[STM32] enc1:379 enc2:20 enc3:1030 enc4:65513
+[STM32] enc1:428 enc2:20 enc3:1113 enc4:65513
+[STM32] enc1:480 enc2:20 enc3:1176 enc4:65513
+[STM32] enc1:544 enc2:20 enc3:1259 enc4:65513
+[STM32] enc1:598 enc2:20 enc3:1345 enc4:65513
+[STM32] enc1:657 enc2:20 enc3:1438 enc4:65513
+[STM32] enc1:714 enc2:20 enc3:1529 enc4:65513
+[STM32] enc1:765 enc2:20 enc3:1635 enc4:65513
+[STM32] enc1:806 enc2:20 enc3:1750 enc4:65513
+[STM32] enc1:836 enc2:20 enc3:1870 enc4:65513
+[STM32] enc1:872 enc2:20 enc3:1988 enc4:65512
+[STM32] enc1:924 enc2:20 enc3:2090 enc4:65511
+[STM32] enc1:980 enc2:20 enc3:2178 enc4:65511
+[STM32] enc1:1055 enc2:20 enc3:2242 enc4:65509
+[STM32] enc1:1128 enc2:20 enc3:2292 enc4:65509
+[STM32] enc1:1199 enc2:20 enc3:2356 enc4:65509
+[STM32] enc1:1256 enc2:20 enc3:2420 enc4:65509
+[STM32] enc1:1310 enc2:20 enc3:2485 enc4:65509
+[STM32] enc1:1380 enc2:20 enc3:2534 enc4:65509
+[STM32] enc1:1439 enc2:20 enc3:2591 enc4:65509
+[STM32] enc1:1490 enc2:20 enc3:2668 enc4:65509
+[STM32] enc1:1526 enc2:20 enc3:2766 enc4:65509
+[STM32] enc1:1548 enc2:20 enc3:2862 enc4:65509
+[STM32] enc1:1578 enc2:20 enc3:2974 enc4:65509
+[STM32] enc1:1609 enc2:20 enc3:3080 enc4:65509
+[STM32] enc1:1636 enc2:20 enc3:3180 enc4:65508
+[STM32] enc1:1662 enc2:20 enc3:3282 enc4:65508
+[STM32] enc1:1676 enc2:20 enc3:3380 enc4:65508
+[STM32] enc1:1710 enc2:20 enc3:3490 enc4:65508
+[STM32] enc1:1730 enc2:16 enc3:3568 enc4:65513
+[STM32] enc1:1714 enc2:6 enc3:3571 enc4:65525
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] enc1:1712 enc2:6 enc3:3570 enc4:65524
+[STM32] Mouv Ok
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] AC x=697.885 y=180
+[STM32] [STM32] CMD recue: [AC 697.885 180]
+[STM32] Mouv Ok
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 0
+[STM32] POS 697.885 179.224 17
+[STM32] POS 697.885 179.224 46
+[STM32] POS 697.885 179.224 78
+[STM32] POS 697.885 179.224 100
+[STM32] POS 697.885 179.224 109
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[STM32] POS 697.885 179.224 110
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] AC x=284 y=80
+[STM32] [STM32] CMD recue: [AC 284 80]
+[STM32] x_cible:284.00 robot_pos.x:697.89 y_cible:80.00 robot_pos.y:179.22 enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:65535 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:65530 enc3:4 enc4:65528
+[STM32] enc1:65528 enc2:65527 enc3:20 enc4:65516
+[STM32] enc1:65504 enc2:65512 enc3:44 enc4:65504
+[STM32] enc1:65466 enc2:65488 enc3:78 enc4:65484
+[STM32] enc1:65411 enc2:65458 enc3:120 enc4:65457
+[STM32] enc1:65350 enc2:65420 enc3:176 enc4:65428
+[STM32] enc1:65275 enc2:65377 enc3:230 enc4:65400
+[STM32] enc1:65193 enc2:65330 enc3:288 enc4:65376
+[STM32] enc1:65106 enc2:65286 enc3:354 enc4:65353
+[STM32] enc1:65018 enc2:65238 enc3:417 enc4:65329
+[STM32] enc1:64932 enc2:65196 enc3:479 enc4:65306
+[STM32] enc1:64852 enc2:65158 enc3:542 enc4:65288
+[STM32] enc1:64772 enc2:65122 enc3:600 enc4:65268
+[STM32] enc1:64692 enc2:65090 enc3:660 enc4:65246
+[STM32] enc1:64613 enc2:65050 enc3:726 enc4:65221
+[STM32] enc1:64532 enc2:65014 enc3:792 enc4:65188
+[STM32] enc1:64442 enc2:64970 enc3:857 enc4:65158
+[STM32] enc1:64352 enc2:64918 enc3:926 enc4:65130
+[STM32] enc1:64259 enc2:64868 enc3:989 enc4:65102
+[STM32] enc1:64170 enc2:64807 enc3:1046 enc4:65078
+[STM32] enc1:64081 enc2:64742 enc3:1098 enc4:65056
+[STM32] enc1:64002 enc2:64678 enc3:1135 enc4:65026
+[STM32] enc1:63934 enc2:64621 enc3:1164 enc4:64995
+[STM32] enc1:63883 enc2:64566 enc3:1191 enc4:64963
+[STM32] enc1:63846 enc2:64512 enc3:1220 enc4:64928
+[STM32] enc1:63809 enc2:64462 enc3:1235 enc4:64888
+[STM32] enc1:63785 enc2:64419 enc3:1248 enc4:64845
+[STM32] enc1:63770 enc2:64375 enc3:1266 enc4:64802
+[STM32] enc1:63762 enc2:64332 enc3:1286 enc4:64753
+[STM32] enc1:63756 enc2:64290 enc3:1312 enc4:64698
+[STM32] enc1:63752 enc2:64256 enc3:1341 enc4:64643
+[STM32] enc1:63746 enc2:64224 enc3:1371 enc4:64582
+[STM32] enc1:63746 enc2:64193 enc3:1404 enc4:64519
+[STM32] enc1:63746 enc2:64166 enc3:1442 enc4:64456
+[STM32] enc1:63746 enc2:64146 enc3:1485 enc4:64394
+[STM32] enc1:63747 enc2:64134 enc3:1523 enc4:64339
+[STM32] enc1:63754 enc2:64128 enc3:1558 enc4:64294
+[STM32] enc1:63761 enc2:64128 enc3:1585 enc4:64265
+[STM32] enc1:63765 enc2:64128 enc3:1604 enc4:64246
+[STM32] enc1:63765 enc2:64128 enc3:1618 enc4:64232
+[STM32] enc1:63765 enc2:64128 enc3:1623 enc4:64224
+[STM32] enc1:63765 enc2:64130 enc3:1623 enc4:64224
+[STM32] enc1:63765 enc2:64130 enc3:1623 enc4:64224
+[STM32] enc1:63765 enc2:64130 enc3:1623 enc4:64224
+[STM32] enc1:63765 enc2:64130 enc3:1623 enc4:64224
+[STM32] enc1:63765 enc2:64130 enc3:1623 enc4:64224
+[STM32] enc1:63765 enc2:64130 enc3:1623 enc4:64224
+[STM32] enc1:63765 enc2:64130 enc3:1623 enc4:64224
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 699.174 175.625 20
+[STM32] POS 699.174 175.625 20
+[STM32] POS 699.174 175.625 20
+[STM32] POS 699.174 175.625 20
+[STM32] POS 699.174 175.625 20
+[STM32] POS 699.174 175.625 20
+[STM32] POS 699.174 175.625 20
+[STM32] POS 699.174 175.625 20
+[LIDAR] Obstacle disparu, tentative de reprise
+[STM32] RESUME AC x=284.0 y=80.0
+[LIDAR] Reprise mouvement envoyé
+[STM32] [STM32] CMD recue: [AC 284.0 80.0]
+[STM32] x_cible:284.00 robot_pos.x:699.17 y_cible:80.00 robot_pos.y:175.enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] AC x=699.174 y=180
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65535
+[STM32] enc1:[RPi] Lidar connecte sur /dev/ttyUSB0
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 16.000 184.000 359
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] AC x=284 y=80
+[STM32] [STM32] CMD recue: []
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 359
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[LIDAR] Obstacle disparu, tentative de reprise
+[STM32] RESUME AC x=284.0 y=80.0
+[LIDAR] Reprise mouvement envoyé
+[STM32] [STM32] CMD recue: [AC 284.0 80.0]
+[STM32] x_cible:284.00 robot_pos.x:16.00 y_cible:80.00 robot_pos.y:184.0enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:0 enc3:65530 enc4:8
+[STM32] enc1:65533 enc2:65535 enc3:65524 enc4:10
+[STM32] enc1:65519 enc2:65527 enc3:65521 enc4:14
+[STM32] enc1:65496 enc2:65511 enc3:65518 enc4:31
+[STM32] enc1:65463 enc2:65491 enc3:65498 enc4:58
+[STM32] enc1:65417 enc2:65464 enc3:65480 enc4:95
+[STM32] enc1:65367 enc2:65437 enc3:65454 enc4:142
+[STM32] enc1:65305 enc2:65408 enc3:65428 enc4:197
+[STM32] enc1:65228 enc2:65369 enc3:65408 enc4:240
+[STM32] enc1:65159 enc2:65311 enc3:65376 enc4:298
+[STM32] enc1:65059 enc2:65263 enc3:65332 enc4:360
+[STM32] enc1:64959 enc2:65197 enc3:65288 enc4:450
+[STM32] enc1:64857 enc2:65157 enc3:65236 enc4:558
+[STM32] enc1:64737 enc2:65105 enc3:65171 enc4:670
+[STM32] enc1:64611 enc2:65047 enc3:65118 enc4:786
+[STM32] enc1:64496 enc2:64970 enc3:65048 enc4:872
+[STM32] enc1:64369 enc2:64876 enc3:64965 enc4:968
+[STM32] enc1:64200 enc2:64806 enc3:64884 enc4:1074
+[STM32] enc1:64061 enc2:64723 enc3:64793 enc4:1190
+[STM32] enc1:63937 enc2:64645 enc3:64698 enc4:1306
+[STM32] enc1:63784 enc2:64567 enc3:64600 enc4:1425
+[STM32] enc1:63625 enc2:64499 enc3:64502 enc4:1550
+[STM32] enc1:63511 enc2:64421 enc3:64398 enc4:1668
+[STM32] enc1:63399 enc2:64340 enc3:64292 enc4:1787
+[STM32] enc1:63263 enc2:64257 enc3:64189 enc4:1903
+[STM32] enc1:63130 enc2:64152 enc3:64090 enc4:2016
+[STM32] enc1:62991 enc2:64047 enc3:63998 enc4:2132
+[STM32] enc1:62847 enc2:63937 enc3:63898 enc4:2250
+[STM32] enc1:62701 enc2:63823 enc3:63792 enc4:2370
+[STM32] enc1:62558 enc2:63703 enc3:63681 enc4:2493
+[STM32] enc1:62414 enc2:63577 enc3:63566 enc4:2618
+[STM32] enc1:62276 enc2:63461 enc3:63453 enc4:2746
+[STM32] enc1:62137 enc2:63339 enc3:63339 enc4:2866
+[STM32] enc1:61995 enc2:63209 enc3:63223 enc4:2990
+[STM32] enc1:61853 enc2:63081 enc3:63104 enc4:3112
+[STM32] enc1:61710 enc2:62949 enc3:62984 enc4:3239
+[STM32] enc1:61569 enc2:62815 enc3:62862 enc4:3364
+[STM32] enc1:61423 enc2:62679 enc3:62739 enc4:3494
+[STM32] enc1:61271 enc2:62550 enc3:62614 enc4:3627
+[STM32] enc1:61115 enc2:62416 enc3:62490 enc4:3764
+[STM32] enc1:60935 enc2:62285 enc3:62369 enc4:3912
+[STM32] enc1:60764 enc2:62165 enc3:62246 enc4:4057
+[STM32] enc1:60620 enc2:62053 enc3:62127 enc4:4197
+[STM32] enc1:60483 enc2:61939 enc3:62004 enc4:4327
+[STM32] enc1:60335 enc2:61825 enc3:61882 enc4:4450
+[STM32] enc1:60189 enc2:61711 enc3:61764 enc4:4575
+[STM32] enc1:60055 enc2:61586 enc3:61642 enc4:4695
+[STM32] enc1:59925 enc2:61457 enc3:61522 enc4:4814
+[STM32] enc1:59792 enc2:61329 enc3:61402 enc4:4938
+[STM32] enc1:59661 enc2:61207 enc3:61277 enc4:5064
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 119.976 171.482 354
+[STM32] POS 119.976 171.482 354
+[WARN] Zone d'exclusion atteinte ! x=120.0, y=171.5
+[INFO] Dégagement vers x=120.0, y=171.5
+[STM32] AC x=119.976 y=171.482
+[STM32] [STM32] CMD recue: [AC 119.976 171.482]
+[STM32] Mouv Ok
+[STM32] POS 119.976 171.482 354
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 119.976 171.482 359
+[STM32] POS 119.976 171.482 359
+[STM32] POS 119.976 171.482 359
+[STM32] POS 119.976 171.482 359
+[WARN] Zone d'exclusion atteinte ! x=120.0, y=171.5
+[INFO] Dégagement vers x=120.0, y=171.5
+[STM32] AC x=119.976 y=171.482
+[STM32] [STM32] CMD recue: [AC 119.976 171.482]
+[STM32] Mouv Ok
+[STM32] POS 119.976 171.482 359
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 119.976 171.482 359
+[STM32] POS 119.976 171.482 356
+[STM32] POS 119.976 171.482 353
+[STM32] POS 119.976 171.482 352
+[WARN] Zone d'exclusion atteinte ! x=120.0, y=171.5
+[INFO] Dégagement vers x=120.0, y=171.5
+[STM32] AC x=119.976 y=171.482
+[STM32] [STM32] CMD recue: [AC 119.976 171.482]
+[STM32] Mouv Ok
+[STM32] POS 119.976 171.482 352
+[STM32] POS 119.976 171.482 351
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] AC x=119.976 y=180
+[STM32] [STM32] CMD recue: [AC 119.976 180]
+[STM32] x_cible:119.98 robot_pos.x:119.98 y_cible:180.00 robot_pos.y:17enc1:56 enc2:59 enc3:57 enc4:65496
+[STM32] enc1:114 enc2:121 enc3:111 enc4:65441
+[STM32] enc1:175 enc2:180 enc3:166 enc4:65386
+[STM32] enc1:234 enc2:243 enc3:231 enc4:65325
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 353
+[STM32] POS 115.083 171.327 353
+[STM32] POS 115.083 171.327 349
+[STM32] POS 115.083 171.327 351
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 356
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 1
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 1
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 1
+[LIDAR] Obstacle disparu, tentative de reprise
+[STM32] RESUME AC x=115.083 y=171.327
+[LIDAR] Reprise mouvement envoyé
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 1
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 2
+[STM32] POS 115.083 171.327 1
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] 71.327 0
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 115.083 171.327 0
+[STM32] POS 115.083 171.327 0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 115.083 171.327 0
+[WARN] Zone d'exclusion atteinte ! x=115.1, y=171.3
+[INFO] Dégagement vers x=115.1, y=171.3
+[STM32] AC x=115.083 y=171.327
+[STM32] [STM32] CMD recue: [AC 115.083 171.327]
+[STM32] Mouv Ok
+[STM32] POS 115.083 171.327 0
+[RPi] Équipe changée via interrupteur → yellow
+[STM32] [STM32] CMD recue: [TJ]
+[STM32] [DBG] Position_robot_init team=0
+[STM32] POS 16.000 184.000 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[RPi] Équipe changée via interrupteur → blue
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] AC x=284 y=80
+[STM32] [STM32] CMD recue: [AC 284 80]
+[STM32] x_cible:284.00 robot_pos.x:284.00 y_cible:80.00 robot_pos.y:184.00 enc1:0 enc2:0 enc3:0 enc4:0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] AC x=284.0 y=180
+[STM32] [STM32] CMD recue: [AC 284.0 180]
+[STM32] x_cible:284.00 robot_pos.x:284.00 y_cible:180.00 robot_pos.y:184.enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Équipe changée via interrupteur → yellow
+[STM32] [STM32] CMD recue: [TJ]
+[STM32] [DBG] Position_robot_init team=0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[RPi] Équipe changée via interrupteur → blue
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] AC x=284 y=80
+[STM32] [STM32] CMD recue: [AC 284 80]
+[STM32] x_cible:284.00 robot_pos.x:284.00 y_cible:80.00 robot_pos.y:184.00 enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65530 enc2:0 enc3:7 enc4:0
+[STM32] enc1:65529 enc2:0 enc3:8 enc4:0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] POS 283.995 183.920 0
+[STM32] AC x=283.995 y=180
+[STM32] [STM32] CMD recue: [AC 283.995 180]
+[STM32] x_cible:283.99 robot_pos.x:283.99 y_cible:180.00 robot_pos.y:18enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:0 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65534 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65534 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65534 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65534 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65534 enc2:2 enc3:0 enc4:0
+[STM32] enc1:65533 enc2:2 enc3:1 enc4:0
+[STM32] enc1:65533 enc2:2 enc3:1 enc4:0
+[STM32] enc1:65531 enc2:2 enc3:2 enc4:0
+[STM32] enc1:65529 enc2:2 enc3:6 enc4:0
+[STM32] enc1:65521 enc2:2 enc3:10 enc4:0
+[STM32] enc1:65519 enc2:2 enc3:12 enc4:0
+[STM32] enc1:65514 enc2:2 enc3:12 enc4:0
+[STM32] enc1:65512 enc2:2 enc3:15 enc4:2
+[STM32] enc1:65507 enc2:2 enc3:15 enc4:2
+[STM32] enc1:65505 enc2:2 enc3:16 enc4:2
+[STM32] enc1:65501 enc2:2 enc3:16 enc4:3
+[STM32] enc1:65498 enc2:2 enc3:17 enc4:3
+[STM32] enc1:65489 enc2:2 enc3:18 enc4:4
+[STM32] enc1:65474 enc2:2 enc3:18 enc4:4
+[STM32] enc1:65473 enc2:2 enc3:18 enc4:4
+[STM32] enc1:65455 enc2:2 enc3:18 enc4:4
+[STM32] enc1:65445 enc2:2 enc3:18 enc4:4
+[STM32] enc1:65445 enc2:2 enc3:18 enc4:4
+[STM32] enc1:65427 enc2:2 enc3:20 enc4:5
+[STM32] enc1:65418 enc2:2 enc3:20 enc4:10
+[STM32] enc1:65415 enc2:2 enc3:22 enc4:10
+[STM32] enc1:65403 enc2:2 enc3:22 enc4:12
+[STM32] enc1:65390 enc2:2 enc3:30 enc4:13
+[STM32] enc1:65385 enc2:2 enc3:30 enc4:14
+[STM32] enc1:65371 enc2:2 enc3:31 enc4:15
+[STM32] enc1:65357 enc2:2 enc3:32 enc4:17
+[STM32] enc1:65356 enc2:2 enc3:36 enc4:18
+[STM32] enc1:65336 enc2:2 enc3:36 enc4:18
+[STM32] enc1:65310 enc2:2 enc3:37 enc4:22
+[STM32] enc1:65310 enc2:2 enc3:37 enc4:22
+[STM32] enc1:65279 enc2:2 enc3:37 enc4:27
+[STM32] enc1:65255 enc2:2 enc3:37 enc4:27
+[STM32] enc1:65255 enc2:2 enc3:37 enc4:27
+[STM32] enc1:65236 enc2:2 enc3:37 enc4:27
+[STM32] enc1:65211 enc2:2 enc3:38 enc4:31
+[STM32] enc1:65210 enc2:2 enc3:38 enc4:34
+[STM32] enc1:65190 enc2:2 enc3:38 enc4:34
+[STM32] enc1:65161 enc2:2 enc3:38 enc4:34
+[STM32] Mouv Ok
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[STM32] POS 285.959 181.529 359
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] POS 285.959 181.529 0
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[RPi] Dashboard : http://localhost:5000
+[STM32] AC x=284 y=80
+[STM32] [STM32] CMD recue: [AC 284 80]
+[STM32] x_cible:284.00 robot_pos.x:285.96 y_cible:80.00 robot_pos.y:181.53 enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65529 enc2:0 enc3:7 enc4:0
+[STM32] enc1:65524 enc2:0 enc3:7 enc4:0
+[STM32] enc1:65524 enc2:0 enc3:7 enc4:0
+[STM32] enc1:65516 enc2:1 enc3:11 enc4:0
+[STM32] enc1:65512 enc2:2 enc3:15 enc4:2
+[STM32] enc1:65482 enc2:4 enc3:21 enc4:9
+[STM32] enc1:65455 enc2:4 enc3:35 enc4:12
+[STM32] enc1:65440 enc2:4 enc3:46 enc4:16
+[STM32] enc1:65396 enc2:4 enc3:52 enc4:21
+[STM32] enc1:65350 enc2:4 enc3:64 enc4:25
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] enc1:65320 enc2:4 enc3:73 enc4:28
+[STM32] enc1:65278 enc2:4 enc3:99 enc4:28
+[STM32] enc1:65238 enc2:4 enc3:144 enc4:34
+[STM32] enc1:65193 enc2:4 enc3:205 enc4:44
+[STM32] enc1:65136 enc2:4 enc3:259 enc4:56
+[STM32] enc1:65087 enc2:4 enc3:309 enc4:94
+[STM32] enc1:65038 enc2:4 enc3:331 enc4:178
+[STM32] enc1:64998 enc2:4 enc3:361 enc4:262
+[STM32] enc1:64976 enc2:4 enc3:421 enc4:326
+[STM32] enc1:64962 enc2:4 enc3:520 enc4:336
+[STM32] enc1:64958 enc2:4 enc3:633 enc4:336
+[STM32] enc1:64958 enc2:4 enc3:719 enc4:336
+[STM32] enc1:64957 enc2:4 enc3:811 enc4:336
+[STM32] enc1:64957 enc2:4 enc3:931 enc4:336
+[STM32] enc1:64957 enc2:4 enc3:1025 enc4:336
+[STM32] enc1:64957 enc2:4 enc3:1105 enc4:336
+[STM32] enc1:64956 enc2:4 enc3:1209 enc4:336
+[STM32] enc1:64951 enc2:4 enc3:1319 enc4:336
+[STM32] enc1:64950 enc2:4 enc3:1415 enc4:336
+[STM32] enc1:64950 enc2:4 enc3:1501 enc4:336
+[STM32] enc1:64949 enc2:4 enc3:1591 enc4:336
+[STM32] enc1:64940 enc2:4 enc3:1677 enc4:337
+[STM32] enc1:64923 enc2:4 enc3:1768 enc4:338
+[STM32] enc1:64902 enc2:4 enc3:1855 enc4:342
+[STM32] enc1:64880 enc2:4 enc3:1948 enc4:369
+[STM32] enc1:64863 enc2:4 enc3:2052 enc4:420
+[STM32] enc1:64862 enc2:4 enc3:2165 enc4:488
+[STM32] enc1:64862 enc2:4 enc3:2288 enc4:543
+[STM32] enc1:64861 enc2:4 enc3:2394 enc4:624
+[STM32] enc1:64857 enc2:4 enc3:2477 enc4:724
+[STM32] enc1:64854 enc2:4 enc3:2553 enc4:842
+[STM32] enc1:64850 enc2:4 enc3:2618 enc4:972
+[STM32] enc1:64849 enc2:4 enc3:2677 enc4:1114
+[STM32] enc1:64849 enc2:4 enc3:2707 enc4:1262
+[STM32] enc1:64849 enc2:4 enc3:2731 enc4:1404
+[STM32] enc1:64849 enc2:4 enc3:2759 enc4:1542
+[STM32] enc1:64849 enc2:4 enc3:2813 enc4:1678
+[STM32] enc1:64848 enc2:4 enc3:2855 enc4:1799
+[STM32] enc1:64848 enc2:4 enc3:2893 enc4:1898
+[STM32] enc1:64848 enc2:4 enc3:2927 enc4:2023
+[STM32] enc1:64848 enc2:4 enc3:2937 enc4:2154
+[STM32] enc1:64848 enc2:4 enc3:2937 enc4:2288
+[STM32] enc1:64848 enc2:4 enc3:2937 enc4:2427
+[STM32] enc1:64848 enc2:4 enc3:2937 enc4:2586
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:2727
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:2862
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:2994
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:3120
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:3238
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:3363
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:3476
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:3604
+[STM32] enc1:64848 enc2:4 enc3:2938 enc4:3743
+[STM32] enc1:64852 enc2:4 enc3:2938 enc4:3898
+[STM32] enc1:64863 enc2:6 enc3:2938 enc4:4040
+[STM32] enc1:64877 enc2:14 enc3:2938 enc4:4166
+[STM32] enc1:64889 enc2:10 enc3:2935 enc4:4278
+[STM32] enc1:64889 enc2:8 enc3:2917 enc4:4348
+[STM32] enc1:64882 enc2:2 enc3:2892 enc4:4390
+[STM32] enc1:64820 enc2:65518 enc3:2864 enc4:4431
+[STM32] enc1:64720 enc2:65482 enc3:2845 enc4:4460
+[STM32] enc1:64596 enc2:65438 enc3:2836 enc4:4501
+[STM32] enc1:64480 enc2:65436 enc3:2869 enc4:4574
+[STM32] enc1:64369 enc2:65436 enc3:2942 enc4:4723
+[STM32] enc1:64272 enc2:65456 enc3:2973 enc4:4868
+[STM32] enc1:64222 enc2:65475 enc3:2985 enc4:5008
+[STM32] enc1:64184 enc2:65488 enc3:3008 enc4:5161
+[STM32] enc1:64140 enc2:65507 enc3:3035 enc4:5299
+[STM32] enc1:64104 enc2:65528 enc3:3059 enc4:5398
+[STM32] enc1:64079 enc2:0 enc3:3114 enc4:5473
+[STM32] enc1:64049 enc2:6 enc3:3196 enc4:5512
+[STM32] enc1:64029 enc2:6 enc3:3256 enc4:5547
+[STM32] enc1:64024 enc2:1 enc3:3281 enc4:5574
+[STM32] enc1:63990 enc2:65527 enc3:3359 enc4:5574
+[STM32] enc1:63975 enc2:65514 enc3:3379 enc4:5581
+[STM32] enc1:63935 enc2:65514 enc3:3463 enc4:5597
+[STM32] enc1:63898 enc2:65494 enc3:3560 enc4:5618
+[STM32] enc1:63872 enc2:65476 enc3:3633 enc4:5645
+[STM32] enc1:63849 enc2:65482 enc3:3665 enc4:5669
+[STM32] enc1:63846 enc2:65486 enc3:3665 enc4:5730
+[STM32] enc1:63827 enc2:65498 enc3:3688 enc4:5766
+[STM32] enc1:63822 enc2:65502 enc3:3715 enc4:5815
+[STM32] enc1:63822 enc2:65517 enc3:3733 enc4:5882
+[STM32] enc1:63822 enc2:65522 enc3:3770 enc4:5955
+[STM32] enc1:63819 enc2:65530 enc3:3758 enc4:6014
+[STM32] enc1:63814 enc2:65532 enc3:3749 enc4:6062
+[STM32] enc1:63811 enc2:65532 enc3:3747 enc4:6120
+[STM32] enc1:63810 enc2:65515 enc3:3747 enc4:6204
+[STM32] enc1:63812 enc2:65503 enc3:3734 enc4:6267
+[STM32] enc1:63808 enc2:65500 enc3:3709 enc4:6331
+[STM32] enc1:63808 enc2:65493 enc3:3695 enc4:6368
+[STM32] enc1:63804 enc2:65482 enc3:3704 enc4:6417
+[STM32] enc1:63791 enc2:65478 enc3:3737 enc4:6506
+[STM32] enc1:63764 enc2:65503 enc3:3755 enc4:6565
+[STM32] enc1:63714 enc2:65515 enc3:3773 enc4:6610
+[STM32] enc1:63655 enc2:65524 enc3:3839 enc4:6642
+[STM32] enc1:63595 enc2:65526 enc3:3911 enc4:6658
+[STM32] enc1:63558 enc2:65528 enc3:3929 enc4:6674
+[STM32] enc1:63518 enc2:2 enc3:3948 enc4:6686
+[STM32] enc1:63491 enc2:6 enc3:3963 enc4:6720
+[STM32] enc1:63446 enc2:14 enc3:3968 enc4:6768
+[STM32] enc1:63385 enc2:19 enc3:3964 enc4:6814
+[STM32] enc1:63312 enc2:20 enc3:3961 enc4:6850
+[STM32] enc1:63236 enc2:7 enc3:3961 enc4:6892
+[STM32] enc1:63137 enc2:65526 enc3:3951 enc4:6914
+[STM32] enc1:63046 enc2:65512 enc3:3929 enc4:6938
+[STM32] enc1:62957 enc2:65492 enc3:3899 enc4:6970
+[STM32] enc1:62851 enc2:65466 enc3:3892 enc4:7002
+[STM32] enc1:62762 enc2:65438 enc3:3892 enc4:7021
+[STM32] enc1:62688 enc2:65434 enc3:3899 enc4:7049
+[STM32] enc1:62671 enc2:65438 enc3:3899 enc4:7086
+[STM32] enc1:62655 enc2:65471 enc3:3927 enc4:7112
+[STM32] enc1:62653 enc2:65476 enc3:3931 enc4:7162
+[STM32] enc1:62643 enc2:65484 enc3:3953 enc4:7209
+[STM32] enc1:62642 enc2:65488 enc3:3955 enc4:7222
+[STM32] enc1:62642 enc2:65488 enc3:3946 enc4:7222
+[STM32] enc1:62642 enc2:65488 enc3:3945 enc4:7222
+[STM32] enc1:62642 enc2:65488 enc3:3945 enc4:7222
+[STM32] enc1:62640 enc2:65480 enc3:3945 enc4:7222
+[STM32] enc1:62622 enc2:65468 enc3:3945 enc4:7227
+[STM32] enc1:62600 enc2:65456 enc3:3936 enc4:7247
+[STM32] enc1:62568 enc2:65434 enc3:3933 enc4:7248
+[STM32] enc1:62543 enc2:65398 enc3:3934 enc4:7235
+[STM32] enc1:62509 enc2:65360 enc3:3939 enc4:7220
+[STM32] enc1:62469 enc2:65348 enc3:3951 enc4:7202
+[STM32] enc1:62442 enc2:65366 enc3:3959 enc4:7190
+[STM32] enc1:62463 enc2:65394 enc3:3982 enc4:7210
+[STM32] enc1:62489 enc2:65438 enc3:3997 enc4:7223
+[STM32] enc1:62514 enc2:65455 enc3:3995 enc4:7220
+[STM32] enc1:62531 enc2:65462 enc3:3995 enc4:7219
+[STM32] enc1:62545 enc2:65476 enc3:3995 enc4:7216
+[STM32] enc1:62555 enc2:65480 enc3:3993 enc4:7212
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7211
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7211
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7210
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] enc1:62556 enc2:65480 enc3:3993 enc4:7209
+[STM32] Mouv Ok
+[STM32] POS 319.250 106.312 351
+[STM32] POS 319.250 106.312 351
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 319.250 106.312 351
+[STM32] POS 319.250 106.312 351
+[STM32] POS 319.250 106.312 351
+[STM32] POS 319.250 106.312 351
+[STM32] POS 319.250 106.312 350
+[STM32] POS 319.250 106.312 350
+[STM32] POS 319.250 106.312 351
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] AC x=319.25 y=180
+[STM32] [STM32] CMD recue: [AC 319.25 180]
+[STM32] x_cible:319.25 robot_pos.x:319.25 y_cible:180.00 robot_pos.y:106enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] OS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 319.250 106.312 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[STM32] POS 319.250 106.312 0
+[RPi] Équipe changée via interrupteur → yellow
+[STM32] [STM32] CMD recue: [TJ]
+[STM32] [DBG] Position_robot_init team=0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[RPi] Équipe changée via interrupteur → blue
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] AC x=284 y=80
+[STM32] [STM32] CMD recue: [AC 284 80]
+[STM32] x_cible:284.00 robot_pos.x:284.00 y_cible:80.00 robot_pos.y:184.00 enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65532 enc2:6 enc3:7 enc4:2
+[STM32] enc1:65530 enc2:6 enc3:7 enc4:2
+[STM32] enc1:65526 enc2:6 enc3:7 enc4:2
+[STM32] enc1:65523 enc2:6 enc3:9 enc4:4
+[STM32] enc1:65506 enc2:9 enc3:23 enc4:11
+[STM32] enc1:65490 enc2:9 enc3:35 enc4:16
+[STM32] enc1:65467 enc2:9 enc3:61 enc4:25
+[STM32] enc1:65438 enc2:9 enc3:99 enc4:34
+[STM32] enc1:65402 enc2:9 enc3:103 enc4:84
+[STM32] enc1:65368 enc2:9 enc3:133 enc4:136
+[STM32] enc1:65334 enc2:9 enc3:203 enc4:136
+[STM32] enc1:65299 enc2:9 enc3:261 enc4:160
+[STM32] enc1:65264 enc2:9 enc3:297 enc4:213
+[STM32] enc1:65238 enc2:9 enc3:355 enc4:314
+[STM32] enc1:65216 enc2:9 enc3:447 enc4:378
+[STM32] enc1:65200 enc2:9 enc3:515 enc4:439
+[STM32] enc1:65181 enc2:9 enc3:588 enc4:507
+[STM32] enc1:65168 enc2:9 enc3:691 enc4:607
+[STM32] enc1:65150 enc2:9 enc3:767 enc4:691
+[STM32] enc1:65146 enc2:8 enc3:820 enc4:776
+[STM32] enc1:65141 enc2:8 enc3:901 enc4:876
+[STM32] enc1:65141 enc2:8 enc3:1004 enc4:964
+[STM32] enc1:65141 enc2:8 enc3:1077 enc4:1054
+[STM32] enc1:65141 enc2:8 enc3:1141 enc4:1136
+[STM32] enc1:65141 enc2:8 enc3:1212 enc4:1212
+[STM32] enc1:65141 enc2:8 enc3:1299 enc4:1284
+[STM32] enc1:65141 enc2:8 enc3:1369 enc4:1369
+[STM32] enc1:65140 enc2:8 enc3:1444 enc4:1464
+[STM32] enc1:65140 enc2:8 enc3:1520 enc4:1551
+[STM32] enc1:65138 enc2:8 enc3:1603 enc4:1656
+[STM32] enc1:65125 enc2:8 enc3:1693 enc4:1761
+[STM32] enc1:65111 enc2:8 enc3:1788 enc4:1844
+[STM32] enc1:65104 enc2:8 enc3:1887 enc4:1946
+[STM32] enc1:65094 enc2:8 enc3:1980 enc4:2068
+[STM32] enc1:65085 enc2:8 enc3:2087 enc4:2167
+[STM32] enc1:65082 enc2:8 enc3:2199 enc4:2256
+[STM32] enc1:65082 enc2:8 enc3:2307 enc4:2357
+[STM32] enc1:65080 enc2:8 enc3:2411 enc4:2459
+[STM32] enc1:65070 enc2:8 enc3:2517 enc4:2568
+[STM32] enc1:65056 enc2:8 enc3:2626 enc4:2687
+[STM32] enc1:65044 enc2:8 enc3:2735 enc4:2800
+[STM32] enc1:65026 enc2:8 enc3:2849 enc4:2908
+[STM32] enc1:65007 enc2:8 enc3:2942 enc4:3050
+[STM32] enc1:64992 enc2:6 enc3:3022 enc4:3188
+[STM32] enc1:64968 enc2:65513 enc3:3125 enc4:3288
+[STM32] enc1:64876 enc2:65486 enc3:3254 enc4:3316
+[STM32] enc1:64780 enc2:65451 enc3:3287 enc4:3374
+[STM32] enc1:64699 enc2:65416 enc3:3313 enc4:3418
+[STM32] enc1:64600 enc2:65400 enc3:3384 enc4:3458
+[STM32] enc1:64551 enc2:65406 enc3:3394 enc4:3506
+[STM32] enc1:64550 enc2:65416 enc3:3394 enc4:3574
+[STM32] enc1:64536 enc2:65444 enc3:3407 enc4:3620
+[STM32] enc1:64532 enc2:65448 enc3:3423 enc4:3692
+[STM32] enc1:64532 enc2:65458 enc3:3435 enc4:3754
+[STM32] enc1:64532 enc2:65460 enc3:3439 enc4:3810
+[STM32] enc1:64532 enc2:65460 enc3:3439 enc4:3819
+[STM32] enc1:64524 enc2:65463 enc3:3459 enc4:3819
+[STM32] enc1:64512 enc2:65454 enc3:3503 enc4:3806
+[STM32] enc1:64516 enc2:65444 enc3:3502 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3502 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64518 enc2:65448 enc3:3503 enc4:3792
+[STM32] enc1:64521 enc2:65450 enc3:3503 enc4:3792
+[STM32] enc1:64532 enc2:65458 enc3:3503 enc4:3792
+[STM32] enc1:64554 enc2:65474 enc3:3503 enc4:3790
+[STM32] enc1:64583 enc2:65494 enc3:3499 enc4:3786
+[STM32] enc1:64619 enc2:65518 enc3:3493 enc4:3781
+[STM32] enc1:64664 enc2:9 enc3:3483 enc4:3776
+[STM32] enc1:64712 enc2:36 enc3:3471 enc4:3773
+[STM32] enc1:64762 enc2:62 enc3:3459 enc4:3769
+[STM32] enc1:64808 enc2:91 enc3:3447 enc4:3766
+[STM32] enc1:64850 enc2:121 enc3:3437 enc4:3761
+[STM32] enc1:64892 enc2:146 enc3:3429 enc4:3753
+[STM32] enc1:64928 enc2:164 enc3:3423 enc4:3744
+[STM32] enc1:64956 enc2:178 enc3:3413 enc4:3740
+[STM32] enc1:64972 enc2:186 enc3:3401 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] enc1:64971 enc2:186 enc3:3396 enc4:3740
+[STM32] Mouv Ok
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] AC x=287.85 y=180
+[STM32] [STM32] CMD recue: [AC 287.85 180]
+[STM32] x_cible:287.85 robot_pos.x:287.85 y_cible:180.00 robot_pos.y:142enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 1
+[STM32] POS 287.850 142.004 1
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 287.850 142.004 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[STM32] POS 287.850 142.004 0
+[RPi] Équipe blue → robot positionné à (287.85, 142.004) angle=-90.0°
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[LIDAR] Obstacle disparu, tentative de reprise
+[LIDAR] Aucun mouvement à reprendre
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[LIDAR] Obstacle disparu, tentative de reprise
+[LIDAR] Aucun mouvement à reprendre
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] AC x=284 y=80
+[STM32] [STM32] CMD recue: [AC 284 80]
+[STM32] x_cible:284.00 robot_pos.x:284.00 y_cible:80.00 robot_pos.y:184.00 enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65530 enc2:0 enc3:8 enc4:1
+[STM32] enc1:65529 enc2:0 enc3:10 enc4:1
+[STM32] enc1:65528 enc2:0 enc3:10 enc4:1
+[STM32] enc1:65522 enc2:1 enc3:18 enc4:1
+[STM32] enc1:65506 enc2:3 enc3:26 enc4:5
+[STM32] enc1:65494 enc2:3 enc3:46 enc4:9
+[STM32] enc1:65471 enc2:3 enc3:66 enc4:14
+[STM32] enc1:65447 enc2:3 enc3:94 enc4:21
+[STM32] enc1:65406 enc2:3 enc3:117 enc4:32
+[STM32] enc1:65374 enc2:3 enc3:154 enc4:55
+[STM32] enc1:65358 enc2:3 enc3:242 enc4:63
+[STM32] enc1:65335 enc2:3 enc3:287 enc4:66
+[STM32] enc1:65316 enc2:3 enc3:319 enc4:68
+[STM32] enc1:65298 enc2:3 enc3:390 enc4:69
+[STM32] enc1:65258 enc2:3 enc3:454 enc4:77
+[STM32] enc1:65213 enc2:3 enc3:518 enc4:80
+[STM32] enc1:65160 enc2:3 enc3:558 enc4:106
+[STM32] enc1:65100 enc2:3 enc3:575 enc4:168
+[STM32] enc1:65046 enc2:3 enc3:575 enc4:255
+[STM32] enc1:65016 enc2:3 enc3:575 enc4:361
+[STM32] enc1:64998 enc2:3 enc3:575 enc4:471
+[STM32] enc1:64962 enc2:3 enc3:575 enc4:538
+[STM32] enc1:64908 enc2:3 enc3:575 enc4:584
+[STM32] enc1:64850 enc2:3 enc3:575 enc4:682
+[STM32] enc1:64788 enc2:3 enc3:575 enc4:807
+[STM32] enc1:64730 enc2:3 enc3:575 enc4:910
+[STM32] enc1:64670 enc2:3 enc3:575 enc4:1010
+[STM32] enc1:64603 enc2:3 enc3:575 enc4:1141
+[STM32] enc1:64546 enc2:3 enc3:575 enc4:1260
+[STM32] enc1:64491 enc2:3 enc3:575 enc4:1327
+[STM32] enc1:64443 enc2:3 enc3:575 enc4:1394
+[STM32] enc1:64404 enc2:3 enc3:575 enc4:1473
+[STM32] enc1:64367 enc2:3 enc3:575 enc4:1573
+[STM32] enc1:64338 enc2:3 enc3:575 enc4:1681
+[STM32] enc1:64315 enc2:3 enc3:575 enc4:1815
+[STM32] enc1:64295 enc2:3 enc3:579 enc4:1907
+[STM32] enc1:64282 enc2:3 enc3:610 enc4:1994
+[STM32] enc1:64273 enc2:3 enc3:682 enc4:2091
+[STM32] enc1:64252 enc2:3 enc3:747 enc4:2215
+[STM32] enc1:64229 enc2:3 enc3:802 enc4:2334
+[STM32] enc1:64208 enc2:3 enc3:859 enc4:2447
+[STM32] enc1:64195 enc2:3 enc3:914 enc4:2574
+[STM32] enc1:64194 enc2:3 enc3:971 enc4:2682
+[STM32] enc1:64187 enc2:3 enc3:1020 enc4:2767
+[STM32] enc1:64180 enc2:3 enc3:1084 enc4:2869
+[STM32] enc1:64173 enc2:3 enc3:1166 enc4:2969
+[STM32] enc1:64173 enc2:65535 enc3:1265 enc4:3069
+[STM32] enc1:64138 enc2:65505 enc3:1394 enc4:3143
+[STM32] enc1:64064 enc2:65479 enc3:1576 enc4:3177
+[STM32] enc1:63972 enc2:65427 enc3:1718 enc4:3217
+[STM32] enc1:63827 enc2:65369 enc3:1804 enc4:3277
+[STM32] enc1:63627 enc2:65331 enc3:1964 enc4:3299
+[STM32] enc1:63452 enc2:65341 enc3:2054 enc4:3319
+[STM32] enc1:63445 enc2:65315 enc3:2042 enc4:3315
+[STM32] enc1:63454 enc2:65317 enc3:2039 enc4:3310
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3316
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63453 enc2:65316 enc3:2036 enc4:3317
+[STM32] enc1:63465 enc2:65331 enc3:2036 enc4:3317
+[STM32] enc1:63500 enc2:65353 enc3:2036 enc4:3309
+[STM32] enc1:63544 enc2:65380 enc3:2036 enc4:3291
+[STM32] enc1:63594 enc2:65413 enc3:2036 enc4:3273
+[STM32] enc1:63651 enc2:65453 enc3:2036 enc4:3257
+[STM32] enc1:63709 enc2:65490 enc3:2024 enc4:3245
+[STM32] enc1:63764 enc2:65519 enc3:2006 enc4:3243
+[STM32] enc1:63812 enc2:10 enc3:1992 enc4:3243
+[STM32] enc1:63854 enc2:33 enc3:1984 enc4:3242
+[STM32] enc1:63888 enc2:51 enc3:1979 enc4:3240
+[STM32] enc1:63916 enc2:65 enc3:1966 enc4:3238
+[STM32] enc1:63921 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1956 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3238
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1957 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] enc1:63918 enc2:63 enc3:1958 enc4:3237
+[STM32] Mouv Ok
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] AC x=299.09 y=180
+[STM32] [STM32] CMD recue: [AC 299.09 180]
+[STM32] x_cible:299.09 robot_pos.x:299.09 y_cible:180.00 robot_pos.y:147enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[LIDAR] Obstacle disparu, tentative de reprise
+[STM32] RESUME AC x=299.09 y=180.0
+[LIDAR] Reprise mouvement envoyé
+[STM32] [STM32] CMD recue: [AC 299.09 180.0]
+[STM32] x_cible:299.09 robot_pos.x:299.09 y_cible:180.00 robot_pos.y:1enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] c4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] enc1:0 enc2:0 enc3:0POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 299.090 147.387 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 299.090 147.387 0
+[STM32] POS 299.090 147.387 0
+[RPi] Équipe blue → robot positionné à (299.09, 147.387) angle=-90.0°
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Équipe yellow → robot positionné à (284.0, 184.0) angle=-90.0°
+[STM32] [STM32] CMD recue: [TJ]
+[STM32] [DBG] Position_robot_init team=0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[RPi] Équipe changée via interrupteur → yellow
+[STM32] [STM32] CMD recue: [TJ]
+[STM32] [DBG] Position_robot_init team=0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[RPi] Équipe changée via interrupteur → blue
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] AC x=284.0 y=80
+[STM32] [STM32] CMD recue: [AC 284.0 80]
+[STM32] x_cible:284.00 robot_pos.x:284.00 y_cible:80.00 robot_pos.y:184.00enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65528 enc2:1 enc3:6 enc4:0
+[STM32] enc1:65522 enc2:1 enc3:6 enc4:0
+[STM32] enc1:65522 enc2:2 enc3:7 enc4:1
+[STM32] enc1:65518 enc2:2 enc3:13 enc4:2
+[STM32] enc1:65504 enc2:17 enc3:27 enc4:16
+[STM32] enc1:65478 enc2:39 enc3:52 enc4:38
+[STM32] enc1:65446 enc2:62 enc3:81 enc4:66
+[STM32] enc1:65406 enc2:98 enc3:117 enc4:103
+[STM32] enc1:65360 enc2:140 enc3:164 enc4:148
+[STM32] enc1:65305 enc2:206 enc3:199 enc4:173
+[STM32] enc1:65277 enc2:202 enc3:254 enc4:211
+[STM32] enc1:65252 enc2:204 enc3:314 enc4:217
+[STM32] enc1:65235 enc2:206 enc3:341 enc4:222
+[STM32] enc1:65203 enc2:210 enc3:373 enc4:222
+[STM32] enc1:65170 enc2:214 enc3:432 enc4:222
+[STM32] enc1:65128 enc2:218 enc3:520 enc4:222
+[STM32] enc1:65102 enc2:212 enc3:605 enc4:220
+[STM32] enc1:65111 enc2:198 enc3:632 enc4:205
+[STM32] enc1:65110 enc2:198 enc3:632 enc4:194
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:199 enc3:632 enc4:195
+[STM32] enc1:65110 enc2:198 enc3:632 enc4:193
+[STM32] enc1:65113 enc2:194 enc3:628 enc4:189
+[STM32] enc1:65116 enc2:182 enc3:622 enc4:181
+[STM32] enc1:65123 enc2:166 enc3:610 enc4:168
+[STM32] enc1:65137 enc2:144 enc3:594 enc4:150
+[STM32] enc1:65158 enc2:118 enc3:572 enc4:125
+[STM32] enc1:65185 enc2:86 enc3:540 enc4:94
+[STM32] enc1:65220 enc2:46 enc3:504 enc4:56
+[STM32] enc1:65257 enc2:4 enc3:465 enc4:14
+[STM32] enc1:65301 enc2:65504 enc3:425 enc4:65508
+[STM32] enc1:65347 enc2:65466 enc3:386 enc4:65470
+[STM32] enc1:65390 enc2:65434 enc3:346 enc4:65430
+[STM32] enc1:65438 enc2:65408 enc3:309 enc4:65393
+[STM32] enc1:65489 enc2:65390 enc3:276 enc4:65360
+[STM32] enc1:65518 enc2:65380 enc3:245 enc4:65350
+[STM32] enc1:65524 enc2:65370 enc3:222 enc4:65352
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65358
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65366 enc3:212 enc4:65360
+[STM32] enc1:65526 enc2:65367 enc3:212 enc4:65361
+[STM32] enc1:65526 enc2:65368 enc3:212 enc4:65364
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] 15 enc2:65386 enc3:212 enc4:65392
+[STM32] enc1:65507 enc2:65394 enc3:214 enc4:65403
+[STM32] enc1:65502 enc2:65400 enc3:220 enc4:65409
+[STM32] enc1:65497 enc2:65404 enc3:229 enc4:65410
+[STM32] enc1:65494 enc2:65406 enc3:238 enc4:65410
+[STM32] enc1:65490 enc2:65410 enc3:244 enc4:65410
+[STM32] enc1:65486 enc2:65412 enc3:252 enc4:65410
+[STM32] enc1:65481 enc2:65416 enc3:260 enc4:65410
+[STM32] enc1:65475 enc2:65420 enc3:270 enc4:65410
+[STM32] enc1:65470 enc2:65426 enc3:280 enc4:65410
+[STM32] enc1:65464 enc2:65430 enc3:288 enc4:65410
+[STM32] enc1:65458 enc2:65435 enc3:297 enc4:65410
+[STM32] enc1:65452 enc2:65442 enc3:304 enc4:65411
+[STM32] enc1:65447 enc2:65447 enc3:313 enc4:65414
+[STM32] enc1:65439 enc2:65454 enc3:323 enc4:65418
+[STM32] enc1:65428 enc2:65465 enc3:338 enc4:65426
+[STM32] enc1:65412 enc2:65480 enc3:356 enc4:65436
+[STM32] enc1:65392 enc2:65498 enc3:375 enc4:65458
+[STM32] enc1:65369 enc2:65520 enc3:395 enc4:65484
+[STM32] enc1:65343 enc2:12 enc3:420 enc4:65512
+[STM32] enc1:65316 enc2:40 enc3:446 enc4:3
+[STM32] enc1:65292 enc2:63 enc3:474 enc4:22
+[STM32] enc1:65272 enc2:74 enc3:502 enc4:24
+[STM32] enc1:65256 enc2:74 enc3:506 enc4:29
+[STM32] enc1:65256 enc2:76 enc3:506 enc4:31
+[STM32] enc1:65261 enc2:80 enc3:506 enc4:31
+[STM32] enc1:65263 enc2:80 enc3:506 enc4:32
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:35
+[STM32] enc1:65263 enc2:81 enc3:506 enc4:38
+[STM32] enc1:65263 enc2:81 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4:40
+[STM32] enc1:65263 enc2:82 enc3:506 enc4POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[STM32] POS 282.536 179.213 0
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [A 10.0]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65533 enc2:65533 enc3:65528 enc4:3
+[STM32] enc1:65525 enc2:65524 enc3:65516 enc4:16
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:65506 enc2:65505 enc3:65494 enc4:38
+[STM32] enc1:65480 enc2:65483 enc3:65462 enc4:64
+[STM32] enc1:65447 enc2:65447 enc3:65427 enc4:98
+[STM32] enc1:65409 enc2:65412 enc3:65393 enc4:131
+[STM32] enc1:65369 enc2:65375 enc3:65358 enc4:169
+[STM32] enc1:65337 enc2:65343 enc3:65328 enc4:200
+[STM32] enc1:65305 enc2:65311 enc3:65293 enc4:231
+[STM32] enc1:65279 enc2:65283 enc3:65264 enc4:260
+[STM32] enc1:65253 enc2:65261 enc3:65238 enc4:286
+[STM32] enc1:65233 enc2:65241 enc3:65222 enc4:308
+[STM32] enc1:65213 enc2:65222 enc3:65202 enc4:326
+[STM32] enc1:65199 enc2:65207 enc3:65186 enc4:342
+[STM32] enc1:65186 enc2:65197 enc3:65165 enc4:358
+[STM32] enc1:65176 enc2:65187 enc3:65150 enc4:371
+[STM32] enc1:65166 enc2:65175 enc3:65138 enc4:382
+[STM32] enc1:65158 enc2:65165 enc3:65130 enc4:390
+[STM32] Mouv Ok
+[STM32] POS 290.762 179.261 1
+[STM32] POS 290.762 179.261 1
+[STM32] POS 290.762 179.261 1
+[STM32] POS 290.762 179.261 1
+[STM32] POS 290.762 179.261 1
+[STM32] POS 290.762 179.261 1
+[STM32] POS 290.762 179.261 1
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [A 10.0]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:1
+[STM32] enc1:65533 enc2:65534 enc3:65534 enc4:2
+[STM32] enc1:65525 enc2:65532 enc3:65529 enc4:8
+[STM32] enc1:65515 enc2:65522 enc3:65519 enc4:17
+[STM32] enc1:65494 enc2:65506 enc3:65502 enc4:33
+[STM32] enc1:65456 enc2:65481 enc3:65475 enc4:61
+[STM32] enc1:65410 enc2:65448 enc3:65437 enc4:96
+[STM32] enc1:65381 enc2:65410 enc3:65392 enc4:132
+[STM32] enc1:65339 enc2:65374 enc3:65352 enc4:166
+[STM32] enc1:65304 enc2:65338 enc3:65318 enc4:201
+[STM32] enc1:65272 enc2:65304 enc3:65286 enc4:236
+[STM32] enc1:65241 enc2:65274 enc3:65254 enc4:267
+[STM32] enc1:65213 enc2:65246 enc3:65226 enc4:295
+[STM32] enc1:65187 enc2:65224 enc3:65202 enc4:316
+[STM32] enc1:65166 enc2:65202 enc3:65180 enc4:332
+[STM32] enc1:65146 enc2:65180 enc3:65163 enc4:350
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:65130 enc2:65162 enc3:65149 enc4:361
+[STM32] enc1:65113 enc2:65144 enc3:65135 enc4:372
+[STM32] Mouv Ok
+[STM32] POS 299.218 179.250 1
+[STM32] POS 299.218 179.250 1
+[STM32] POS 299.218 179.250 0
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [A 10.0]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:65528 enc3:65534 enc4:4
+[STM32] enc1:65531 enc2:65525 enc3:65530 enc4:6
+[STM32] enc1:65523 enc2:65518 enc3:65524 enc4:14
+[STM32] enc1:65510 enc2:65504 enc3:65510 enc4:26
+[STM32] enc1:65488 enc2:65486 enc3:65489 enc4:46
+[STM32] enc1:65463 enc2:65460 enc3:65462 enc4:73
+[STM32] enc1:65426 enc2:65426 enc3:65428 enc4:105
+[STM32] enc1:65388 enc2:65390 enc3:65392 enc4:138
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:65349 enc2:65360 enc3:65356 enc4:174
+[STM32] enc1:65316 enc2:65324 enc3:65322 enc4:208
+[STM32] enc1:65283 enc2:65294 enc3:65288 enc4:240
+[STM32] enc1:65257 enc2:65265 enc3:65258 enc4:270
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:65233 enc2:65238 enc3:65224 enc4:296
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:65214 enc2:65214 enc3:65205 enc4:321
+[STM32] enc1:65190 enc2:65196 enc3:65180 enc4:343
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:65180 enc2:65182 enc3:65160 enc4:362
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:65171 enc2:65172 enc3:65144 enc4:379
+[STM32] enc1:65161 enc2:65162 enc3:65130 enc4:391
+[STM32] Mouv Ok
+[STM32] POS 307.450 179.325 1
+[STM32] POS 307.450 179.325 1
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [A 10.0]
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65532 enc2:65532 enc3:65535 enc4:0
+[STM32] enc1:65529 enc2:65530 enc3:65533 enc4:2
+[STM32] enc1:65524 enc2:65524 enc3:65525 enc4:7
+[STM32] enc1:65514 enc2:65514 enc3:65517 enc4:17
+[STM32] enc1:65495 enc2:65494 enc3:65499 enc4:33
+[STM32] enc1:65469 enc2:65470 enc3:65473 enc4:58
+[STM32] enc1:65431 enc2:65440 enc3:65437 enc4:93
+[STM32] enc1:65396 enc2:65402 enc3:65397 enc4:134
+[STM32] enc1:65360 enc2:65368 enc3:65357 enc4:171
+[STM32] enc1:65322 enc2:65335 enc3:65323 enc4:209
+[STM32] enc1:65290 enc2:65304 enc3:65292 enc4:239
+[STM32] enc1:65260 enc2:65277 enc3:65265 enc4:270
+[STM32] enc1:65238 enc2:65256 enc3:65235 enc4:297
+[STM32] enc1:65218 enc2:65236 enc3:65209 enc4:326
+[STM32] enc1:65198 enc2:65215 enc3:65189 enc4:343
+[STM32] enc1:65179 enc2:65196 enc3:65173 enc4:360
+[STM32] enc1:65164 enc2:65182 enc3:65159 enc4:375
+[STM32] enc1:65150 enc2:65170 enc3:65147 enc4:388
+[STM32] enc1:65138 enc2:65158 enc3:65139 enc4:398
+[STM32] Mouv Ok
+[STM32] POS 315.815 179.213 1
+[STM32] POS 315.815 179.213 1
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [A 10.0]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:65535 enc3:65531 enc4:0
+[STM32] enc1:65534 enc2:65534 enc3:65530 enc4:3
+[STM32] enc1:65530 enc2:65530 enc3:65526 enc4:6
+[STM32] enc1:65520 enc2:65520 enc3:65515 enc4:16
+[STM32] enc1:65499 enc2:65502 enc3:65495 enc4:35
+[STM32] enc1:65473 enc2:65476 enc3:65464 enc4:62
+[STM32] enc1:65436 enc2:65440 enc3:65428 enc4:99
+[STM32] enc1:65397 enc2:65402 enc3:65388 enc4:138
+[STM32] enc1:65357 enc2:65364 enc3:65352 enc4:174
+[STM32] enc1:65324 enc2:65326 enc3:65314 enc4:208
+[STM32] enc1:65288 enc2:65288 enc3:65276 enc4:244
+[STM32] enc1:65260 enc2:65264 enc3:65248 enc4:269
+[STM32] enc1:65230 enc2:65233 enc3:65229 enc4:295
+[STM32] enc1:65210 enc2:65216 enc3:65200 enc4:313
+[RPi] Commande : avancer 10.0cm (opt: 0)
+[STM32] enc1:65193 enc2:65198 enc3:65184 enc4:326
+[STM32] enc1:65175 enc2:65178 enc3:65168 enc4:343
+[STM32] enc1:65162 enc2:65164 enc3:65156 enc4:355
+[STM32] enc1:65151 enc2:65152 enc3:65146 enc4:366
+[STM32] enc1:65141 enc2:65142 enc3:65140 enc4:372
+[STM32] Mouv Ok
+[STM32] POS 324.106 179.336 1
+[STM32] POS 324.106 179.336 1
+[STM32] POS 324.106 179.336 1
+[STM32] POS 324.106 179.336 1
+[STM32] POS 324.106 179.336 1
+[STM32] POS 324.106 179.336 1
+[STM32] POS 324.106 179.336 1
+[RPi] Commande : rot_droite 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [RAH 10.0]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65535 enc2:65531 enc3:8 enc4:65529
+[STM32] enc1:65533 enc2:65528 enc3:14 enc4:65524
+[STM32] enc1:65530 enc2:65528 enc3:22 enc4:65519
+[STM32] enc1:65530 enc2:65528 enc3:26 enc4:65516
+[STM32] enc1:65529 enc2:65528 enc3:28 enc4:65514
+[STM32] enc1:65528 enc2:65528 enc3:29 enc4:65514
+[STM32] enc1:65527 enc2:65528 enc3:29 enc4:65514
+[STM32] enc1:65527 enc2:65527 enc3:30 enc4:65514
+[STM32] enc1:65526 enc2:65527 enc3:30 enc4:65514
+[STM32] enc1:65526 enc2:65527 enc3:30 enc4:65514
+[STM32] enc1:65526 enc2:65527 enc3:31 enc4:65513
+[STM32] enc1:65525 enc2:65526 enc3:33 enc4:65512
+[STM32] enc1:65522 enc2:65526 enc3:36 enc4:65510
+[STM32] enc1:65518 enc2:65522 enc3:40 enc4:65509
+[STM32] enc1:65510 enc2:65520 enc3:46 enc4:65506
+[STM32] enc1:65502 enc2:65517 enc3:55 enc4:65501
+[STM32] enc1:65495 enc2:65514 enc3:63 enc4:65496
+[STM32] enc1:65490 enc2:65513 enc3:68 enc4:65492
+[STM32] enc1:65487 enc2:65510 enc3:72 enc4:65489
+[STM32] enc1:65481 enc2:65506 enc3:75 enc4:65487
+[STM32] enc1:65472 enc2:65500 enc3:80 enc4:65481
+[STM32] enc1:65461 enc2:65492 enc3:87 enc4:65476
+[STM32] enc1:65448 enc2:65486 enc3:96 enc4:65472
+[STM32] enc1:65435 enc2:65479 enc3:106 enc4:65466
+[STM32] enc1:65423 enc2:65474 enc3:118 enc4:65458
+[STM32] enc1:65410 enc2:65468 enc3:132 enc4:65450
+[STM32] Mouv Ok
+[STM32] POS 323.978 178.782 356
+[STM32] POS 323.978 178.782 356
+[STM32] POS 323.978 178.782 355
+[STM32] POS 323.978 178.782 355
+[STM32] POS 323.978 178.782 355
+[RPi] Commande : rot_gauche 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [RH 10.0]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:9 enc2:8 enc3:65528 enc4:6
+[STM32] enc1:21 enc2:14 enc3:65522 enc4:9
+[STM32] enc1:36 enc2:24 enc3:65517 enc4:9
+[STM32] enc1:50 enc2:33 enc3:65514 enc4:9
+[STM32] enc1:62 enc2:42 enc3:65509 enc4:9
+[STM32] enc1:75 enc2:51 enc3:65505 enc4:9
+[STM32] enc1:90 enc2:60 enc3:65500 enc4:9
+[STM32] enc1:105 enc2:69 enc3:65496 enc4:10
+[STM32] enc1:121 enc2:78 enc3:65490 enc4:10
+[STM32] enc1:135 enc2:86 enc3:65486 enc4:10
+[STM32] enc1:150 enc2:96 enc3:65480 enc4:10
+[STM32] enc1:165 enc2:106 enc3:65474 enc4:12
+[STM32] enc1:181 enc2:116 enc3:65468 enc4:12
+[STM32] enc1:197 enc2:126 enc3:65459 enc4:15
+[STM32] enc1:212 enc2:136 enc3:65450 enc4:18
+[STM32] enc1:227 enc2:146 enc3:65441 enc4:20
+[STM32] enc1:246 enc2:158 enc3:65436 enc4:20
+[STM32] enc1:268 enc2:172 enc3:65428 enc4:20
+[STM32] enc1:291 enc2:186 enc3:65418 enc4:20
+[STM32] enc1:312 enc2:201 enc3:65409 enc4:21
+[STM32] Mouv Ok
+[STM32] POS 322.035 179.937 4
+[STM32] POS 322.035 179.937 4
+[STM32] POS 322.035 179.937 5
+[STM32] POS 322.035 179.937 5
+[STM32] POS 322.035 179.937 5
+[STM32] POS 322.035 179.937 5
+[STM32] POS 322.035 179.937 5
+[STM32] POS 322.035 179.937 5
+[STM32] POS 322.035 179.937 5
+[STM32] POS 322.035 179.937 5
+[RPi] Commande : gauche 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [D 10.0]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65528 enc2:2 enc3:5 enc4:0
+[STM32] enc1:65526 enc2:2 enc3:7 enc4:0
+[STM32] enc1:65524 enc2:3 enc3:8 enc4:0
+[STM32] enc1:65517 enc2:6 enc3:19 enc4:3
+[STM32] enc1:65499 enc2:17 enc3:37 enc4:14
+[STM32] enc1:65478 enc2:42 enc3:67 enc4:34
+[STM32] enc1:65440 enc2:66 enc3:96 enc4:69
+[STM32] enc1:65403 enc2:103 enc3:136 enc4:97
+[STM32] enc1:65368 enc2:134 enc3:169 enc4:126
+[STM32] enc1:65338 enc2:162 enc3:205 enc4:140
+[STM32] enc1:65308 enc2:182 enc3:239 enc4:163
+[STM32] enc1:65278 enc2:202 enc3:267 enc4:181
+[STM32] enc1:65252 enc2:208 enc3:287 enc4:189
+[STM32] enc1:65238 enc2:208 enc3:298 enc4:189
+[STM32] enc1:65233 enc2:208 enc3:301 enc4:197
+[STM32] enc1:65221 enc2:208 enc3:309 enc4:197
+[STM32] enc1:65204 enc2:208 enc3:323 enc4:198
+[STM32] enc1:65197 enc2:208 enc3:331 enc4:200
+[STM32] enc1:65187 enc2:208 enc3:338 enc4:201
+[STM32] enc1:65170 enc2:208 enc3:352 enc4:202
+[STM32] enc1:65164 enc2:208 enc3:355 enc4:203
+[STM32] enc1:65148 enc2:208 enc3:359 enc4:203
+[STM32] enc1:65139 enc2:208 enc3:359 enc4:203
+[STM32] enc1:65138 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65122 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65110 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65110 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65104 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65079 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65071 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65056 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65036 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65033 enc2:208 enc3:360 enc4:203
+[STM32] enc1:65021 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64986 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64978 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64967 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64944 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64924 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64904 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64873 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64848 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64836 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64818 enc2:208 enc3:360 enc4:203
+[STM32] enc1:64785 enc2:208 enc3:360 enc4:203
+[STM32] Mouv Ok
+[STM32] POS 324.090 171.833 1
+[STM32] POS 324.090 171.833 1
+[RPi] Commande : droite 10.0cm (opt: 0)
+[STM32] [STM32] CMD recue: [G 10.0]
+[STM32] enc1:3 enc2:65530 enc3:65533 enc4:65533
+[STM32] enc1:5 enc2:65530 enc3:65529 enc4:65531
+[STM32] enc1:13 enc2:65530 enc3:65523 enc4:65530
+[STM32] enc1:25 enc2:65526 enc3:65513 enc4:65525
+[STM32] enc1:44 enc2:65524 enc3:65500 enc4:65518
+[STM32] enc1:67 enc2:65512 enc3:65481 enc4:65506
+[STM32] enc1:98 enc2:65488 enc3:65456 enc4:65482
+[STM32] enc1:132 enc2:65461 enc3:65421 enc4:65456
+[STM32] enc1:174 enc2:65434 enc3:65383 enc4:65430
+[STM32] enc1:212 enc2:65398 enc3:65335 enc4:65404
+[STM32] enc1:252 enc2:65364 enc3:65297 enc4:65370
+[STM32] enc1:289 enc2:65334 enc3:65267 enc4:65338
+[STM32] enc1:318 enc2:65306 enc3:65232 enc4:65310
+[STM32] enc1:340 enc2:65282 enc3:65201 enc4:65292
+[STM32] enc1:363 enc2:65264 enc3:65177 enc4:65276
+[STM32] enc1:385 enc2:65250 enc3:65157 enc4:65265
+[STM32] enc1:398 enc2:65236 enc3:65143 enc4:65254
+[STM32] enc1:406 enc2:65223 enc3:65135 enc4:65242
+[STM32] enc1:412 enc2:65212 enc3:65131 enc4:65228
+[STM32] enc1:420 enc2:65206 enc3:65125 enc4:65220
+[STM32] enc1:428 enc2:65202 enc3:65118 enc4:65214
+[STM32] enc1:437 enc2:65200 enc3:65113 enc4:65208
+[STM32] enc1:445 enc2:65200 enc3:65109 enc4:65203
+[STM32] enc1:456 enc2:65200 enc3:65103 enc4:65200
+[STM32] enc1:468 enc2:65199 enc3:65092 enc4:65197
+[STM32] enc1:483 enc2:65198 enc3:65077 enc4:65195
+[STM32] enc1:494 enc2:65198 enc3:65063 enc4:65192
+[STM32] enc1:508 enc2:65198 enc3:65053 enc4:65187
+[STM32] enc1:522 enc2:65196 enc3:65043 enc4:65180
+[STM32] enc1:540 enc2:65196 enc3:65036 enc4:65172
+[STM32] enc1:555 enc2:65192 enc3:65027 enc4:65164
+[STM32] enc1:570 enc2:65189 enc3:65019 enc4:65154
+[STM32] enc1:585 enc2:65183 enc3:65009 enc4:65146
+[STM32] enc1:601 enc2:65176 enc3:64999 enc4:65136
+[STM32] Mouv Ok
+[STM32] POS 323.536 181.939 5
+[STM32] POS 323.536 181.939 5
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[LIDAR] Obstacle disparu, tentative de reprise
+[LIDAR] Aucun mouvement à reprendre
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 6
+[STM32] POS 323.536 181.939 5
+[STM32] POS 323.536 181.939 3
+[STM32] POS 323.536 181.939 0
+[STM32] POS 323.536 181.939 358
+[STM32] POS 323.536 181.939 358
+[STM32] POS 323.536 181.939 358
+[STM32] POS 323.536 181.939 359
+[RPi] Équipe changée via interrupteur → yellow
+[STM32] [STM32] CMD recue: [TJ]
+[STM32] [DBG] Position_robot_init team=0
+[STM32] POS 16.000 184.000 359
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 16.000 184.000 358
+[STM32] POS 16.000 184.000 359
+[RPi] Équipe changée via interrupteur → blue
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 3
+[STM32] POS 284.000 184.000 1
+[STM32] POS 284.000 184.000 0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] [STM32] CMD recue: [A 80]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:65534 enc3:65531 enc4:3
+[STM32] enc1:65534 enc2:65533 enc3:65529 enc4:5
+[STM32] enc1:65530 enc2:65530 enc3:65526 enc4:6
+[STM32] enc1:65523 enc2:65522 enc3:65517 enc4:15
+[STM32] enc1:65503 enc2:65505 enc3:65498 enc4:33
+[STM32] enc1:65475 enc2:65478 enc3:65474 enc4:59
+[STM32] enc1:65438 enc2:65442 enc3:65437 enc4:93
+[LIDAR] Obstacle disparu, tentative de reprise
+[LIDAR] Aucun mouvement à reprendre
+[STM32] enc1:65396 enc2:65400 enc3:65394 enc4:136
+[STM32] enc1:65347 enc2:65356 enc3:65340 enc4:183
+[STM32] enc1:65290 enc2:65298 enc3:65286 enc4:240
+[STM32] enc1:65223 enc2:65242 enc3:65222 enc4:300
+[STM32] enc1:65154 enc2:65168 enc3:65150 enc4:371
+[STM32] enc1:65071 enc2:65092 enc3:65075 enc4:439
+[STM32] enc1:64984 enc2:65008 enc3:64988 enc4:524
+[STM32] enc1:64892 enc2:64924 enc3:64900 enc4:610
+[STM32] enc1:64792 enc2:64826 enc3:64802 enc4:704
+[STM32] enc1:64685 enc2:64720 enc3:64696 enc4:802
+[STM32] enc1:64574 enc2:64614 enc3:64588 enc4:905
+[STM32] enc1:64459 enc2:64508 enc3:64478 enc4:1016
+[STM32] enc1:64350 enc2:64397 enc3:64364 enc4:1127
+[STM32] enc1:64234 enc2:64291 enc3:64250 enc4:1237
+[STM32] enc1:64120 enc2:64180 enc3:64140 enc4:1349
+[STM32] enc1:64004 enc2:64073 enc3:64028 enc4:1459
+[STM32] enc1:63890 enc2:63963 enc3:63916 enc4:1572
+[STM32] enc1:63777 enc2:63856 enc3:63798 enc4:1683
+[STM32] enc1:63660 enc2:63739 enc3:63684 enc4:1796
+[STM32] enc1:63541 enc2:63626 enc3:63574 enc4:1907
+[STM32] enc1:63425 enc2:63508 enc3:63456 enc4:2015
+[STM32] enc1:63310 enc2:63390 enc3:63336 enc4:2125
+[STM32] enc1:63200 enc2:63278 enc3:63224 enc4:2231
+[STM32] enc1:63086 enc2:63168 enc3:63110 enc4:2340
+[STM32] enc1:62972 enc2:63054 enc3:62994 enc4:2450
+[STM32] enc1:62858 enc2:62943 enc3:62878 enc4:2561
+[STM32] enc1:62744 enc2:62834 enc3:62762 enc4:2671
+[STM32] enc1:62629 enc2:62723 enc3:62646 enc4:2781
+[STM32] enc1:62510 enc2:62610 enc3:62533 enc4:2894
+[STM32] enc1:62390 enc2:62496 enc3:62418 enc4:3010
+[STM32] enc1:62275 enc2:62386 enc3:62306 enc4:3120
+[STM32] enc1:62168 enc2:62282 enc3:62202 enc4:3225
+[STM32] enc1:62068 enc2:62178 enc3:62102 enc4:3319
+[STM32] enc1:61977 enc2:62086 enc3:62012 enc4:3407
+[STM32] enc1:61893 enc2:62004 enc3:61930 enc4:3481
+[STM32] enc1:61822 enc2:61933 enc3:61854 enc4:3555
+[STM32] enc1:61759 enc2:61870 enc3:61788 enc4:3621
+[STM32] enc1:61706 enc2:61810 enc3:61734 enc4:3679
+[STM32] Mouv Ok
+[STM32] POS 364.068 184.101 359
+[STM32] POS 364.068 184.101 359
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] POS 364.068 184.101 0
+[STM32] [STM32] CMD recue: [R 80]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:8 enc2:6 enc3:8 enc4:65528
+[STM32] enc1:14 enc2:12 enc3:13 enc4:65524
+[STM32] enc1:26 enc2:22 enc3:23 enc4:65513
+[STM32] enc1:42 enc2:36 enc3:37 enc4:65500
+[STM32] enc1:66 enc2:60 enc3:60 enc4:65474
+[STM32] enc1:98 enc2:89 enc3:91 enc4:65444
+[STM32] enc1:137 enc2:125 enc3:131 enc4:65404
+[STM32] enc1:188 enc2:166 enc3:175 enc4:65355
+[STM32] enc1:247 enc2:222 enc3:232 enc4:65300
+[STM32] enc1:309 enc2:280 enc3:291 enc4:65244
+[STM32] enc1:383 enc2:342 enc3:358 enc4:65175
+[STM32] enc1:456 enc2:413 enc3:427 enc4:65100
+[STM32] enc1:543 enc2:488 enc3:504 enc4:65024
+[STM32] enc1:634 enc2:574 enc3:588 enc4:64935
+[STM32] enc1:729 enc2:662 enc3:677 enc4:64847
+[STM32] enc1:837 enc2:762 enc3:777 enc4:64745
+[STM32] enc1:945 enc2:864 enc3:880 enc4:64644
+[STM32] enc1:1066 enc2:970 enc3:990 enc4:64529
+[STM32] enc1:1187 enc2:1076 enc3:1099 enc4:64412
+[STM32] enc1:1306 enc2:1190 enc3:1215 enc4:64300
+[STM32] enc1:1427 enc2:1300 enc3:1329 enc4:64174
+[STM32] enc1:1550 enc2:1414 enc3:1449 enc4:64063
+[STM32] enc1:1672 enc2:1522 enc3:1567 enc4:63939
+[STM32] enc1:1794 enc2:1644 enc3:1686 enc4:63818
+[STM32] enc1:1918 enc2:1752 enc3:1803 enc4:63700
+[STM32] enc1:2045 enc2:1869 enc3:1923 enc4:63580
+[STM32] enc1:2170 enc2:1983 enc3:2039 enc4:63461
+[STM32] enc1:2296 enc2:2103 enc3:2157 enc4:63341
+[STM32] enc1:2422 enc2:2216 enc3:2277 enc4:63221
+[STM32] enc1:2551 enc2:2328 enc3:2393 enc4:63098
+[STM32] enc1:2678 enc2:2444 enc3:2513 enc4:62972
+[STM32] enc1:2804 enc2:2563 enc3:2633 enc4:62852
+[STM32] enc1:2934 enc2:2674 enc3:2755 enc4:62724
+[STM32] enc1:3064 enc2:2793 enc3:2877 enc4:62596
+[STM32] enc1:3187 enc2:2909 enc3:2998 enc4:62474
+[STM32] enc1:3318 enc2:3027 enc3:3119 enc4:62348
+[STM32] enc1:3448 enc2:3142 enc3:3237 enc4:62224
+[STM32] enc1:3566 enc2:3257 enc3:3345 enc4:62112
+[STM32] enc1:3683 enc2:3366 enc3:3453 enc4:62001
+[STM32] enc1:3796 enc2:3474 enc3:3551 enc4:61894
+[STM32] enc1:3904 enc2:3568 enc3:3646 enc4:61791
+[STM32] enc1:3993 enc2:3636 enc3:3731 enc4:61693
+[STM32] Mouv Ok
+[STM32] POS 283.116 186.598 1
+[STM32] POS 283.116 186.598 1
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 2
+[STM32] POS 283.116 186.598 1
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 283.116 186.598 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] POS 283.116 186.598 0
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 283.116 186.598 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[STM32] POS 283.116 186.598 0
+[RPi] Équipe changée via interrupteur → yellow
+[STM32] [STM32] CMD recue: [TJ]
+[STM32] [DBG] Position_robot_init team=0
+[STM32] POS 16.000 184.000 0
+[STM32] POS 16.000 184.000 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 16.000 184.000 0
+[RPi] Équipe changée via interrupteur → blue
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[LIDAR] Obstacle disparu, tentative de reprise
+[LIDAR] Aucun mouvement à reprendre
+[STM32] POS 284.000 184.000 0
+[STM32] POS 284.000 184.000 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] [STM32] CMD recue: [A 85]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65529 enc2:65534 enc3:65528 enc4:1
+[STM32] enc1:65528 enc2:65532 enc3:65526 enc4:3
+[STM32] enc1:65524 enc2:65528 enc3:65522 enc4:7
+[STM32] enc1:65516 enc2:65520 enc3:65512 enc4:16
+[STM32] enc1:65496 enc2:65500 enc3:65490 enc4:32
+[STM32] enc1:65467 enc2:65474 enc3:65462 enc4:60
+[STM32] enc1:65430 enc2:65438 enc3:65428 enc4:94
+[STM32] enc1:65385 enc2:65396 enc3:65386 enc4:136
+[STM32] enc1:65339 enc2:65348 enc3:65336 enc4:182
+[STM32] enc1:65279 enc2:65293 enc3:65277 enc4:237
+[STM32] enc1:65212 enc2:65233 enc3:65217 enc4:298
+[STM32] enc1:65144 enc2:65162 enc3:65145 enc4:362
+[STM32] enc1:65059 enc2:65088 enc3:65068 enc4:439
+[STM32] enc1:64975 enc2:65008 enc3:64984 enc4:513
+[STM32] enc1:64873 enc2:64922 enc3:64892 enc4:606
+[STM32] enc1:64777 enc2:64828 enc3:64794 enc4:697
+[STM32] enc1:64669 enc2:64722 enc3:64686 enc4:796
+[STM32] enc1:64557 enc2:64614 enc3:64580 enc4:904
+[STM32] enc1:64444 enc2:64504 enc3:64469 enc4:1012
+[STM32] enc1:64332 enc2:64396 enc3:64353 enc4:1120
+[STM32] enc1:64220 enc2:64290 enc3:64241 enc4:1234
+[STM32] enc1:64103 enc2:64184 enc3:64127 enc4:1348
+[STM32] enc1:63991 enc2:64074 enc3:64018 enc4:1456
+[STM32] enc1:63877 enc2:63962 enc3:63905 enc4:1568
+[STM32] enc1:63761 enc2:63853 enc3:63792 enc4:1682
+[STM32] enc1:63647 enc2:63740 enc3:63678 enc4:1794
+[STM32] enc1:63528 enc2:63624 enc3:63566 enc4:1902
+[STM32] enc1:63413 enc2:63509 enc3:63450 enc4:2012
+[STM32] enc1:63297 enc2:63390 enc3:63329 enc4:2124
+[STM32] enc1:63180 enc2:63278 enc3:63216 enc4:2234
+[STM32] enc1:63069 enc2:63160 enc3:63106 enc4:2341
+[STM32] enc1:62955 enc2:63053 enc3:62990 enc4:2449
+[STM32] enc1:62843 enc2:62944 enc3:62874 enc4:2558
+[STM32] enc1:62727 enc2:62834 enc3:62758 enc4:2670
+[STM32] enc1:62611 enc2:62719 enc3:62644 enc4:2782
+[STM32] enc1:62497 enc2:62606 enc3:62532 enc4:2894
+[STM32] enc1:62376 enc2:62491 enc3:62416 enc4:3009
+[STM32] enc1:62255 enc2:62378 enc3:62300 enc4:3122
+[STM32] enc1:62138 enc2:62264 enc3:62189 enc4:3235
+[STM32] enc1:62021 enc2:62150 enc3:62072 enc4:3347
+[STM32] enc1:61913 enc2:62042 enc3:61968 enc4:3451
+[STM32] enc1:61811 enc2:61942 enc3:61864 enc4:3552
+[STM32] enc1:61720 enc2:61846 enc3:61768 enc4:3643
+[STM32] enc1:61639 enc2:61760 enc3:61684 enc4:3728
+[STM32] enc1:61567 enc2:61689 enc3:61604 enc4:3806
+[STM32] enc1:61502 enc2:61626 enc3:61537 enc4:3871
+[STM32] enc1:61452 enc2:61570 enc3:61473 enc4:3927
+[STM32] Mouv Ok
+[STM32] POS 369.409 184.096 0
+[STM32] POS 369.409 184.096 0
+[STM32] POS 369.409 184.096 1
+[STM32] POS 369.409 184.096 1
+[STM32] POS 369.409 184.096 1
+[STM32] POS 369.409 184.096 1
+[STM32] POS 369.409 184.096 1
+[STM32] [STM32] CMD recue: [R 80]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:8 enc2:7 enc3:6 enc4:65528
+[STM32] enc1:16 enc2:14 enc3:11 enc4:65522
+[STM32] enc1:35 enc2:28 enc3:24 enc4:65510
+[STM32] enc1:52 enc2:46 enc3:43 enc4:65490
+[STM32] enc1:77 enc2:70 enc3:71 enc4:65462
+[STM32] enc1:109 enc2:100 enc3:102 enc4:65426
+[STM32] enc1:150 enc2:138 enc3:144 enc4:65388
+[STM32] enc1:200 enc2:184 enc3:186 enc4:65344
+[STM32] enc1:254 enc2:232 enc3:234 enc4:65292
+[STM32] enc1:316 enc2:288 enc3:298 enc4:65226
+[STM32] enc1:385 enc2:350 enc3:359 enc4:65161
+[STM32] enc1:463 enc2:422 enc3:431 enc4:65084
+[STM32] enc1:549 enc2:498 enc3:511 enc4:65002
+[STM32] enc1:639 enc2:586 enc3:596 enc4:64916
+[STM32] enc1:735 enc2:675 enc3:686 enc4:64825
+[STM32] enc1:842 enc2:771 enc3:788 enc4:64724
+[STM32] enc1:952 enc2:873 enc3:886 enc4:64618
+[STM32] enc1:1068 enc2:978 enc3:994 enc4:64508
+[STM32] enc1:1188 enc2:1093 enc3:1106 enc4:64397
+[STM32] enc1:1312 enc2:1202 enc3:1214 enc4:64281
+[STM32] enc1:1434 enc2:1314 enc3:1325 enc4:64168
+[STM32] enc1:1557 enc2:1425 enc3:1441 enc4:64048
+[STM32] enc1:1678 enc2:1540 enc3:1560 enc4:63926
+[STM32] enc1:1801 enc2:1649 enc3:1682 enc4:63808
+[STM32] enc1:1922 enc2:1764 enc3:1798 enc4:63688
+[STM32] enc1:2047 enc2:1880 enc3:1924 enc4:63566
+[STM32] enc1:2169 enc2:1999 enc3:2038 enc4:63445
+[STM32] enc1:2293 enc2:2112 enc3:2159 enc4:63320
+[STM32] enc1:2420 enc2:2229 enc3:2278 enc4:63203
+[STM32] enc1:2546 enc2:2350 enc3:2395 enc4:63081
+[STM32] enc1:2670 enc2:2472 enc3:2510 enc4:62965
+[STM32] enc1:2796 enc2:2580 enc3:2625 enc4:62844
+[STM32] enc1:2928 enc2:2700 enc3:2746 enc4:62716
+[STM32] enc1:3051 enc2:2816 enc3:2866 enc4:62586
+[STM32] enc1:3182 enc2:2934 enc3:2989 enc4:62467
+[STM32] enc1:3310 enc2:3046 enc3:3112 enc4:62336
+[STM32] enc1:3434 enc2:3167 enc3:3232 enc4:62213
+[STM32] enc1:3551 enc2:3273 enc3:3345 enc4:62096
+[STM32] enc1:3664 enc2:3377 enc3:3450 enc4:61978
+[STM32] enc1:3771 enc2:3478 enc3:3552 enc4:61865
+[STM32] enc1:3870 enc2:3566 enc3:3651 enc4:61766
+[STM32] enc1:3963 enc2:3654 enc3:3742 enc4:61671
+[STM32] Mouv Ok
+[STM32] POS 288.345 186.396 2
+[STM32] POS 288.345 186.396 2
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 288.345 186.396 0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 0
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] OS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 288.345 18POS 288.345 186.396 1
+[ERR] Parse position : too many values to unpack (expected 4)
+[STM32] POS 288.345 186.396 1
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[STM32] POS 288.345 186.396 1
+[RPi] Équipe changée via interrupteur → yellow
+[STM32] [STM32] CMD recue: [TJ]
+[STM32] [DBG] Position_robot_init team=0
+[STM32] POS 16.000 184.000 1
+[STM32] POS 16.000 184.000 1
+[STM32] POS 16.000 184.000 1
+[RPi] Équipe changée via interrupteur → blue
+[STM32] [STM32] CMD recue: [TB]
+[STM32] [DBG] Position_robot_init team=1
+[STM32] POS 284.000 184.000 1
+[STM32] POS 284.000 184.000 1
+[STM32] POS 284.000 184.000 1
+[STM32] POS 284.000 184.000 1
+[STM32] POS 284.000 184.000 1
+[STM32] POS 284.000 184.000 1
+[STM32] POS 284.000 184.000 1
+[STM32] POS 284.000 184.000 1
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] [STM32] CMD recue: [A 85]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65534 enc2:65531 enc3:65530 enc4:2
+[STM32] enc1:65533 enc2:65531 enc3:65528 enc4:5
+[STM32] enc1:65530 enc2:65527 enc3:65524 enc4:7
+[STM32] enc1:65524 enc2:65522 enc3:65515 enc4:16
+[STM32] enc1:65505 enc2:65504 enc3:65498 enc4:31
+[STM32] enc1:65474 enc2:65477 enc3:65474 enc4:57
+[STM32] enc1:65437 enc2:65443 enc3:65436 enc4:94
+[STM32] enc1:65397 enc2:65403 enc3:65392 enc4:136
+[STM32] enc1:65345 enc2:65350 enc3:65338 enc4:184
+[STM32] enc1:65285 enc2:65293 enc3:65283 enc4:239
+[STM32] enc1:65219 enc2:65232 enc3:65219 enc4:300
+[STM32] enc1:65149 enc2:65161 enc3:65148 enc4:368
+[STM32] enc1:65065 enc2:65091 enc3:65070 enc4:444
+[STM32] enc1:64982 enc2:65005 enc3:64990 enc4:524
+[STM32] enc1:64884 enc2:64915 enc3:64900 enc4:609
+[STM32] enc1:64788 enc2:64819 enc3:64802 enc4:704
+[STM32] enc1:64681 enc2:64721 enc3:64698 enc4:801
+[STM32] enc1:64570 enc2:64612 enc3:64592 enc4:907
+[STM32] enc1:64459 enc2:64507 enc3:64482 enc4:1016
+[STM32] enc1:64348 enc2:64399 enc3:64369 enc4:1126
+[STM32] enc1:64235 enc2:64296 enc3:64258 enc4:1234
+[STM32] enc1:64121 enc2:64181 enc3:64144 enc4:1348
+[STM32] enc1:64007 enc2:64073 enc3:64030 enc4:1456
+[STM32] enc1:63892 enc2:63961 enc3:63921 enc4:1570
+[STM32] enc1:63776 enc2:63849 enc3:63804 enc4:1683
+[STM32] enc1:63661 enc2:63737 enc3:63688 enc4:1797
+[STM32] enc1:63542 enc2:63620 enc3:63574 enc4:1906
+[STM32] enc1:63427 enc2:63502 enc3:63456 enc4:2019
+[STM32] enc1:63309 enc2:63391 enc3:63340 enc4:2130
+[STM32] enc1:63203 enc2:63273 enc3:63223 enc4:2239
+[STM32] enc1:63088 enc2:63169 enc3:63106 enc4:2346
+[STM32] enc1:62974 enc2:63055 enc3:62994 enc4:2454
+[STM32] enc1:62857 enc2:62942 enc3:62884 enc4:2563
+[STM32] enc1:62744 enc2:62829 enc3:62766 enc4:2676
+[STM32] enc1:62630 enc2:62719 enc3:62650 enc4:2787
+[STM32] enc1:62512 enc2:62603 enc3:62534 enc4:2901
+[STM32] enc1:62390 enc2:62489 enc3:62420 enc4:3016
+[STM32] enc1:62270 enc2:62373 enc3:62302 enc4:3131
+[STM32] enc1:62153 enc2:62255 enc3:62186 enc4:3242
+[STM32] enc1:62037 enc2:62148 enc3:62070 enc4:3351
+[STM32] enc1:61930 enc2:62039 enc3:61964 enc4:3455
+[STM32] enc1:61831 enc2:61937 enc3:61864 enc4:3556
+[STM32] enc1:61739 enc2:61854 enc3:61772 enc4:3645
+[STM32] enc1:61660 enc2:61775 enc3:61690 enc4:3729
+[STM32] enc1:61590 enc2:61705 enc3:61616 enc4:3805
+[STM32] enc1:61532 enc2:61643 enc3:61552 enc4:3866
+[STM32] enc1:61481 enc2:61591 enc3:61488 enc4:3920
+[STM32] Mouv Ok
+[STM32] POS 369.025 184.096 0
+[STM32] POS 369.025 184.096 0
+[STM32] POS 369.025 184.096 0
+[STM32] POS 369.025 184.096 0
+[STM32] POS 369.025 184.096 0
+[STM32] POS 369.025 184.096 0
+[STM32] POS 369.025 184.096 0
+[STM32] [STM32] CMD recue: [R 70]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:8 enc2:7 enc3:8 enc4:65529
+[STM32] enc1:13 enc2:10 enc3:14 enc4:65523
+[STM32] enc1:25 enc2:21 enc3:26 enc4:65510
+[STM32] enc1:41 enc2:35 enc3:44 enc4:65492
+[STM32] enc1:66 enc2:60 enc3:70 enc4:65464
+[STM32] enc1:99 enc2:89 enc3:100 enc4:65433
+[STM32] enc1:144 enc2:128 enc3:140 enc4:65394
+[STM32] enc1:188 enc2:172 enc3:181 enc4:65348
+[STM32] enc1:247 enc2:228 enc3:236 enc4:65291
+[STM32] enc1:312 enc2:283 enc3:296 enc4:65233
+[STM32] enc1:379 enc2:349 enc3:358 enc4:65164
+[STM32] enc1:460 enc2:417 enc3:432 enc4:65088
+[STM32] enc1:536 enc2:495 enc3:508 enc4:65007
+[STM32] enc1:634 enc2:579 enc3:598 enc4:64920
+[STM32] enc1:723 enc2:668 enc3:684 enc4:64830
+[STM32] enc1:838 enc2:769 enc3:779 enc4:64724
+[STM32] enc1:950 enc2:869 enc3:882 enc4:64625
+[STM32] enc1:1064 enc2:979 enc3:988 enc4:64511
+[STM32] enc1:1183 enc2:1086 enc3:1100 enc4:64394
+[STM32] enc1:1304 enc2:1203 enc3:1208 enc4:64284
+[STM32] enc1:1428 enc2:1315 enc3:1322 enc4:64164
+[STM32] enc1:1550 enc2:1429 enc3:1438 enc4:64052
+[STM32] enc1:1669 enc2:1541 enc3:1555 enc4:63928
+[STM32] enc1:1795 enc2:1657 enc3:1673 enc4:63804
+[STM32] enc1:1915 enc2:1767 enc3:1791 enc4:63686
+[STM32] enc1:2041 enc2:1884 enc3:1914 enc4:63564
+[STM32] enc1:2162 enc2:2001 enc3:2030 enc4:63444
+[STM32] enc1:2286 enc2:2119 enc3:2148 enc4:63322
+[STM32] enc1:2412 enc2:2236 enc3:2266 enc4:63200
+[STM32] enc1:2533 enc2:2349 enc3:2384 enc4:63084
+[STM32] enc1:2665 enc2:2471 enc3:2500 enc4:62956
+[STM32] enc1:2790 enc2:2591 enc3:2619 enc4:62837
+[STM32] enc1:2916 enc2:2697 enc3:2732 enc4:62715
+[STM32] enc1:3039 enc2:2806 enc3:2838 enc4:62591
+[STM32] enc1:3153 enc2:2907 enc3:2940 enc4:62476
+[STM32] enc1:3265 enc2:3001 enc3:3040 enc4:62366
+[STM32] enc1:3369 enc2:3085 enc3:3136 enc4:62257
+[STM32] enc1:3464 enc2:3165 enc3:3222 enc4:62158
+[STM32] enc1:3556 enc2:3237 enc3:3303 enc4:62061
+[STM32] Mouv Ok
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 0
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[STM32] 63 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[STM32] POS 296.763 186.710 1
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] [STM32] CMD recue: [A 85]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:65530 enc2:65528 enc3:65535 enc4:7
+[STM32] enc1:65525 enc2:65526 enc3:65531 enc4:10
+[STM32] enc1:65519 enc2:65518 enc3:65521 enc4:18
+[STM32] enc1:65505 enc2:65508 enc3:65511 enc4:29
+[STM32] enc1:65486 enc2:65492 enc3:65492 enc4:46
+[STM32] enc1:65462 enc2:65470 enc3:65466 enc4:71
+[STM32] enc1:65427 enc2:65439 enc3:65433 enc4:104
+[STM32] enc1:65383 enc2:65399 enc3:65389 enc4:143
+[STM32] enc1:65333 enc2:65354 enc3:65339 enc4:193
+[STM32] enc1:65277 enc2:65306 enc3:65285 enc4:247
+[STM32] enc1:65209 enc2:65256 enc3:65221 enc4:306
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] enc1:65135 enc2:65190 enc3:65151 enc4:372
+[STM32] enc1:65050 enc2:65126 enc3:65073 enc4:437
+[STM32] enc1:64971 enc2:65044 enc3:64991 enc4:518
+[STM32] enc1:64875 enc2:64960 enc3:64900 enc4:595
+[STM32] enc1:64793 enc2:64876 enc3:64818 enc4:664
+[STM32] enc1:64733 enc2:64812 enc3:64749 enc4:730
+[STM32] enc1:64675 enc2:64758 enc3:64695 enc4:788
+[STM32] enc1:64632 enc2:64714 enc3:64643 enc4:830
+[STM32] enc1:64591 enc2:64670 enc3:64597 enc4:868
+[STM32] enc1:64553 enc2:64638 enc3:64561 enc4:906
+[STM32] enc1:64529 enc2:64612 enc3:64533 enc4:936
+[STM32] enc1:64511 enc2:64594 enc3:64511 enc4:958
+[STM32] enc1:64502 enc2:64580 enc3:64496 enc4:970
+[STM32] enc1:64500 enc2:64572 enc3:64492 enc4:974
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:974
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[STM32] enc1:64500 enc2:64570 enc3:64492 enc4:973
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[LIDAR] Obstacle disparu, tentative de reprise
+[LIDAR] Aucun mouvement à reprendre
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[RPi] Tirette retirée → stratégie homologation (blue)
+[INFO] Le robot se dirige vers la zone 
+[STM32] [STM32] CMD recue: [A 85]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] Mouv Ok
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[LIDAR] Obstacle disparu, tentative de reprise
+[LIDAR] Aucun mouvement à reprendre
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Tirette retirée → stratégie homologation (blue)
+[RPi] Dashboard : http://localhost:5000
+[INFO] Le robot se dirige vers la zone 
+[STM32] [STM32] CMD recue: [A 85]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[LIDAR] Obstacle disparu, tentative de reprise
+[LIDAR] Aucun mouvement à reprendre
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] POS 318.163 186.716 2
+[STM32] [STM32] CMD recue: [R 70]
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:0
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65535
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:0 enc4:65534
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65533
+[STM32] enc1:0 enc2:0 enc3:1 enc4:65532
+[STM32] enc1:35 enc2:32 enc3:36 enc4:65493
+[STM32] enc1:96 enc2:122 enc3:80 enc4:65359
+[STM32] enc1:207 enc2:232 enc3:166 enc4:65212
+[STM32] enc1:339 enc2:361 enc3:271 enc4:65051
+[STM32] enc1:487 enc2:510 enc3:383 enc4:64871
+[STM32] enc1:650 enc2:670 enc3:489 enc4:64675
+[STM32] enc1:819 enc2:836 enc3:583 enc4:64455
+[STM32] enc1:970 enc2:1036 enc3:651 enc4:64208
+[STM32] enc1:1083 enc2:1236 enc3:667 enc4:63945
+[LIDAR] Arrêt prioritaire Lidar
+[STM32] Mouv Ok
+[STM32] POS 293.792 190.821 12
+[STM32] POS 293.792 190.821 12
+[STM32] POS 293.792 190.821 12
+[STM32] POS 293.792 190.821 12
+[STM32] POS 293.792 190.821 12
+[STM32] POS 293.792 190.821 11
+[STM32] POS 293.792 190.821 11
+[STM32] POS 293.792 190.821 11
+[STM32] POS 293.792 190.821 11
+[RPi] Lidar connecte sur /dev/ttyUSB0
+[ERR] Lidar scan exception: ValueError: too many values to unpack (expected 2); reset flux
+[STM32] CONNECT port=/dev/ttyACM0 baudrate=115200
+[RPi] Caméra 0 ouverte → slot 0
+[RPi] Dashboard : http://localhost:5000
+[STM32] POS 293.792 190.821 1
+[RPi] Caméra slot 0 -> première frame reçue
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1
+[STM32] POS 293.792 190.821 1

@@ -168,16 +168,23 @@ class Aruco:
                     c = couleur if i == 0 else (0, 255, 0)
                     cv2.putText(image, texte, (tx, ty + (i * 20)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, c, 2)
     def detect_zone_ramassage(self, image):
+        """
         if image is None or self.camera_matrix is None:
             return None
     
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     
-        # Masque blanc permissif
+        # Masque blanc permissif (ton code actuel)
         lower_white = np.array([0, 0, 140])
         upper_white = np.array([180, 80, 255])
-        mask = cv2.inRange(hsv, lower_white, upper_white)
-    
+        mask_white = cv2.inRange(hsv, lower_white, upper_white)
+        
+        # --- NOUVEAU : Masque pour la bordure verte ---
+        # Valeurs à ajuster légèrement selon l'éclairage de ta caméra
+        lower_green = np.array([35, 80, 40]) 
+        upper_green = np.array([85, 255, 255])
+        mask_green = cv2.inRange(hsv, lower_green, upper_green)
+
         kernel_small = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
         kernel_big = cv2.getStructuringElement(cv2.MORPH_RECT, (11, 11))
         mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel_small)
@@ -224,8 +231,37 @@ class Aruco:
     
             if not cv2.isContourConvex(approx):
                 continue
-    
+
+            mask_carre = np.zeros(image.shape[:2], dtype=np.uint8)
+            
+            # 2. On dessine notre carré blanc potentiel en plein (rempli)
+            cv2.drawContours(mask_carre, [approx], -1, 255, thickness=cv2.FILLED)
+            
+            # 3. On "dilate" ce carré pour qu'il déborde sur l'extérieur (ex: de 15 pixels)
+            # La taille du noyau (15,15) dépend de la résolution de ta caméra. 
+            # A augmenter si tu es en 1080p, à baisser si tu es en 480p.
+            kernel_dilate = np.ones((15, 15), np.uint8)
+            mask_dilated = cv2.dilate(mask_carre, kernel_dilate)
+            
+            # 4. En soustrayant le carré d'origine au carré grossi, on obtient un "anneau"
+            mask_anneau = cv2.bitwise_xor(mask_dilated, mask_carre)
+            
+            # 5. On compte combien de pixels de cet anneau sont verts
+            pixels_total_anneau = cv2.countNonZero(mask_anneau)
+            if pixels_total_anneau > 0:
+                anneau_vert = cv2.bitwise_and(mask_green, mask_green, mask=mask_anneau)
+                pixels_verts = cv2.countNonZero(anneau_vert)
+                
+                ratio_vert = pixels_verts / pixels_total_anneau
+                
+                # Si moins de 15% ou 20% du tour est vert, c'est probablement un tag ArUco ou une ligne !
+                if ratio_vert < 0.15:
+                    continue  # On rejette ce contour, on passe au suivant
+            # =================================================================
+
+            # Ton code normal reprend ici :
             rect_min = cv2.minAreaRect(contour)
+        
             (_, _), (rw, rh), _ = rect_min
             if rw == 0 or rh == 0:
                 continue
@@ -311,7 +347,7 @@ class Aruco:
             result.pop("largeur_cm", None)
             result.pop("hauteur_cm", None)
             return result
-    
+         """
         return None
         
     def draw_zone_ramassage(self, image, zone):

@@ -100,6 +100,8 @@ class Mecanum:
                         self.mouvement_termine.set()
                     elif line == "Mouv Pince Ok":
                         self.mouvement_pince_termine.set()
+                    elif line == "Prochaine caisse":
+                        self.prochaine_caisse = True
 
             except Exception as exc:
                 self.logs.log("ERR", f"Lecture série : {exc}")

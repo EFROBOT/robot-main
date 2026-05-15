@@ -19,8 +19,8 @@ class Camera:
         self.dist_coeffs = None
         self.last_calibration_info = None
 
-        self.width = 1280
-        self.height = 720
+        self.width = 720
+        self.height = 480
         self.fps = 30
 
         self.aruco = Aruco(marker_size=0.040)
