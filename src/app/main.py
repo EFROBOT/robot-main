@@ -13,6 +13,13 @@ from web.dashboard import AffichageWeb
 def ficelle(robot, strategy, web, utiliser_camera):
     x = False
     GPIO.setup(2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+    def frame_provider_robot():
+        ret, frame = robot.camera.read()
+        if ret and frame is not None:
+            return frame
+        frame = robot.camera.get_latest_frame()
+        return frame if frame is not None else None
     
     while True:
         # Suivi de l'interrupteur d'équipe (uniquement si changement)
@@ -28,7 +35,7 @@ def ficelle(robot, strategy, web, utiliser_camera):
         # Surveillance de la tirette
         if GPIO.input(2) == GPIO.LOW:
             robot.logs.log("RPi", f"Tirette retirée → stratégie homologation ({robot.team})")
-            strategy.homologation()
+            strategy.strategy_derniere_serie()
             robot.fermer()
             GPIO.cleanup()
             while True:
@@ -63,6 +70,9 @@ def main():
         angle_init_deg=0,
         team=team
     )
+
+    if utiliser_camera:
+        robot.setup()
 
     carte = Map(team=team)
     strategy = Strategy(carte=carte, robot=robot)

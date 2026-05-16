@@ -20,6 +20,7 @@ Pour recevoir position
 import serial
 import threading
 import time
+import re
 
 from core.affinite_cpu import fixer_affinite_cpu
 
@@ -96,14 +97,20 @@ class Mecanum:
 
                 if line:
                     self.logs.log("STM32", line)
-                    if line.startswith("POS"):
+                    normalized = self._normaliser_ligne_uart(line)
+
+                    if normalized.startswith("pos"):
                         self.traiter_position(line)
-                    elif line == "Mouv Ok":
+                    elif "mouv" in normalized and "ok" in normalized and "pince" not in normalized:
                         self.mouvement_termine.set()
-                    elif line == "Mouv Pince Ok":
+                        self.logs.log("STM32", "Mouv Ok reconnu")
+                    elif "mouv" in normalized and "pince" in normalized and "ok" in normalized:
                         self.mouvement_pince_termine.set()
-                    elif line == "Prochaine caisse":
+                        self.logs.log("STM32", "Mouv Pince Ok reconnu")
+                    elif normalized == "prochaine caisse":
                         self.prochaine_caisse = True
+                    elif normalized.startswith("mouv"):
+                        self.logs.log("WARN", f"Réponse Mouv non reconnue: {line!r}")
 
             except Exception as exc:
                 self.logs.log("ERR", f"Lecture série : {exc}")
@@ -119,6 +126,11 @@ class Mecanum:
         except Exception as e:
             self.logs.log("ERR", f"Parse position : {e}")
 
+    @staticmethod
+    def _normaliser_ligne_uart(line):
+        cleaned = re.sub(r"[^0-9A-Za-zÀ-ÿ]+", " ", line)
+        return " ".join(cleaned.split()).casefold()
+
     def send_raw(self, line):
         serial_port = self.serial_port
         if not serial_port or not serial_port.is_open:
@@ -128,72 +140,49 @@ class Mecanum:
             serial_port.write(data)
         return True
 
-
     def avancer(self, distance):
         self.mouvement_termine.clear()
+        try: 
+            self._last_motion_cmd = ("A", float(distance))
+        except Exception:
+            self._last_motion_cmd = ("A", distance)
+
         self._paused_by_lidar = False
         self.send_raw(f"A {distance}")
 
+    
     def reculer(self, distance):
         self.mouvement_termine.clear()
-        try:
-            self._last_motion_cmd = ("R", float(distance))
-        except Exception:
-            self._last_motion_cmd = ("R", distance)
         self._paused_by_lidar = False
         self.send_raw(f"R {distance}")
 
     def droite(self, distance):
         self.mouvement_termine.clear()
-        try:
-            self._last_motion_cmd = ("G", float(distance))
-        except Exception:
-            self._last_motion_cmd = ("G", distance)
         self._paused_by_lidar = False
         self.send_raw(f"G {distance}")
 
     def gauche(self, distance):
         self.mouvement_termine.clear()
-        try:
-            self._last_motion_cmd = ("D", float(distance))
-        except Exception:
-            self._last_motion_cmd = ("D", distance)
         self._paused_by_lidar = False
         self.send_raw(f"D {distance}")
 
     def diagonale_gauche(self, distance):
         self.mouvement_termine.clear()
-        try:
-            self._last_motion_cmd = ("DG", float(distance))
-        except Exception:
-            self._last_motion_cmd = ("DG", distance)
         self._paused_by_lidar = False
         self.send_raw(f"DG {distance}")
 
     def diagonale_droite(self, distance):
         self.mouvement_termine.clear()
-        try:
-            self._last_motion_cmd = ("DD", float(distance))
-        except Exception:
-            self._last_motion_cmd = ("DD", distance)
         self._paused_by_lidar = False
         self.send_raw(f"DD {distance}")
 
     def rotation_gauche(self, angle):
         self.mouvement_termine.clear()
-        try:
-            self._last_motion_cmd = ("RH", float(angle))
-        except Exception:
-            self._last_motion_cmd = ("RH", angle)
         self._paused_by_lidar = False
         self.send_raw(f"RH {angle}")
 
     def rotation_droite(self, angle):
         self.mouvement_termine.clear()
-        try:
-            self._last_motion_cmd = ("RAH", float(angle))
-        except Exception:
-            self._last_motion_cmd = ("RAH", angle)
         self._paused_by_lidar = False
         self.send_raw(f"RAH {angle}")
 

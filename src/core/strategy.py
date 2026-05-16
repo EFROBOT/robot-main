@@ -3,12 +3,123 @@ import math
 import threading
 from core.camera import Camera
 from core.robot import Robot
+from core.alignement_tri_caisses import AlignementTriCaisses
+from core.recuperation_caisses import RecuperationCaisses
 
 class Strategy:
     def __init__(self, carte, robot):
         self.carte = carte
         self.robot = robot
+        self.frame_provider = None  # injecté par AffichageWeb après ouverture caméra
+        # Paramètres d'alignement (faciles à ajuster)
+        self.seuil_align_distance_cm = 51.0
+        self.seuil_align_lateral_cm = 3.0
+        self.seuil_align_angle_deg = 4.0
 
+    def strategy_derniere_serie(self):
+        self.debut_match = time.time()
+        
+        self.robot.logs.log("INFO", f"Lancement de la stratégie de derniere serie")
+
+        if self.robot.team == "yellow":
+            #Séquence  de déplacement ok 
+            self.robot.avancer(105)
+            time.sleep(1)
+            self.robot.rotation_droite(100)
+            time.sleep(1)
+            self.robot.avancer(25)
+            time.sleep(1)
+            self.aligner_et_recuperer_caisses()
+            time.sleep(1)
+            # Faire une sequence de plus à chaque fois pour valider entouré de time.sleep() 
+            while True: ## evite de relancé le code à lafin
+                x= "Coucou"
+        #Suite de la séquence à valider 
+        """
+            #-------------
+            #  2S
+            #-------------
+            self.robot.reculer(20)
+            time.sleep(1)
+            # fonction de déchargement
+            time.sleep(1)
+            self.robot.avancer(10)
+            time.sleep(1)
+            #-------------
+            #  3
+            #-------------
+            self.robot.rotation_gauche(90) # même problème
+            time.sleep(1)
+            #-------------
+            #  4
+            #-------------
+            self.robot.avancer(25)
+            time.sleep(1)
+            self.robot.rotation_gauche(90)
+            time.sleep(1)
+            self.robot.avancer(55)
+            time.sleep(1)
+            self.robot.droite(15)
+            time.sleep(1)
+            self.robot.avancer(35)
+            time.sleep(1)
+            self.robot.rotation_gauche(90)
+            time.sleep(1)
+            self.robot.avancer(30)
+            time.sleep(1)
+            current_time = time.time()
+            if (current_time - self.debut_match) < 40 :
+                #-------------
+                #  5
+                #-------------
+                # fonction alignement & prendre set caisses
+                time.sleep(1)
+                self.robot.reculer(20) 
+                time.sleep(1)
+                # fonction de déchargement
+                time.sleep(1)
+                #-------------
+                #  6
+                #-------------
+                self.robot.avancer(90)
+            else :
+		#-----------------
+                #  skip vers la 6
+                #-----------------
+                self.robot.avancer(65)
+                time.sleep(1)
+                self.robot.droite(20)
+                time.sleep(1)
+                self.robot.avancer(20)
+        else:
+            #-------------
+            #  1
+            #-------------
+            self.robot.avancer(105)
+            time.sleep(1)
+            self.robot.rotation_gauche(90) # la fonction fait l'inverse (rotation à droite)
+            time.sleep(1)
+            self.robot.avancer(50)
+            time.sleep(1)
+            # fonction alignement & prendre set caisses
+            time.sleep(1)
+            #-------------
+            #  2
+            #-------------
+            self.robot.reculer(20)
+            time.sleep(1)
+            # fonction de déchargement
+            time.sleep(1)
+            self.robot.avancer(10)
+            time.sleep(1)
+            #-------------
+            #  3
+            #-------------
+            self.robot.rotation_droite(90) # même problème
+            time.sleep(1)
+            #-------------
+            #  4
+        """
     # ------------------------------------------------------------------
     # Temps match
     def verifier_fin_match(self):
@@ -136,8 +247,9 @@ class Strategy:
             angle = caisse.angle_longueur
 
             self.robot.logs.log("INFO", f"Cible :  à dist={distance:.1f}cm lateral={lateral:+.1f}cm angle={caisse.angle_longueur:+.1f}°")
-            distance_arret = 38            
-            if distance <= distance_arret and abs(lateral) <= 3:
+            distance_arret = self.seuil_align_distance_cm
+            lateral_max = self.seuil_align_lateral_cm
+            if distance <= distance_arret and abs(lateral) <= lateral_max:
                 self.robot.logs.log("INFO", f"ArUco → Cible atteinte ! Dist: {distance:.1f}cm")
                 self.robot.logs.log("INFO", f"ArUco → ALIGNÉ ✓ Ordre des blocs: {meilleur_ordre_blocs}")
                 return True, meilleur_ordre_blocs
@@ -146,7 +258,7 @@ class Strategy:
             erreur_angle = angle - angle_cible
             erreur_angle = (erreur_angle + 45) % 90 - 45
             
-            if abs(erreur_angle) > 4.0: 
+            if abs(erreur_angle) > self.seuil_align_angle_deg:
                 if erreur_angle > 0:
                     self.robot.rotation_gauche(int(abs(erreur_angle)) + 3)
                 else:
@@ -493,24 +605,21 @@ class Strategy:
     # ------------------------------------------------------------------
 
     def homologation(self):
+        #self.robot.set_position(150, 150, -90)
          
         self.robot.logs.log("INFO", f"Le robot se dirige vers la zone ")
 
         if self.robot.team=="yellow":
-            self.robot.avancer(75)
+            self.robot.avancer(85)
             time.sleep(5)
-            self.robot.rotation_droite(190)
-            time.sleep(5)
-            self.robot.avancer(75)
+            self.robot.reculer(70)
             time.sleep(5)
         else :
-            self.robot.avancer(75)
+            self.robot.avancer(85)
             time.sleep(5)
-            self.robot.rotation_gauche(190)
+            self.robot.reculer(70)
             time.sleep(5)
-            self.robot.avancer(75)
-            time.sleep(5)  
-
+                
         time.sleep(5)
         
         #self.robot.aller_a_coord(self.robot.x, 184)
@@ -520,7 +629,50 @@ class Strategy:
         self.robot.match_demarre = True
 
         caisse = self.prendre_set_caisse(team = self.robot.team, frame_provider=frame_provider)
-        
+
+    # ------------------------------------------------------------------
+    # Alignement + récupération en une seule étape
+
+    def aligner_et_recuperer_caisses(self, frame_provider=None, timeout_alignement_s=15.0):
+        """Aligne le robot sur les caisses, détecte leur ordre de couleurs, puis les récupère.
+
+        frame_provider : callable retournant une frame BGR, ou None pour ouvrir
+                         robot.camera directement (sans dashboard).
+        Retourne True si le cycle s'est déroulé sans erreur, False sinon.
+        """
+        if frame_provider is None:
+            frame_provider = self.frame_provider
+
+        if frame_provider is None:
+            cam = self.robot.camera
+            if cam.cap is None or not cam.cap.isOpened():
+                if not cam.load_calibration():
+                    cam.use_default_calibration()
+                cam.open()
+
+            def _lire_camera():
+                ret, frame = cam.read()
+                return frame if ret else None
+
+            frame_provider = _lire_camera
+
+        _fp_sauvegarde = self.frame_provider
+        self.frame_provider = frame_provider
+        try:
+            aligneur = AlignementTriCaisses(strategy=self, logs=self.robot.logs)
+            resultat = aligneur.lancer(timeout_alignement_s=timeout_alignement_s)
+        finally:
+            self.frame_provider = _fp_sauvegarde
+
+        ordre = resultat.get("ordre_couleurs", [])
+        if not ordre:
+            self.robot.logs.log("WARN", "aligner_et_recuperer_caisses: pas d'ordre couleurs détecté.")
+            return False
+
+        self.robot.logs.log("RPi", f"Ordre couleurs détecté: {ordre}")
+        recuperation = RecuperationCaisses(robot=self.robot, logs=self.robot.logs)
+        return recuperation.executer_cycle(ordre)
+
     # Jaune 
     def strategy_1_jaune(self, frame_provider):
         self.robot.logs.log("INFO", "Start strategy")

@@ -17,8 +17,11 @@ class AlignementTriCaisses:
         if self.logs is not None:
             self.logs.log(niveau, message)
 
-    def lancer(self, frame_provider=None, timeout_alignement_s=15.0):
+    def lancer(self, timeout_alignement_s=15.0):
         """Exécute l'alignement et le tri des couleurs.
+
+        Le frame_provider est lu depuis self.strategy.frame_provider (injecté par
+        AffichageWeb ou aligner_et_recuperer_caisses avant l'appel).
 
         Retour:
             {
@@ -27,6 +30,8 @@ class AlignementTriCaisses:
               "resultat_alignement": any,
             }
         """
+        frame_provider = getattr(self.strategy, "frame_provider", None)
+
         stop_tri = threading.Event()
         lock_resultat = threading.Lock()
 
@@ -50,8 +55,6 @@ class AlignementTriCaisses:
                 )
 
                 with lock_resultat:
-                    # On conserve la meilleure tentative: priorité au nombre de captures utiles,
-                    # puis à la somme des confiances.
                     score_nouveau = (
                         resultat.get("captures_utiles", 0),
                         sum(resultat.get("confiance_par_position", {}).values()),

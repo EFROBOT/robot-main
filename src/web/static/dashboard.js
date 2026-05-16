@@ -442,6 +442,26 @@ Object.entries(boutons).forEach(([id, action]) => {
     }
 });
 
+// Pince une fois (route dédiée)
+async function envoyerPinceOnce() {
+    const checkbox = document.getElementById("opt-recup");
+    const rotation = checkbox && checkbox.checked ? 1 : 0;
+    const resp = await fetch("/pince_once", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({rotation})
+    });
+    if (resp.ok) {
+        log_local("RPi", "Pince une fois lancé");
+    } else {
+        const data = await resp.json().catch(() => ({}));
+        log_local("ERR", `Pince une fois erreur: ${data.error || resp.status}`);
+    }
+}
+
+const btnPinceOnce = document.getElementById("btn-pince-once");
+if (btnPinceOnce) btnPinceOnce.addEventListener("click", envoyerPinceOnce);
+
 const touches = {
     ArrowUp:"avancer", ArrowDown:"reculer",
     ArrowLeft:"gauche", ArrowRight:"droite",

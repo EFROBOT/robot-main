@@ -11,9 +11,10 @@ import cv2
 from core.camera import Camera
 from core.robot import Robot
 from core.affinite_cpu import fixer_affinite_cpu
-
 from core.alignement_tri_caisses import AlignementTriCaisses
 from core.recuperation_caisses import RecuperationCaisses
+
+
 class AffichageWeb:
     def __init__(
         self,
@@ -99,6 +100,9 @@ class AffichageWeb:
             worker = threading.Thread(target=self._camera_worker, args=(slot,), daemon=True)
             worker.start()
             self._workers.append(worker)
+
+        if self._caps:
+            self.strategy.frame_provider = lambda: self.get_frame(slot=0)
 
         self._setup_routes()
 
@@ -461,7 +465,6 @@ class AffichageWeb:
                         ordre = resultat.get("ordre_couleurs", [])
                         self.robot.logs.log("RPi", f"AlignementTri terminé, ordre: {ordre}")
                         print(f"[WEB] Caisses trouvées: {ordre}")
-
                         self.dernier_ordre_couleurs = list(ordre)
                     elif numero == 7:
                         if not self.dernier_ordre_couleurs:
@@ -469,7 +472,6 @@ class AffichageWeb:
                         else:
                             ok = self.recuperation_caisses.executer_cycle(self.dernier_ordre_couleurs)
                             self.robot.logs.log("RPi", f"Cycle récupération depuis web terminé: {ok}")
-
 
                 except Exception as exc:
                     self.robot.logs.log("ERR", f"Stratégie {numero} : {exc}")
@@ -527,6 +529,7 @@ class AffichageWeb:
                 return jsonify({"ok": False, "erreur": "coordonnées invalides"}), 400
 
             self.robot.logs.log("RPi", f"Aller à ({x}, {y})")
+
             def run_nav_coord():
                 fixer_affinite_cpu(3, logs=self.robot.logs, nom_thread="nav_coord")
                 self.robot.aller_a_coord(x, y)
@@ -543,6 +546,7 @@ class AffichageWeb:
                 return jsonify({"ok": False, "erreur": "angle invalide"}), 400
 
             self.robot.logs.log("RPi", f"Tourner vers {angle}°")
+
             def run_nav_angle():
                 fixer_affinite_cpu(3, logs=self.robot.logs, nom_thread="nav_angle")
                 self.robot.tourner_vers_angle(angle)

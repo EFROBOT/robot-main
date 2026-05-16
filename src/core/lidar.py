@@ -31,7 +31,7 @@ class Lidar:
         except Exception:
             pass
 
-    def scan(self, distance_cm=45, min_distance_cm=3, max_measures=1600):
+    def scan(self, distance_cm=15, min_distance_cm=3, max_measures=1600):
         """Collect one scan cycle from lidar measures.
 
         This implementation uses iter_measures directly to avoid intermittent
@@ -90,7 +90,6 @@ class Lidar:
                         "angle": round(angle, 1),
                         "distance_cm": round(dist / 10, 1),
                     })
-            self.logs.log("ERR", f"obstacles end {obstacles}")
             return obstacles
         except Exception as exc:
             if self.logs:

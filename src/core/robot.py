@@ -103,14 +103,6 @@ class Robot(Mecanum):
         super().stop()
         self.camera.release()
         cv2.destroyAllWindows()
-        
-    def stop(self):
-        """Arrête les mouvements du robot et ferme la caméra."""
-        self.running = False
-        super().stop()  # Envoie "STOP" au STM32
-        self.camera.release()
-        cv2.destroyAllWindows()
-
 
     def align_to_marker(self, marker):
         now = time.time() * 1000
@@ -156,7 +148,9 @@ class Robot(Mecanum):
     # ------------------------------------------------------------------
     # Option pince
 
-    def recuperer_caisses(self, recup, attendre=True, timeout=30):
+    
+    def recuperer_caisses(self, recup, attendre=True, timeout=10):
+        self.mouvement_pince_termine.clear()
         self.send_raw(f"Recuperer caisse {recup}")
         if attendre:
             ok = self.mouvement_pince_termine.wait(timeout=timeout)
@@ -171,7 +165,8 @@ class Robot(Mecanum):
     def pince_homologation(self):
         self.send_raw("Pince Homologation")
 
-    def pince_recuperer_avancer_et_stocker(self, rotation_active, attendre=True, timeout=30):
+    def pince_recuperer_avancer_et_stocker(self, rotation_active, attendre=True, timeout=10):
+        self.mouvement_pince_termine.clear()
         self.send_raw(f"Pince_RecupererAvancerEtStocker {int(rotation_active)}")
         if attendre:
             ok = self.mouvement_pince_termine.wait(timeout=timeout)
@@ -180,7 +175,8 @@ class Robot(Mecanum):
             return ok
         return True
 
-    def pince_recuperer_et_stocker(self, rotation_active, attendre=True, timeout=30):
+    def pince_recuperer_et_stocker(self, rotation_active, attendre=True, timeout=10):
+        self.mouvement_pince_termine.clear()
         self.send_raw(f"Pince_RecupererEtStocker {int(rotation_active)}")
         if attendre:
             ok = self.mouvement_pince_termine.wait(timeout=timeout)
@@ -321,44 +317,18 @@ class Robot(Mecanum):
     # ------------------------------------------------------------------
 
     # Only lidar
-    def _pres_du_bord_de_carte(self, marge=18.0):
-        return (
-            self.x <= marge
-            or self.x >= TERRAIN_WIDTH - marge
-            or self.y <= marge
-            or self.y >= TERRAIN_HEIGHT - marge
-        )
+    def _obstacle_peut_etre_ignore(self, obstacle):
+        dist_cm = obstacle["distance_cm"]
+        angle_rad = math.radians(self.angle_deg + obstacle["angle"])
+        obs_x = self.x + dist_cm * math.cos(angle_rad)
+        obs_y = self.y + dist_cm * math.sin(angle_rad)
+        marge = self.lidar_ignore_margin_cm
+        if obs_x <= marge or obs_x >= TERRAIN_WIDTH - marge:
+            return True
+        if obs_y <= marge or obs_y >= TERRAIN_HEIGHT - marge:
+            return True
 
-    def _bords_de_carte_proches(self, marge=None):
-        if marge is None:
-            marge = self.lidar_ignore_margin_cm
-        bords = set()
-        if self.x <= marge:
-            bords.add("left")
-        if self.x >= TERRAIN_WIDTH - marge:
-            bords.add("right")
-        if self.y <= marge:
-            bords.add("bottom")
-        if self.y >= TERRAIN_HEIGHT - marge:
-            bords.add("top")
-        return bords
-
-    def _cote_obstacle_lidar(self, angle_deg):
-        # Convertit l'angle Lidar vers le repère terrain et le ramène entre 0° et 360°
-        angle = (float(angle_deg) + float(self.angle_deg)) % 360.0
-
-        if 45.0 <= angle < 135.0:
-            return "top"
-        elif 135.0 <= angle < 225.0:
-            return "right"
-        elif 225.0 <= angle < 315.0:
-            return "bottom"
-        else:
-            return "left"
-
-    def _obstacle_peut_etre_ignored(self, obstacle, bords_proches):
-        cote_obstacle = self._cote_obstacle_lidar(obstacle["angle"])
-        return cote_obstacle in bords_proches
+        return False
 
     def surveiller_lidar(self):
             if not self.lidar:
@@ -377,32 +347,21 @@ class Robot(Mecanum):
                         time.sleep(0.5)
                         continue
                     if obstacles:
-                        self.send_raw("STOP")
+                        obstacles_valides = [o for o in obstacles if not self._obstacle_peut_etre_ignore(o)]
                         """
                         while True:
                                 self.send_raw("STOP")
                                 time.sleep(1)
                                 self.logs.log("LIDAR", "Arrêt prioritaire Lidar")
                         """
-                        
-                        bords_proches = self._bords_de_carte_proches()
-                        if bords_proches and all(self._obstacle_peut_etre_ignored(o, bords_proches) for o in obstacles):
-                            self.logs.log(
-                               "LIDAR",
-                                f"Obstacle bord ignoré: x={self.x:.1f}, y={self.y:.1f}, bords={sorted(bords_proches)}",
-                            )
-                            time.sleep(0.2)
+                        if not obstacles_valides:
+                            time.sleep(0.1)
                             continue
-
-                        details = ", ".join(f"{o['angle']}°/{o['distance_cm']}cm" for o in obstacles)
-                        #self.logs.log("LIDAR", f"Obstacle détecté ({len(obstacles)} pts): {details}")
-
-                        # Prioritise Lidar: stop robot and mark paused state
                         if not getattr(self, "_paused_by_lidar", False):
                             self._paused_by_lidar = True
                             self.send_raw("STOP")
-                            self.logs.log("LIDAR", "Arrêt prioritaire Lidar")
-
+                            self.logs.log("LIDAR", f"Arrêt prioritaire Lidar ({len(obstacles_valides)} pts réels)")
+                            
                         clear_consecutive = 0
                        
                     else:
@@ -429,7 +388,7 @@ class Robot(Mecanum):
                     time.sleep(0.1)
             
             threading.Thread(target=boucle, daemon=True).start()
-    
+
     # Lidar & camera 
     def surveiller(self):
         pass
