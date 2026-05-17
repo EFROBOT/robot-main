@@ -35,7 +35,7 @@ def ficelle(robot, strategy, web, utiliser_camera):
         # Surveillance de la tirette
         if GPIO.input(2) == GPIO.LOW:
             robot.logs.log("RPi", f"Tirette retirée → stratégie homologation ({robot.team})")
-            strategy.strategy_derniere_serie()
+            strategy.homologation()
             robot.fermer()
             GPIO.cleanup()
             while True:

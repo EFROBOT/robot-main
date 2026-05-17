@@ -12,28 +12,40 @@ class Strategy:
         self.robot = robot
         self.frame_provider = None  # injecté par AffichageWeb après ouverture caméra
         # Paramètres d'alignement (faciles à ajuster)
-        self.seuil_align_distance_cm = 51.0
+        self.seuil_align_distance_cm = 53.0
         self.seuil_align_lateral_cm = 3.0
         self.seuil_align_angle_deg = 4.0
 
-    def strategy_derniere_serie(self):
-        self.debut_match = time.time()
+    def strategy_derniere_serie(self, frame_provider):
+        #self.debut_match = time.time()
         
+        self.robot.securiser_caisses()
         self.robot.logs.log("INFO", f"Lancement de la stratégie de derniere serie")
+        
+        #Séquence  de déplacement ok 
+        self.robot.avancer(30)
+        self.aligner_et_recuperer_caisses()
+        time.sleep(0.5)
+        self.robot.logs.log("INFO", f"ffffffff")
+        self.avancer(10)
+        self.robot.rotation_gauche(180)
+        time.sleep(0.5)
+        self.robot.lacher_caisses()
+        time.sleep(2)
+        self.robot.avancer(60)
+        time.sleep(2)
 
-        if self.robot.team == "yellow":
-            #Séquence  de déplacement ok 
-            self.robot.avancer(105)
-            time.sleep(1)
-            self.robot.rotation_droite(100)
-            time.sleep(1)
-            self.robot.avancer(25)
-            time.sleep(1)
-            self.aligner_et_recuperer_caisses()
-            time.sleep(1)
-            # Faire une sequence de plus à chaque fois pour valider entouré de time.sleep() 
-            while True: ## evite de relancé le code à lafin
-                x= "Coucou"
+        
+        
+        """self.robot.rotation_droite(100)
+        time.sleep(1)
+        self.robot.avancer(25)
+        time.sleep(1)
+        self.aligner_et_recuperer_caisses()
+        time.sleep(1)"""
+        # Faire une sequence de plus à chaque fois pour valider entouré de time.sleep() 
+        while True: ## evite de relancé le code à lafin
+            x= "Coucou"
         #Suite de la séquence à valider 
         """
             #-------------
@@ -640,6 +652,8 @@ class Strategy:
                          robot.camera directement (sans dashboard).
         Retourne True si le cycle s'est déroulé sans erreur, False sinon.
         """
+        self.robot.logs.log("INFO", "srgreg.")
+
         if frame_provider is None:
             frame_provider = self.frame_provider
 
