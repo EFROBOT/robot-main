@@ -7,9 +7,9 @@ requires-python = ">=3.8"
 dependencies = [
     "flask>=3.0.3",
     "numpy>=1.24.4",
-    "opencv-python>=4.13.0.90",
+    "opencv-python-headless>=4.13.0.92",
     "pyserial>=3.5",
-    "rpi-gpio>=0.7.1",
+    "rpi-lgpio>=0.6",
     "rplidar-roboticia>=0.9.5",
 ]
 

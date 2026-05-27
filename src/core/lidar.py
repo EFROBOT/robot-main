@@ -12,16 +12,16 @@ class Lidar:
         self.logs = logs
         self.port = port
         self.lidar = RPLidar(port)
-        self._measure_iter = None
+        self._iter_mesures = None
         if self.logs:
             self.logs.log("RPi", f"Lidar connecte sur {port}")
 
-    def _ensure_measure_iter(self):
-        if self._measure_iter is None:
-            self._measure_iter = self.lidar.iter_measures(scan_type="normal", max_buf_meas=3000)
+    def _assurer_iter_mesures(self):
+        if self._iter_mesures is None:
+            self._iter_mesures = self.lidar.iter_measures(scan_type="normal", max_buf_meas=3000)
 
-    def _reset_measure_iter(self):
-        self._measure_iter = None
+    def _reinitialiser_iter_mesures(self):
+        self._iter_mesures = None
         try:
             self.lidar.stop()
         except Exception:
@@ -31,7 +31,7 @@ class Lidar:
         except Exception:
             pass
 
-    def scan(self, distance_cm=15, min_distance_cm=3, max_measures=1600):
+    def scan(self, distance_cm=20, min_distance_cm=1, max_measures=1600):
         """Collect one scan cycle from lidar measures.
 
         This implementation uses iter_measures directly to avoid intermittent
@@ -40,47 +40,39 @@ class Lidar:
         distance_mm = distance_cm * 10
         min_distance_mm = min_distance_cm * 10
         obstacles = []
-        started_scan = False
+        scan_demarre = False
 
         try:
-            self._ensure_measure_iter()
-            idx = 0
-            while idx < max_measures:
-                idx += 1
-                measure = next(self._measure_iter)
+            self._assurer_iter_mesures()
+            if self._iter_mesures is None:
+                return []
+            index = 0
+            while index < max_measures:
+                index += 1
+                mesure = next(self._iter_mesures)
                 try:
-                    if not isinstance(measure, (list, tuple)):
+                    if not isinstance(mesure, (list, tuple)):
                         continue
 
-                    if len(measure) >= 4:
-                        new_scan = bool(measure[0])
-                        angle = float(measure[-2])
-                        dist = float(measure[-1])
-                    elif len(measure) >= 3:
-                        # Fallback shape without explicit new_scan flag
-                        new_scan = False
-                        angle = float(measure[-2])
-                        dist = float(measure[-1])
+                    if len(mesure) >= 4:
+                        nouveau_scan = bool(mesure[0])
+                        angle = float(mesure[-2])
+                        dist = float(mesure[-1])
+                    elif len(mesure) >= 3:
+                        nouveau_scan = False
+                        angle = float(mesure[-2])
+                        dist = float(mesure[-1])
                     else:
                         continue
                 except (TypeError, ValueError, IndexError):
                     continue
 
-                """
-                if dist:
-                    self.logs.log("ERR", f"dist: {dist}")
-                """
-                if new_scan and started_scan:
-                    # End of one full rotation
-                    self.logs.log("ERR", f"obstacles {obstacles}")
-                    return obstacles
 
-                if new_scan:
-                    started_scan = True
+                if nouveau_scan:
+                    scan_demarre = True
 
-                if not started_scan or dist <= 0:
-                    if idx >= max_measures:
-                        self.logs.log("ERR", f"obstacles max {obstacles}")
+                if not scan_demarre or dist <= 0:
+                    if index >= max_measures:
                         return obstacles
                     continue
 
@@ -94,14 +86,14 @@ class Lidar:
         except Exception as exc:
             if self.logs:
                 self.logs.log("ERR", f"Lidar scan exception: {type(exc).__name__}: {exc}; reset flux")
-            self._reset_measure_iter()
+            self._reinitialiser_iter_mesures()
             return []
 
     def stop(self):
         if not hasattr(self, "lidar") or self.lidar is None:
             return
         try:
-            self._measure_iter = None
+            self._iter_mesures = None
             self.lidar.stop()
             self.lidar.disconnect()
         finally:

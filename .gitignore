@@ -6,5 +6,18 @@ dist/
 wheels/
 *.egg-info
 
+# Logs and runtime output
+data/logs/
+*.log
+*.log.*
+*.tmp
+
+# Test and lint caches
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+
 # Virtual environments
 .venv
