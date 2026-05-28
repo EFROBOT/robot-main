@@ -4,7 +4,6 @@ import threading
 import cv2
 from core.logs import Logs
 from core.mecanum import Mecanum
-from core.pince import Pince
 from core.camera import Camera
 from core.lidar import Lidar
 from core.leds import BandeauLED
@@ -30,19 +29,20 @@ class Robot(Mecanum):
         self.team = team
         self.map = Map(team=team)
         self.inventaire = []
-        self.pince = Pince(self)
         self.zone_ramassage = None
         self.tirette_en_place = True
         self.match_demarre = False 
         self.running = False
         self.last_align_time = 0.0
         self.align_interval_ms = 50
+        self._lidar_thread_started = False
         # Tolérance hors table pour le filtrage Lidar (0 = strictement dans [0..W]x[0..H]).
         self.marge_ignore_lidar_cm = -10.0
         self.decalage_angle_lidar_deg = 0.0
         self.sens_angle_lidar = -1.0
 
         self.direction_vers_bas = True
+        self.surveiller_lidar()
 
     def setup(self):
         if not self.camera.load_calibration():
@@ -83,8 +83,8 @@ class Robot(Mecanum):
             self.logs.log("ERR", f"Erreur release camera: {exc}")
         try:
             cv2.destroyAllWindows()
-        except cv2.error as exc:
-            self.logs.log("ERR", f"Erreur OpenCV destroyAllWindows: {exc}")
+        except Exception:
+            pass
 
     def align_to_marker(self, marker):
         now = time.time() * 1000
@@ -127,21 +127,38 @@ class Robot(Mecanum):
 
     # ------------------------------------------------------------------
     # Option pince
-
-    def recuperer_caisses(self, recup, attendre=True, timeout=10):
-        return self.pince.recuperer_caisses(recup, attendre=attendre, timeout=timeout)
-
+    
     def pince_navigation(self):
-        return self.pince.pince_navigation()
+        self.send_raw("Pince Navigation")
 
     def pince_homologation(self):
-        return self.pince.pince_homologation()
+        self.send_raw("Pince Homologation")
 
     def pince_recuperer_avancer_et_stocker(self, rotation_active, attendre=True, timeout=10):
-        return self.pince.pince_recuperer_avancer_et_stocker(rotation_active, attendre=attendre, timeout=timeout)
+        self.mouvement_pince_termine.clear()
+        self.send_raw(f"Pince_RecupererAvancerEtStocker {int(rotation_active)}")
+        if attendre:
+            ok = self._attendre_fin_mouvement(timeout=timeout)
+            if not ok:
+                self.logs.log(
+                    "ERR",
+                    f"Timeout Pince_RecupererAvancerEtStocker ({rotation_active})",
+                )
+            return ok
+        return True
 
     def pince_recuperer_et_stocker(self, rotation_active, attendre=True, timeout=10):
-        return self.pince.pince_recuperer_et_stocker(rotation_active, attendre=attendre, timeout=timeout)
+        self.mouvement_pince_termine.clear()
+        self.send_raw(f"Pince_RecupererEtStocker {int(rotation_active)}")
+        if attendre:
+            ok = self._attendre_fin_mouvement(timeout=timeout)
+            if not ok:
+                self.logs.log(
+                    "ERR",
+                    f"Timeout Pince_RecupererEtStocker ({rotation_active})",
+                )
+            return ok
+        return True
 
     def securiser_caisses(self):
         return self.pince.securiser_caisses()
@@ -174,98 +191,49 @@ class Robot(Mecanum):
         return False
 
     def surveiller_lidar(self):
-            if not self.lidar:
-                return
-            def boucle():
-                fixer_affinite_cpu(0, logs=self.logs, nom_thread="lidar")
-                required_clear = 3
-                while self.lidar:
-                    try:
-                        obstacles = self.lidar.scan()
-                    except Exception as exc:
-                        self.logs.log("ERR", f"Lidar scan error: {exc}")
-                        time.sleep(0.5)
-                        continue
-                    if self.leds and self.leds.pixels:
-                        self.leds.eteindre()
-                    if obstacles:
-                        obstacles_valides = []
-                        for obstacle in obstacles:
-                            angle_lidar_deg = float(obstacle.get("angle", 0.0)) % 360.0
-                            if self.leds:
-                                n_leds = max(1, int(self.leds.num_pixels))
-                                index = int((angle_lidar_deg / 360.0) * n_leds)
-                                if index >= n_leds:
-                                    index = n_leds - 1
-                                if self._obstacle_peut_etre_ignore(obstacle):
-                                    self.leds.set_pixel(index, (255, 128, 0))
-                                else:
-                                    self.leds.set_pixel(index, (255, 0, 0))
-                                    obstacles_valides.append(obstacle)
+        if not self.lidar or self._lidar_thread_started:
+            return
+
+        self._lidar_thread_started = True
+
+        def boucle():
+            fixer_affinite_cpu(0, logs=self.logs, nom_thread="lidar")
+            while self.lidar:
+                try:
+                    obstacles = self.lidar.scan()
+                except Exception as exc:
+                    self.logs.log("ERR", f"Lidar scan error: {exc}")
+                    time.sleep(0.5)
+                    continue
+
+                if self.leds and self.leds.pixels:
+                    self.leds.eteindre()
+
+                if obstacles:
+                    obstacles_valides = []
+                    for obstacle in obstacles:
+                        angle_lidar_deg = float(obstacle.get("angle", 0.0)) % 360.0
+                        if self.leds:
+                            n_leds = max(1, int(self.leds.num_pixels))
+                            index = int((angle_lidar_deg / 360.0) * n_leds)
+                            if index >= n_leds:
+                                index = n_leds - 1
+                            if self._obstacle_peut_etre_ignore(obstacle):
+                                self.leds.set_pixel(index, (255, 128, 0))
                             else:
-                                if not self._obstacle_peut_etre_ignore(obstacle):
-                                    obstacles_valides.append(obstacle)
+                                self.leds.set_pixel(index, (255, 0, 0))
+                                obstacles_valides.append(obstacle)
+                        else:
+                            if not self._obstacle_peut_etre_ignore(obstacle):
+                                obstacles_valides.append(obstacle)
 
-                        if self.leds and self.leds.pixels:
-                            self.leds.show()
+                    if self.leds and self.leds.pixels:
+                        self.leds.show()
 
-                        if not obstacles_valides:
-                            time.sleep(0.1)
-                            continue
-                        
+                    if obstacles_valides:
                         self.send_raw("STOP")
                         self.logs.log("LIDAR", f"Arrêt prioritaire Lidar ({len(obstacles_valides)} pts réels)")
-                            
-                                
 
-                    time.sleep(0.1)
-            
-            threading.Thread(target=boucle, daemon=True).start()
+                time.sleep(0.1)
 
-
-
-    """
-     # ------------------------------------------------------------------
-    
-    def calculer_chemin_esquive(self, x_actuel, y_actuel, x_cible, y_cible, zones_a_eviter):
-        marge = 20.0 
-        
-        for zone in zones_a_eviter:
-            excl_x_min = (zone.center.x - (zone.width / 2.0)) - marge
-            excl_x_max = (zone.center.x + (zone.width / 2.0)) + marge
-            excl_y_min = (zone.center.y - (zone.height / 2.0)) - marge
-            excl_y_max = (zone.center.y + (zone.height / 2.0)) + marge
-
-            traverse_y = (y_actuel < excl_y_min and y_cible > excl_y_min) or (y_actuel > excl_y_max and y_cible < excl_y_max)
-            traverse_x = (x_actuel > excl_x_min and x_actuel < excl_x_max) or (x_cible > excl_x_min and x_cible < excl_x_max)
-
-            if traverse_y and traverse_x:
-                x_contournement = excl_x_min - 10 if x_cible < zone.center.x else excl_x_max + 10
-                y_contournement = excl_y_min - 10 
-                
-                self.logs.log("WARN", f"Obstacle esquivé : {zone.name}")
-                return [(x_contournement, y_contournement), (x_cible, y_cible)]
-        
-        return [(x_cible, y_cible)]
-        
-    def attendre_fin_trajet(self, timeout=25.0):
-        succes = self.mouvement_termine.wait(timeout)
-        
-        if not succes:
-            self.logs.log("WARN", "Timeout: La STM32 n'a pas renvoyé 'C Ok'")
-
-    # Top level for évitement objet
-    def aller_a_coord_intelligent(self, x_cible, y_cible, zones_a_eviter=None):
-        if zones_a_eviter is None:
-            zones_a_eviter = []
-
-        waypoints = self.calculer_chemin_esquive(self.x, self.y, x_cible, y_cible, zones_a_eviter)
-        
-        for point in waypoints:
-            px, py = point
-            self.aller_a_coord(px, py)
-            self.attendre_fin_trajet()
-            self.x, self.y = px, py
-    
-    
-    """
+        threading.Thread(target=boucle, daemon=True).start()

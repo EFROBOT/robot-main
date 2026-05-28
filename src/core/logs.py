@@ -100,7 +100,24 @@ class Logs:
 
     def get_lines_by_source(self, source: str) -> list[str]:
         """Retourne les lignes du buffer pour une source donnée."""
-        buf = self._buffers.get(source)
+        normalized = (source or "").strip()
+        aliases = {
+            "stm32": "STM32",
+            "rpi": "RPi",
+            "err": "ERR",
+            "warn": "WARN",
+            "lidar": "LIDAR",
+            "info": "INFO",
+            "erreurs": "ERREURS",
+        }
+        normalized = aliases.get(normalized.lower(), normalized)
+
+        if normalized == "ERREURS":
+            errs = list(self._buffers.get("ERR", ()))
+            warns = list(self._buffers.get("WARN", ()))
+            return errs + warns
+
+        buf = self._buffers.get(normalized)
         if buf is None:
             return []
         return list(buf)

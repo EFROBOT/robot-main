@@ -126,7 +126,7 @@ class ApiServer:
                 "diag_droite":       lambda: self.robot.diagonale_droite(distance),
                 "rot_gauche":        lambda: self.robot.rotation_gauche(distance),
                 "rot_droite":        lambda: self.robot.rotation_droite(distance),
-                "pince_open":        lambda: self.robot.recuperer_caisses(option_val),
+                "pince_open":        lambda: self.robot.pince_recuperer_et_stocker(option_val),
                 "Pince Navigation":  lambda: self.robot.pince_navigation(),
                 "pince_homologation": lambda: self.robot.pince_homologation(),
                 "stockage":          lambda: self.robot.securiser_caisses(),

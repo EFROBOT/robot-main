@@ -2,6 +2,7 @@ import os
 import glob
 import cv2
 import numpy as np
+import re
 
 from core.aruco import Aruco
 
@@ -10,7 +11,7 @@ class Camera:
     def __init__(self, camera_id=0, logs=None, calibration_dir=None):
         self.camera_id = camera_id
         self.logs = logs
-        camera_key = str(camera_id)
+        camera_key = self._camera_key(camera_id)
         self.calibration_dir = calibration_dir or f"./data/calibrations/{camera_key}"
         self.calibration_file = f"{self.calibration_dir}/camera_calibration_{camera_key}.npz"
 
@@ -18,12 +19,24 @@ class Camera:
         self.camera_matrix = None
         self.dist_coeffs = None
         self.last_calibration_info = None
+        self._latest_frame = None
 
         self.width = 720
         self.height = 480
         self.fps = 30
 
         self.aruco = Aruco(marker_size=0.040)
+
+    @staticmethod
+    def _camera_key(camera_id):
+        if isinstance(camera_id, int):
+            return str(camera_id)
+
+        camera_name = os.path.basename(str(camera_id).rstrip("/"))
+        if camera_name:
+            return camera_name
+
+        return re.sub(r"[^A-Za-z0-9_.-]+", "_", str(camera_id).strip("/"))
 
     def open(self):
         backends = [
@@ -52,7 +65,13 @@ class Camera:
     def read(self):
         if self.cap is None or not self.cap.isOpened():
             return False, None
-        return self.cap.read()
+        ret, frame = self.cap.read()
+        if ret and frame is not None:
+            self._latest_frame = frame.copy()
+        return ret, frame
+
+    def get_latest_frame(self):
+        return self._latest_frame
 
     def release(self):
         if self.cap:

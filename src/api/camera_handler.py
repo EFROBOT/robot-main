@@ -20,11 +20,11 @@ class CameraHandler:
         # Références vers le robot et ses logs
         self._robot = robot
         self._aruco_detection = aruco_detection
+        self._camera = robot.camera
 
         # Listes parallèles indexées par slot
-        self._caps = []            # cv2.VideoCapture
+        self._caps = []            # caméra déjà ouverte par Robot
         self._locks = []           # threading.Lock
-        self._camera_ids = []      # identifiant V4L2 original
         self._detectors = []       # détecteur ArUco ou None
         self._latest_frame = []    # dernière frame brute (numpy)
         self._latest_jpeg = []     # dernière frame encodée JPEG (bytes)
@@ -32,24 +32,18 @@ class CameraHandler:
         self._workers = []         # threads de capture
         self._running = True
 
-        # Ouverture persistante de chaque caméra détectée
-        for idx in (camera_indices or []):
-            cap = self._ouvrir_capture(idx)
-            if cap is not None and cap.isOpened():
-                self._configurer_capture(cap)
-                slot = len(self._caps)
-                self._caps.append(cap)
-                self._locks.append(threading.Lock())
-                self._camera_ids.append(idx)
-                self._detectors.append(self._creer_detecteur())
-                self._latest_frame.append(None)
-                self._latest_jpeg.append(None)
-                self._latest_status.append("init")
-                robot.logs.log("RPi", f"Caméra {idx} ouverte → slot {slot}")
-            else:
-                if cap is not None:
-                    cap.release()
-                robot.logs.log("ERR", f"Impossible d'ouvrir la caméra {idx}")
+        camera_id = self._camera.camera_id
+        camera_ouverte = self._camera.cap is not None and self._camera.cap.isOpened()
+        if camera_ouverte and (not camera_indices or camera_id in camera_indices):
+            self._caps.append(self._camera)
+            self._locks.append(threading.Lock())
+            self._detectors.append(self._creer_detecteur())
+            self._latest_frame.append(None)
+            self._latest_jpeg.append(None)
+            self._latest_status.append("init")
+            robot.logs.log("RPi", f"Caméra robot {camera_id} utilisée par le handler → slot 0")
+        elif camera_indices:
+            robot.logs.log("WARN", f"Caméra robot {camera_id} non sélectionnée par la config: {camera_indices}")
 
         # Lancement des threads de capture
         for slot in range(len(self._caps)):
@@ -64,28 +58,6 @@ class CameraHandler:
     def nb_cameras(self) -> int:
         """Nombre de caméras ouvertes avec succès."""
         return len(self._caps)
-
-    # ── Ouverture et configuration d'une caméra ────────────────
-    @staticmethod
-    def _ouvrir_capture(idx):
-        """Essaie d'ouvrir une VideoCapture, d'abord avec V4L2."""
-        if isinstance(idx, int):
-            cap = cv2.VideoCapture(idx, cv2.CAP_V4L2)
-            if not cap.isOpened():
-                cap.release()
-                cap = cv2.VideoCapture(idx)
-        else:
-            cap = cv2.VideoCapture(idx)
-        return cap
-
-    @staticmethod
-    def _configurer_capture(cap):
-        """Applique les réglages de latence minimale et résolution."""
-        cap.set(cv2.CAP_PROP_BUFFERSIZE, 1)
-        cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter.fourcc(*"MJPG"))
-        cap.set(cv2.CAP_PROP_FRAME_WIDTH, 720)
-        cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-        cap.set(cv2.CAP_PROP_FPS, 10)
 
     def _creer_detecteur(self):
         """Construit le détecteur ArUco si la détection est activée."""
@@ -122,14 +94,7 @@ class CameraHandler:
             try:
                 # Lecture avec vidage du buffer interne
                 with lock:
-                    for _ in range(2):
-                        try:
-                            cap.grab()
-                        except Exception:
-                            break
-                    ret, frame = cap.retrieve()
-                    if not ret:
-                        ret, frame = cap.read()
+                    ret, frame = cap.read()
 
                 if frame is None:
                     self._latest_status[slot] = "error"
@@ -143,6 +108,8 @@ class CameraHandler:
                 # Sauvegarde de la frame brute
                 raw_frame = frame.copy()
                 self._latest_frame[slot] = raw_frame
+                if hasattr(cap, "_latest_frame"):
+                    cap._latest_frame = raw_frame
 
                 # Détection ArUco si activée
                 if detector is not None:

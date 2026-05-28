@@ -221,10 +221,10 @@ class Strategy:
             if frame_provider is not None:
                 frame = frame_provider()
             else:
-                ret, frame = self.robot.camera.read()
-                if not ret:
-                    frame = self.robot.camera.get_latest_frame()
-                    if not frame:
+                frame = self.robot.camera.get_latest_frame()
+                if frame is None:
+                    ret, frame = self.robot.camera.read()
+                    if not ret:
                         frame = None
 
             if frame is None:
@@ -310,10 +310,10 @@ class Strategy:
             if frame_provider is not None:
                 frame = frame_provider()
             else:
-                ret, frame = self.robot.camera.read()
-                if not ret:
-                    frame = self.robot.camera.get_latest_frame()
-                    if not frame:
+                frame = self.robot.camera.get_latest_frame()
+                if frame is None:
+                    ret, frame = self.robot.camera.read()
+                    if not ret:
                         frame = None
 
             if frame is None:
@@ -438,10 +438,10 @@ class Strategy:
             if frame_provider is not None:
                 frame = frame_provider()
             else:
-                ret, frame = self.robot.camera.read()
-                if not ret:
-                    frame = self.robot.camera.get_latest_frame()
-                    if not frame:
+                frame = self.robot.camera.get_latest_frame()
+                if frame is None:
+                    ret, frame = self.robot.camera.read()
+                    if not ret:
                         frame = None
 
             if frame is None:
