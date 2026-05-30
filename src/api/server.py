@@ -12,8 +12,6 @@ from flask import Flask, Response, jsonify, request, send_file
 from flask_cors import CORS
 
 from core.affinite_cpu import fixer_affinite_cpu
-from core.alignement_tri_caisses import AlignementTriCaisses
-from core.recuperation_caisses import RecuperationCaisses
 from api.camera_handler import CameraHandler
 
 
@@ -28,13 +26,6 @@ class ApiServer:
         self.strategie_en_cours = False
         self.dernier_ordre_couleurs = []
 
-        # Modules de stratégie avancée
-        self.aligneur_tri = AlignementTriCaisses(
-            strategy=self.strategy, logs=self.robot.logs
-        )
-        self.recuperation_caisses = RecuperationCaisses(
-            robot=self.robot, logs=self.robot.logs
-        )
 
         # Gestion des caméras (capture dans des threads séparés)
         self._camera = CameraHandler(
@@ -254,26 +245,13 @@ class ApiServer:
         if numero == 1:
             self.strategy.aligner_sur_aruco(frame_provider=fournir_frame)
         elif numero == 2:
-            self.strategy.prendre_set_caisse(frame_provider=fournir_frame)
+            self.strategy.aligner_et_recuperer_caisses(frame_provider=fournir_frame)
         elif numero == 3:
-            self.strategy.aligner_sur_zone_de_ramassage(frame_provider=fournir_frame)
+            pass
         elif numero == 6:
-            resultat = self.aligneur_tri.lancer(
-                frame_provider=fournir_frame, timeout_alignement_s=15.0,
-            )
-            ordre = resultat.get("ordre_couleurs", [])
-            self.robot.logs.log("RPi", f"AlignementTri terminé, ordre: {ordre}")
-            self.dernier_ordre_couleurs = list(ordre)
+            pass
         elif numero == 7:
-            if not self.dernier_ordre_couleurs:
-                self.robot.logs.log(
-                    "WARN", "Aucun ordre couleurs. Lance d'abord la stratégie 6."
-                )
-            else:
-                ok = self.recuperation_caisses.executer_cycle(
-                    self.dernier_ordre_couleurs
-                )
-                self.robot.logs.log("RPi", f"Cycle récupération terminé: {ok}")
+            self.strategy.homologation()
 
     # ── Lancement du serveur ───────────────────────────────────
     def run(self):

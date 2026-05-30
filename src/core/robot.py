@@ -9,6 +9,7 @@ from core.lidar import Lidar
 from core.leds import BandeauLED
 from core.affinite_cpu import fixer_affinite_cpu
 from world.map import Map, TERRAIN_WIDTH, TERRAIN_HEIGHT
+from core.servomoteur import init_servo, set_angle_servo
 
 
 class Robot(Mecanum):
@@ -25,6 +26,7 @@ class Robot(Mecanum):
             except Exception as exc:
                 self.logs.log("ERR", str(exc))
  
+        init_servo()
         self.set_team(team)
         self.team = team
         self.map = Map(team=team)
@@ -159,13 +161,13 @@ class Robot(Mecanum):
                 )
             return ok
         return True
-
+    
+    # Option servo
     def securiser_caisses(self):
-        return self.pince.securiser_caisses()
+        set_angle_servo(103)
 
     def lacher_caisses(self):
-        return self.pince.lacher_caisses()
-
+        set_angle_servo(0)
 
 
     #--- LIDAR detection -------------
