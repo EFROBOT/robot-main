@@ -18,7 +18,7 @@ class Lidar:
 
     def _assurer_iter_mesures(self):
         if self._iter_mesures is None:
-            self._iter_mesures = self.lidar.iter_measures(scan_type="normal", max_buf_meas=3000)
+            self._iter_mesures = self.lidar.iter_measures(scan_type="normal", max_buf_meas=100000)
 
     def _reinitialiser_iter_mesures(self):
         self._iter_mesures = None
@@ -31,7 +31,7 @@ class Lidar:
         except Exception:
             pass
 
-    def scan(self, distance_cm=20, min_distance_cm=1, max_measures=1600):
+    def scan(self, distance_cm=45, min_distance_cm=1, max_measures=1600):
         """Collect one scan cycle from lidar measures.
 
         This implementation uses iter_measures directly to avoid intermittent
@@ -69,6 +69,8 @@ class Lidar:
 
 
                 if nouveau_scan:
+                    if scan_demarre and obstacles:
+                        return obstacles
                     scan_demarre = True
 
                 if not scan_demarre or dist <= 0:

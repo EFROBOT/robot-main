@@ -98,12 +98,14 @@ class Mecanum:
 
                 if line:
                     self.logs.log("STM32", line)
-                    normalized = self._normaliser_ligne_uart(line)
 
-                    if normalized.startswith("pos"):
+                    if line.startswith("POS"):
                         self.traiter_position(line)
-                    elif "mouv" in normalized and "ok" in normalized and "pince" not in normalized:
+                    elif "mouv" == "Mouv Ok":
                         self.mouvement_termine.set()
+                    elif "mouv" == "Mouv Pince Ok":
+                        self.mouvement_termine.set()
+
                         self.logs.log("STM32", "Mouv Ok reconnu")
                     elif "mouv" in normalized and "pince" in normalized and "ok" in normalized:
                         self.mouvement_pince_termine.set()
@@ -127,10 +129,6 @@ class Mecanum:
         except Exception as e:
             self.logs.log("ERR", f"Parse position : {e}")
 
-    @staticmethod
-    def _normaliser_ligne_uart(line):
-        cleaned = re.sub(r"[^0-9A-Za-zÀ-ÿ]+", " ", line)
-        return " ".join(cleaned.split()).casefold()
 
     def send_raw(self, line):
         serial_port = self.serial_port

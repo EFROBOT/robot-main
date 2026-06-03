@@ -194,14 +194,15 @@ class Strategy:
         resultat_tri = {"ordre": []}
 
         thread_tri = threading.Thread(
-            target=self.voter_couleurs,
+            target=self.tri_couleur,
             args=(frame_provider, stop_tri, resultat_tri),
             daemon=True,
         )
         thread_tri.start()
 
         self.aligner_sur_aruco(timeout_s=timeout_alignement_s, frame_provider=frame_provider)
-
+        self.robot.logs.log("INFO", "Aprés fonction")
+        
         stop_tri.set()
         thread_tri.join(timeout=1.0)
 
@@ -214,6 +215,7 @@ class Strategy:
 
         # Sequence recuperer caisses
         for couleur_caisse in ordre:
+            print('test')
             rotation = 1 if couleur_caisse == self.robot.team else 0
             ok = self.robot.pince_recuperer_et_stocker(rotation)
             self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} -> {'OK' if ok else 'ECHEC'}")

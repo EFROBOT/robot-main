@@ -44,8 +44,10 @@ def ficelle(robot, strategy, utiliser_camera):
 
         nouvelle_team = "yellow" if GPIO.input(17) == GPIO.LOW else "blue"
         if nouvelle_team != robot.team:
-            robot.leds.clignoter_eteindre()
-
+            try :
+                robot.leds.clignoter_eteindre()
+            except:
+                time.sleep(0.1)
             robot.leds.set_team_color(nouvelle_team)
 
             robot.set_team(nouvelle_team)

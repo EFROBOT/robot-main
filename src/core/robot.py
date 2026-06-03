@@ -136,30 +136,9 @@ class Robot(Mecanum):
     def pince_homologation(self):
         self.send_raw("Pince Homologation")
 
-    def pince_recuperer_avancer_et_stocker(self, rotation_active, attendre=True, timeout=10):
-        self.mouvement_pince_termine.clear()
-        self.send_raw(f"Pince_RecupererAvancerEtStocker {int(rotation_active)}")
-        if attendre:
-            ok = self._attendre_fin_mouvement(timeout=timeout)
-            if not ok:
-                self.logs.log(
-                    "ERR",
-                    f"Timeout Pince_RecupererAvancerEtStocker ({rotation_active})",
-                )
-            return ok
-        return True
-
     def pince_recuperer_et_stocker(self, rotation_active, attendre=True, timeout=10):
         self.mouvement_pince_termine.clear()
         self.send_raw(f"Pince_RecupererEtStocker {int(rotation_active)}")
-        if attendre:
-            ok = self._attendre_fin_mouvement(timeout=timeout)
-            if not ok:
-                self.logs.log(
-                    "ERR",
-                    f"Timeout Pince_RecupererEtStocker ({rotation_active})",
-                )
-            return ok
         return True
     
     # Option servo
@@ -193,49 +172,63 @@ class Robot(Mecanum):
         return False
 
     def surveiller_lidar(self):
-        if not self.lidar or self._lidar_thread_started:
+        # Utilisation de getattr au cas où _lidar_thread_started ne serait pas encore initialisé
+        if getattr(self, "lidar", None) is None or getattr(self, "_lidar_thread_started", False):
             return
 
         self._lidar_thread_started = True
 
+        # ==========================================
+        # AJOUT CRUCIAL : Démarrer l'acquisition série en tâche de fond
+        # C'est ici que tu définis tes distances de détection
+        # ==========================================
+        self.lidar.scan(distance_cm=44, min_distance_cm=1)
+
         def boucle():
+            # Super pratique pour isoler ce thread critique sur un cœur de la Raspberry Pi
             fixer_affinite_cpu(0, logs=self.logs, nom_thread="lidar")
-            while self.lidar:
+            
+            while getattr(self, "lidar", None) is not None:
                 try:
+                    # scan() est maintenant instantané (non-bloquant)
                     obstacles = self.lidar.scan()
                 except Exception as exc:
                     self.logs.log("ERR", f"Lidar scan error: {exc}")
                     time.sleep(0.5)
                     continue
 
-                if self.leds and self.leds.pixels:
+                if getattr(self, "leds", None) and self.leds.pixels:
                     self.leds.eteindre()
 
                 if obstacles:
                     obstacles_valides = []
                     for obstacle in obstacles:
                         angle_lidar_deg = float(obstacle.get("angle", 0.0)) % 360.0
-                        if self.leds:
+                        
+                        if getattr(self, "leds", None):
                             n_leds = max(1, int(self.leds.num_pixels))
                             index = int((angle_lidar_deg / 360.0) * n_leds)
                             if index >= n_leds:
                                 index = n_leds - 1
+                                
                             if self._obstacle_peut_etre_ignore(obstacle):
-                                self.leds.set_pixel(index, (255, 128, 0))
+                                self.leds.set_pixel(index, (255, 128, 0)) # Orange : ignoré
                             else:
-                                self.leds.set_pixel(index, (255, 0, 0))
+                                self.leds.set_pixel(index, (255, 0, 0))   # Rouge : danger
                                 obstacles_valides.append(obstacle)
                         else:
                             if not self._obstacle_peut_etre_ignore(obstacle):
                                 obstacles_valides.append(obstacle)
 
-                    if self.leds and self.leds.pixels:
+                    if getattr(self, "leds", None) and self.leds.pixels:
                         self.leds.show()
 
                     if obstacles_valides:
                         self.send_raw("STOP")
                         self.logs.log("LIDAR", f"Arrêt prioritaire Lidar ({len(obstacles_valides)} pts réels)")
 
-                time.sleep(0.1)
+                # La boucle tourne à 10 Hz. 
+                # C'est parfait car scan() ne bloque plus.
+                time.sleep(0.1) 
 
         threading.Thread(target=boucle, daemon=True).start()
