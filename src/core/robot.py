@@ -136,9 +136,14 @@ class Robot(Mecanum):
     def pince_homologation(self):
         self.send_raw("Pince Homologation")
 
-    def pince_recuperer_et_stocker(self, rotation_active, attendre=True, timeout=10):
+    def pince_recuperer_et_stocker(self, rotation_active, attendre=True, timeout=20):
         self.mouvement_pince_termine.clear()
         self.send_raw(f"Pince_RecupererEtStocker {int(rotation_active)}")
+        if attendre:
+            ok = self.mouvement_pince_termine.wait(timeout=timeout)
+            if not ok:
+                self.logs.log("ERR", f"Timeout ack 'Mouv Pince Ok' (timeout={timeout}s)")
+            return ok
         return True
     
     # Option servo

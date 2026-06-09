@@ -215,7 +215,7 @@ class Strategy:
 
         # Sequence recuperer caisses
         for couleur_caisse in ordre:
-            print('test')
+            self.robot.logs.log("WARN", "Caisses")
             rotation = 1 if couleur_caisse == self.robot.team else 0
             ok = self.robot.pince_recuperer_et_stocker(rotation)
             self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} -> {'OK' if ok else 'ECHEC'}")

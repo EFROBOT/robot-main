@@ -98,27 +98,16 @@ class Mecanum:
 
                 if line:
                     self.logs.log("STM32", line)
-
                     if line.startswith("POS"):
                         self.traiter_position(line)
-                    elif "mouv" == "Mouv Ok":
+                    elif line == "Mouv Ok":
                         self.mouvement_termine.set()
-                    elif "mouv" == "Mouv Pince Ok":
-                        self.mouvement_termine.set()
-
-                        self.logs.log("STM32", "Mouv Ok reconnu")
-                    elif "mouv" in normalized and "pince" in normalized and "ok" in normalized:
+                    elif line == "Mouv Pince Ok":
                         self.mouvement_pince_termine.set()
-                        self.logs.log("STM32", "Mouv Pince Ok reconnu")
-                    elif normalized == "prochaine caisse":
-                        self.prochaine_caisse = True
-                    elif normalized.startswith("mouv"):
-                        self.logs.log("WARN", f"Réponse Mouv non reconnue: {line!r}")
 
             except Exception as exc:
                 self.logs.log("ERR", f"Lecture série : {exc}")
                 time.sleep(0.01)
-
 
     def traiter_position(self, ligne):
         try:
@@ -128,7 +117,6 @@ class Mecanum:
             self.angle_deg = float(angle) - 90
         except Exception as e:
             self.logs.log("ERR", f"Parse position : {e}")
-
 
     def send_raw(self, line):
         serial_port = self.serial_port
@@ -142,50 +130,42 @@ class Mecanum:
     def avancer(self, distance):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
-        self._marche_arriere = False
         self.send_raw(f"A {distance}")
 
     
     def reculer(self, distance):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
-        self._marche_arriere = True
         self.send_raw(f"R {distance}")
 
     def gauche(self, distance):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
-        self._marche_arriere = False
         self.send_raw(f"G {distance}")
 
     def droite(self, distance):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
-        self._marche_arriere = False
         self.send_raw(f"D {distance}")
 
     def diagonale_gauche(self, distance):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
-        self._marche_arriere = False
         self.send_raw(f"DG {distance}")
 
     def diagonale_droite(self, distance):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
-        self._marche_arriere = False
         self.send_raw(f"DD {distance}")
 
     def rotation_gauche(self, angle):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
-        self._marche_arriere = False
         self.send_raw(f"RH {angle}")
 
     def rotation_droite(self, angle):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
-        self._marche_arriere = False
         self.send_raw(f"RAH {angle}")
 
     def aller_a_coord(self, x, y, attendre=True, timeout=20):
