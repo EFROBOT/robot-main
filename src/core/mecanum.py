@@ -33,7 +33,6 @@ class Mecanum:
         self._serial_lock = threading.Lock()
         self._stop_event = threading.Event()
         self.mouvement_termine = threading.Event()
-        self.mouvement_pince_termine = threading.Event()
 
         self._thread = None
         self.running = False
@@ -102,8 +101,6 @@ class Mecanum:
                         self.traiter_position(line)
                     elif line == "Mouv Ok":
                         self.mouvement_termine.set()
-                    elif line == "Mouv Pince Ok":
-                        self.mouvement_pince_termine.set()
 
             except Exception as exc:
                 self.logs.log("ERR", f"Lecture série : {exc}")
@@ -127,10 +124,13 @@ class Mecanum:
             serial_port.write(data)
         return True
 
-    def avancer(self, distance):
+    def avancer(self, distance, attendre=True, timeout=20):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
         self.send_raw(f"A {distance}")
+        if attendre:
+            return self.mouvement_termine.wait(timeout=timeout)
+        return True
 
     
     def reculer(self, distance):

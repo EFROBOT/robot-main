@@ -189,7 +189,6 @@ class Strategy:
                 ret, frame = cam.read()
                 return frame if ret else None
             
-        # Sequence Alignement + Tri
         stop_tri = threading.Event()
         resultat_tri = {"ordre": []}
 
@@ -210,21 +209,54 @@ class Strategy:
         if not ordre:
             self.robot.logs.log("WARN", "Pas d'ordre couleurs détecté.")
             return False
-
-        self.robot.logs.log("RPi", f"Ordre couleurs détecté: {ordre}")
-
-        # Sequence recuperer caisses
+        
+        if self.robot.team == "yellow":
+            equipe = "jaune"
+        else:
+            equipe = "bleu"
+        
+        self.robot.logs.log("WARN", f"Odre {len(ordre)}")
+        
         for couleur_caisse in ordre:
             self.robot.logs.log("WARN", "Caisses")
-            rotation = 1 if couleur_caisse == self.robot.team else 0
+        
+
+            if couleur_caisse == equipe:
+                rotation = 1
+            else:
+                rotation = 0
+            self.robot.logs.log("WARN", f"Team : {equipe}")
+            self.robot.logs.log("WARN", f"Couleur_caisses : {couleur_caisse}")
+            self.robot.logs.log("WARN", f"Rotation : {rotation}")
+
             ok = self.robot.pince_recuperer_et_stocker(rotation)
             self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} -> {'OK' if ok else 'ECHEC'}")
 
             self.robot.avancer(10) # to check
+        
+        #ok = self.robot.pince_recuperer_et_stocker(0)
+        #self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} -> {'OK' if ok else 'ECHEC'}")
 
-        self.robot.stop()
 
-        return
+
+        """
+        self.robot.logs.log("RPi", f"Ordre couleurs détecté: {ordre}")
+    
+        self.robot.logs.log("WARN", "Caisses")
+        rotation = 1 if ordre[0] == self.robot.team else 0
+        
+        self.robot.logs.log("WARN", "JE vais prendre une caisse omg frerot")
+        print("icccccccccccccciiiiiiiiiiii", self.robot.pince_recuperer_et_stocker(rotation))
+        
+        # self.robot.logs.log("WARN", "JE vais avancer frerot")
+  
+        self.robot.avancer(10)
+
+        # self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} ->")
+        
+        print("icccccccccccccciiiiiiiiiiii", self.robot.pince_recuperer_et_stocker(rotation))
+        
+        self.robot.avancer(10)"""
 
     # ------------------------------------------------------------------
     # Top level
