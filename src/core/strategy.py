@@ -177,6 +177,7 @@ class Strategy:
     # aligner et recuperer caisses
 
     def aligner_et_recuperer_caisses(self, frame_provider=None, timeout_alignement_s=15.0):
+        self.robot.fermer_porte()
         frame_provider = frame_provider or self.frame_provider
 
         if frame_provider is None:
@@ -220,7 +221,6 @@ class Strategy:
         for couleur_caisse in ordre:
             self.robot.logs.log("WARN", "Caisses")
         
-
             if couleur_caisse == equipe:
                 rotation = 1
             else:
@@ -231,7 +231,7 @@ class Strategy:
 
             ok = self.robot.pince_recuperer_et_stocker(rotation)
             self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} -> {'OK' if ok else 'ECHEC'}")
-
+            self.robot.leds.clignoter((0,255,0), vitesse=0.5)
             self.robot.avancer(10) # to check
         
         #ok = self.robot.pince_recuperer_et_stocker(0)
@@ -280,5 +280,123 @@ class Strategy:
         time.sleep(5)
 
     def serie(self, frame_provider):
-        pass
+        self.debut_match = time.time()
+        
+        self.robot.logs.log("INFO", f"Lancement de la stratégie de derniere serie")
+
+        if self.robot.team == "yellow":
+            #  1
+            self.robot.avancer(105)
+            time.sleep(1)
+            self.robot.rotation_gauche(90)
+            time.sleep(1)
+            self.robot.avancer(50)
+            time.sleep(1)
+            # fonction alignement & prendre set caisses
+            self.aligner_et_recuperer_caisses()
+            time.sleep(1)
+            #  2
+            self.robot.reculer(20)
+            time.sleep(1)
+            # fonction de déchargement
+            self.robot.ouvrir_porte()
+            time.sleep(1)
+            self.robot.avancer(10)
+            time.sleep(1)
+            #  3
+            self.robot.rotation_droite(90)
+            time.sleep(1)
+            #  4
+            self.robot.avancer(25)
+            time.sleep(1)
+            self.robot.rotation_droite(90)
+            time.sleep(1)
+            self.robot.avancer(55)
+            time.sleep(1)
+            self.robot.droite(15)
+            time.sleep(1)
+            self.robot.avancer(35)
+            time.sleep(1)
+            self.robot.rotation_droite(90)
+            time.sleep(1)
+            self.robot.avancer(30)
+            time.sleep(1)
+            current_time = time.time()
+            if (current_time - self.debut_match) < 40 :
+                #  5
+                # fonction alignement & prendre set caisses
+                self.aligner_et_recuperer_caisses()
+                time.sleep(1)
+                self.robot.reculer(20) 
+                time.sleep(1)
+                # fonction de déchargement
+                self.robot.ouvrir_porte()
+                time.sleep(1)
+                #  6
+                self.robot.avancer(90)
+            else :
+                #  skip vers la 6
+                self.robot.avancer(65)
+                time.sleep(1)
+                self.robot.droite(20)
+                time.sleep(1)
+                self.robot.avancer(20)
+        else:
+            #  1
+            self.robot.avancer(105)
+            time.sleep(1)
+            self.robot.rotation_droite(90) 
+            time.sleep(1)
+            self.robot.avancer(50)
+            time.sleep(1)
+            # fonction alignement & prendre set caisses
+            self.aligner_et_recuperer_caisses()
+            time.sleep(1)
+            #  2
+            self.robot.reculer(20)
+            time.sleep(1)
+            # fonction de déchargement
+            self.robot.ouvrir_porte()
+            time.sleep(1)
+            self.robot.avancer(10)
+            time.sleep(1)
+            #  3
+            self.robot.rotation_gauche(90)
+            time.sleep(1)
+            #  4
+            self.robot.avancer(25)
+            time.sleep(1)
+            self.robot.rotation_gauche(90)
+            time.sleep(1)
+            self.robot.avancer(55)
+            time.sleep(1)
+            self.robot.gauche(15)
+            time.sleep(1)
+            self.robot.avancer(35)
+            time.sleep(1)
+            self.robot.rotation_gauche(90)
+            time.sleep(1)
+            self.robot.avancer(30)
+            time.sleep(1)
+            current_time = time.time()
+            if (current_time - self.debut_match) < 40 :
+                #  5
+                # fonction alignement & prendre set caisses
+                self.aligner_et_recuperer_caisses()
+
+                time.sleep(1)
+                self.robot.reculer(20) 
+                time.sleep(1)
+                # fonction de déchargement
+                self.robot.ouvrir_porte()
+                time.sleep(1)
+                #  6
+                self.robot.avancer(90)
+            else :
+                #  skip vers la 6
+                self.robot.avancer(65)
+                time.sleep(1)
+                self.robot.gauche(20)
+                time.sleep(1)
+                self.robot.avancer(20)
 

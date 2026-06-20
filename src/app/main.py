@@ -4,6 +4,7 @@ import math
 try :
     import RPi.GPIO as GPIO
 except ImportError:
+    # simulation de class gpio si le script est lancé sur pc 
     class MockGPIO:
         BCM = 'BCM'
         IN = 'IN'
@@ -27,6 +28,7 @@ except ImportError:
         def cleanup(self):
             print("GPIO cleanup() called")
 
+#-----------------------------------------------------------------------------------
 from app.options import Options
 from core.robot import Robot
 from core.lidar import Lidar
@@ -35,10 +37,23 @@ from world.map import Map, TERRAIN_WIDTH, TERRAIN_HEIGHT
 
 from api.server import ApiServer
 
-
+# Si la ficelle n'est pas active à l'init du robot --> les leds clignotent en rouge
+# Si la ficelle est active --> leds de la couleur de l'équipe
+# Quand on tire sur la ficelle --> les leds s'eteignent (le lidar prend la priorite)
 def ficelle(robot, strategy, utiliser_camera):
     GPIO.setup(2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    
+
+    # si tirette pas activé au début, alors les leds clignotent en rouge
+    if GPIO.input(2) == GPIO.HIGH:
+        try:
+            robot.leds.clignoter((255, 0, 0), vitesse=0.5)
+        except:
+            pass
+        while GPIO.input(2) == GPIO.HIGH:
+            time.sleep(0.1)
+
+
+    robot.leds.set_team_color(robot.team)
     while True:
         # Suivi de l'interrupteur d'équipe (uniquement si changement)
 
@@ -61,6 +76,7 @@ def ficelle(robot, strategy, utiliser_camera):
         # Surveillance de la tirette
         if GPIO.input(2) == GPIO.LOW:
             robot.logs.log("RPi", f"Tirette retirée → stratégie homologation ({robot.team})")
+            robot.leds.clignoter_eteindre()
             robot.surveiller_lidar()
             strategy.homologation()
             robot.fermer()
@@ -95,8 +111,9 @@ def main():
         angle_init_deg=90,
         team=team
     )
-    ## add pending 
-    robot.leds.clignoter((0,255,0), vitesse=0.5)
+
+    robot.leds.set_team_color(team)
+
     if utiliser_camera:
         robot.setup()
 

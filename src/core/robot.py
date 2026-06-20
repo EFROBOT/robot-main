@@ -143,12 +143,11 @@ class Robot(Mecanum):
             return self.mouvement_termine.wait(timeout=timeout)
         return True
 
-    
     # Option servo
-    def securiser_caisses(self):
+    def fermer_porte(self):
         set_angle_servo(103)
 
-    def lacher_caisses(self):
+    def ouvrir_porte(self):
         set_angle_servo(0)
 
 

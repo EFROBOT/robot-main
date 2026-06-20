@@ -120,8 +120,8 @@ class ApiServer:
                 "pince_open":        lambda: self.robot.pince_recuperer_et_stocker(option_val),
                 "Pince Navigation":  lambda: self.robot.pince_navigation(),
                 "pince_homologation": lambda: self.robot.pince_homologation(),
-                "stockage":          lambda: self.robot.securiser_caisses(),
-                "lacher_caisse":     lambda: self.robot.lacher_caisses(),
+                "stockage":          lambda: self.robot.fermer_porte(),
+                "lacher_caisse":     lambda: self.robot.ouvrir_porte(),
                 "stop":              lambda: self.robot.stop(),
             }
             if action in actions:

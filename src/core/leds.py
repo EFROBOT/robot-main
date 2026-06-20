@@ -64,12 +64,14 @@ class BandeauLED:
         if self.pixels:
             self.pixels.fill(couleur_rgb)
             self.pixels.show()
+
     def _stop_clignotement(self):
         if self._thread_clignoter and self._thread_clignoter.is_alive():
             self._stop_clignoter.set()
             self._thread_clignoter.join()
         self._stop_clignoter.clear()
         self._log("RPi","Stop CLIOOOOOOOOOOO")
+
     def clignoter(self, couleur_rgb, vitesse=0.3):
         self._stop_clignotement()
         def _clignoter_loop():
@@ -85,9 +87,9 @@ class BandeauLED:
                     break
         self._thread_clignoter = threading.Thread(target=_clignoter_loop, daemon= True)
         self._thread_clignoter.start()
+
     def clignoter_eteindre(self):
         self._stop_clignotement()
-
 
     def allumer_premieres(self, n, couleur_rgb):
         """Allume uniquement les n premieres LEDs avec un tuple (R, G, B)."""
