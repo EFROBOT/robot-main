@@ -53,9 +53,6 @@ class BandeauLED:
         elif team == "blue":
             self.allumer_couleur((0, 0, 255))
             self._log("RPi", "LEDs -> BLEU")
-        else:
-            self.eteindre()
-            self._log("RPi", "LEDs -> éteintes")
 
         self.team_actuelle = team
 

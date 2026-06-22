@@ -133,40 +133,61 @@ class Mecanum:
         return True
 
     
-    def reculer(self, distance):
+    def reculer(self, distance, attendre=True, timeout=20):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
         self.send_raw(f"R {distance}")
+        if attendre:
+            return self.mouvement_termine.wait(timeout=timeout)
+        return True
 
-    def gauche(self, distance):
+    def gauche(self, distance, attendre=True, timeout=20):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
         self.send_raw(f"G {distance}")
+        if attendre:
+            return self.mouvement_termine.wait(timeout=timeout)
+        return True
 
-    def droite(self, distance):
+    def droite(self, distance, attendre=True, timeout=20):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
         self.send_raw(f"D {distance}")
+        if attendre:
+            return self.mouvement_termine.wait(timeout=timeout)
+        return True
 
-    def diagonale_gauche(self, distance):
+    def diagonale_droite(self, distance, attendre=True, timeout=20):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
         self.send_raw(f"DG {distance}")
+        if attendre:
+            return self.mouvement_termine.wait(timeout=timeout)
+        return True
 
-    def diagonale_droite(self, distance):
+    def diagonale_gauche(self, distance, attendre=True, timeout=20):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
         self.send_raw(f"DD {distance}")
+        if attendre:
+            return self.mouvement_termine.wait(timeout=timeout)
+        return True
 
-    def rotation_gauche(self, angle):
+    def rotation_droite(self, angle, attendre=True, timeout=20):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
         self.send_raw(f"RH {angle}")
+        if attendre:
+            return self.mouvement_termine.wait(timeout=timeout)
+        return True
 
-    def rotation_droite(self, angle):
+    def rotation_gauche(self, angle, attendre=True, timeout=20):
         self.mouvement_termine.clear()
         self._stop_prio_lidar = False
         self.send_raw(f"RAH {angle}")
+        if attendre:
+            return self.mouvement_termine.wait(timeout=timeout)
+        return True
 
     def aller_a_coord(self, x, y, attendre=True, timeout=20):
         self.mouvement_termine.clear()

@@ -127,7 +127,7 @@ class Strategy:
             self.robot.logs.log("INFO", f"Cible :  à dist={distance:.1f}cm lateral={lateral:+.1f}cm angle={caisse.angle_longueur:+.1f}°")
 
             # Condition d'arret
-            distance_arret = 53
+            distance_arret = 55
             if distance <= distance_arret and abs(lateral) <= 3:
                 self.robot.logs.log("INFO", f"ArUco → Cible atteinte ! Dist: {distance:.1f}cm")
                 self.robot.logs.log("INFO", f"ArUco → ALIGNÉ ✓ Ordre des blocs: {meilleur_ordre_blocs}")
@@ -139,9 +139,9 @@ class Strategy:
             erreur_angle = (erreur_angle + 45) % 90 - 45
             if abs(erreur_angle) > 3:
                 if erreur_angle > 0:
-                    self.robot.rotation_gauche(int(abs(erreur_angle)) + 3)
-                else:
                     self.robot.rotation_droite(int(abs(erreur_angle)) + 3)
+                else:
+                    self.robot.rotation_gauche(int(abs(erreur_angle)) + 3)
                 continue
 
             # Correct lateral
@@ -231,7 +231,7 @@ class Strategy:
 
             ok = self.robot.pince_recuperer_et_stocker(rotation)
             self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} -> {'OK' if ok else 'ECHEC'}")
-            self.robot.leds.clignoter((0,255,0), vitesse=0.5)
+            #self.robot.leds.clignoter((0,255,0), vitesse=0.5)
             self.robot.avancer(10) # to check
         
         #ok = self.robot.pince_recuperer_et_stocker(0)
@@ -263,11 +263,13 @@ class Strategy:
 
     def homologation(self):
         #self.robot.set_position(150, 150, -90)
-         
+             
+             
         self.robot.logs.log("INFO", f"Le robot se dirige vers la zone ")
 
         if self.robot.team=="yellow":
             self.robot.avancer(85)
+
             time.sleep(5)
             self.robot.reculer(70)
             time.sleep(5)
@@ -279,124 +281,23 @@ class Strategy:
                 
         time.sleep(5)
 
-    def serie(self, frame_provider):
+    def serie(self):
         self.debut_match = time.time()
         
         self.robot.logs.log("INFO", f"Lancement de la stratégie de derniere serie")
 
         if self.robot.team == "yellow":
             #  1
-            self.robot.avancer(105)
+            self.robot.avancer(85)
             time.sleep(1)
-            self.robot.rotation_gauche(90)
+            self.robot.gauche(35)
             time.sleep(1)
-            self.robot.avancer(50)
+            self.robot.diagonale_gauche(55)
             time.sleep(1)
-            # fonction alignement & prendre set caisses
+            self.robot.rotation_gauche(70)
+            time.sleep(1)
             self.aligner_et_recuperer_caisses()
-            time.sleep(1)
-            #  2
-            self.robot.reculer(20)
-            time.sleep(1)
-            # fonction de déchargement
+            self.robot.reculer(10)
             self.robot.ouvrir_porte()
-            time.sleep(1)
-            self.robot.avancer(10)
-            time.sleep(1)
-            #  3
-            self.robot.rotation_droite(90)
-            time.sleep(1)
-            #  4
-            self.robot.avancer(25)
-            time.sleep(1)
-            self.robot.rotation_droite(90)
-            time.sleep(1)
-            self.robot.avancer(55)
-            time.sleep(1)
-            self.robot.droite(15)
-            time.sleep(1)
-            self.robot.avancer(35)
-            time.sleep(1)
-            self.robot.rotation_droite(90)
-            time.sleep(1)
-            self.robot.avancer(30)
-            time.sleep(1)
-            current_time = time.time()
-            if (current_time - self.debut_match) < 40 :
-                #  5
-                # fonction alignement & prendre set caisses
-                self.aligner_et_recuperer_caisses()
-                time.sleep(1)
-                self.robot.reculer(20) 
-                time.sleep(1)
-                # fonction de déchargement
-                self.robot.ouvrir_porte()
-                time.sleep(1)
-                #  6
-                self.robot.avancer(90)
-            else :
-                #  skip vers la 6
-                self.robot.avancer(65)
-                time.sleep(1)
-                self.robot.droite(20)
-                time.sleep(1)
-                self.robot.avancer(20)
-        else:
-            #  1
-            self.robot.avancer(105)
-            time.sleep(1)
-            self.robot.rotation_droite(90) 
-            time.sleep(1)
-            self.robot.avancer(50)
-            time.sleep(1)
-            # fonction alignement & prendre set caisses
-            self.aligner_et_recuperer_caisses()
-            time.sleep(1)
-            #  2
-            self.robot.reculer(20)
-            time.sleep(1)
-            # fonction de déchargement
-            self.robot.ouvrir_porte()
-            time.sleep(1)
-            self.robot.avancer(10)
-            time.sleep(1)
-            #  3
-            self.robot.rotation_gauche(90)
-            time.sleep(1)
-            #  4
-            self.robot.avancer(25)
-            time.sleep(1)
-            self.robot.rotation_gauche(90)
-            time.sleep(1)
-            self.robot.avancer(55)
-            time.sleep(1)
-            self.robot.gauche(15)
-            time.sleep(1)
-            self.robot.avancer(35)
-            time.sleep(1)
-            self.robot.rotation_gauche(90)
-            time.sleep(1)
-            self.robot.avancer(30)
-            time.sleep(1)
-            current_time = time.time()
-            if (current_time - self.debut_match) < 40 :
-                #  5
-                # fonction alignement & prendre set caisses
-                self.aligner_et_recuperer_caisses()
-
-                time.sleep(1)
-                self.robot.reculer(20) 
-                time.sleep(1)
-                # fonction de déchargement
-                self.robot.ouvrir_porte()
-                time.sleep(1)
-                #  6
-                self.robot.avancer(90)
-            else :
-                #  skip vers la 6
-                self.robot.avancer(65)
-                time.sleep(1)
-                self.robot.gauche(20)
-                time.sleep(1)
-                self.robot.avancer(20)
-
+            
+            

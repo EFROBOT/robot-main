@@ -44,26 +44,20 @@ def ficelle(robot, strategy, utiliser_camera):
     GPIO.setup(2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     # si tirette pas activé au début, alors les leds clignotent en rouge
-    if GPIO.input(2) == GPIO.HIGH:
-        try:
-            robot.leds.clignoter((255, 0, 0), vitesse=0.5)
-        except:
-            pass
-        while GPIO.input(2) == GPIO.HIGH:
-            time.sleep(0.1)
-
-
-    robot.leds.set_team_color(robot.team)
+    """while GPIO.input(2) == GPIO.LOW:
+        robot.leds.clignoter((255, 0, 0), vitesse=0.5)
+        time.sleep(0.5)
+    robot.leds.clignoter_eteindre()
+    """
+    
+    #robot.leds.set_team_color(robot.team)
     while True:
         # Suivi de l'interrupteur d'équipe (uniquement si changement)
 
         nouvelle_team = "yellow" if GPIO.input(17) == GPIO.LOW else "blue"
         if nouvelle_team != robot.team:
-            try :
-                robot.leds.clignoter_eteindre()
-            except:
-                time.sleep(0.1)
-            robot.leds.set_team_color(nouvelle_team)
+
+            #robot.leds.set_team_color(nouvelle_team)
 
             robot.set_team(nouvelle_team)
             robot.team = nouvelle_team
@@ -83,7 +77,6 @@ def ficelle(robot, strategy, utiliser_camera):
             GPIO.cleanup()
             break
 
-        time.sleep(0.05)
 
 def main():
     devices = Options.init_devices()
@@ -112,7 +105,7 @@ def main():
         team=team
     )
 
-    robot.leds.set_team_color(team)
+    #robot.leds.set_team_color(team)
 
     if utiliser_camera:
         robot.setup()
@@ -134,7 +127,6 @@ def main():
 
         api_thread = threading.Thread(target=api.run, daemon=True)
         api_thread.start()
-
         ficelle(robot, strategy, utiliser_camera)
 
     finally:
