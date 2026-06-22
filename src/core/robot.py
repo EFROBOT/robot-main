@@ -180,12 +180,6 @@ class Robot(Mecanum):
 
         self._lidar_thread_started = True
 
-        # ==========================================
-        # AJOUT CRUCIAL : Démarrer l'acquisition série en tâche de fond
-        # C'est ici que tu définis tes distances de détection
-        # ==========================================
-        self.lidar.scan(distance_cm=44, min_distance_cm=1)
-
         def boucle():
             # Super pratique pour isoler ce thread critique sur un cœur de la Raspberry Pi
             fixer_affinite_cpu(0, logs=self.logs, nom_thread="lidar")
@@ -229,8 +223,6 @@ class Robot(Mecanum):
                         self.send_raw("STOP")
                         self.logs.log("LIDAR", f"Arrêt prioritaire Lidar ({len(obstacles_valides)} pts réels)")
 
-                # La boucle tourne à 10 Hz. 
-                # C'est parfait car scan() ne bloque plus.
-                time.sleep(0.1) 
+                time.sleep(0.001) 
 
         threading.Thread(target=boucle, daemon=True).start()
