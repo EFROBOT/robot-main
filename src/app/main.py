@@ -59,9 +59,10 @@ def ficelle(robot, strategy, utiliser_camera):
 
         # Surveillance de la tirette
         if GPIO.input(2) == GPIO.LOW:
+            robot.set_distance_lidar(45)
             robot.leds.eteindre()
             robot.logs.log("RPi", f"Tirette retirée → stratégie homologation ({robot.team})")
-            strategy.homologation()
+            strategy.serie()
             robot.fermer()
             GPIO.cleanup()
             break
@@ -94,7 +95,7 @@ def main():
         angle_init_deg=90,
         team=team
     )
-
+    robot.set_distance_lidar(5)
     robot.leds.set_team_color(team)
 
     if utiliser_camera:
@@ -107,6 +108,7 @@ def main():
         robot.connecter()
 
     try:
+        """
         api = ApiServer(
             robot=robot,
             strategy=strategy,
@@ -114,10 +116,11 @@ def main():
             camera_indices=camera_ids,
             aruco_detection=activer_aruco,
         )
+        
 
         api_thread = threading.Thread(target=api.run, daemon=True)
         api_thread.start()
-
+        """
         ficelle(robot, strategy, utiliser_camera)
 
     finally:

@@ -151,7 +151,7 @@ class Strategy:
                     self.robot.droite(float(dist_cmd * 0.6))
                 else:
                     self.robot.gauche(float(dist_cmd * 0.6))
-                time.sleep(0.5) 
+                #time.sleep(0.5) 
                 continue 
             
             # Correct distance
@@ -164,7 +164,7 @@ class Strategy:
                 step = min(x, 10.0)
                 self.robot.logs.log("INFO", f"Avance par palier: {step}")
                 self.robot.avancer(step)
-                time.sleep(0.5)
+                #time.sleep(0.5)
                 continue
 
             self.robot.logs.log("INFO", "ArUco → ALIGNÉ ✓")
@@ -178,6 +178,8 @@ class Strategy:
 
     def aligner_et_recuperer_caisses(self, frame_provider=None, timeout_alignement_s=15.0):
         self.robot.fermer_porte()
+        self.robot.set_distance_lidar(10)
+
         frame_provider = frame_provider or self.frame_provider
 
         if frame_provider is None:
@@ -218,7 +220,7 @@ class Strategy:
         
         self.robot.logs.log("WARN", f"Odre {len(ordre)}")
         
-        for couleur_caisse in ordre:
+        for i, couleur_caisse in enumerate(ordre):
             self.robot.logs.log("WARN", "Caisses")
         
             if couleur_caisse == equipe:
@@ -228,59 +230,76 @@ class Strategy:
             self.robot.logs.log("WARN", f"Team : {equipe}")
             self.robot.logs.log("WARN", f"Couleur_caisses : {couleur_caisse}")
             self.robot.logs.log("WARN", f"Rotation : {rotation}")
-
             ok = self.robot.pince_recuperer_et_stocker(rotation)
             self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} -> {'OK' if ok else 'ECHEC'}")
             #self.robot.leds.clignoter((0,255,0), vitesse=0.5)
-            self.robot.avancer(10) # to check
+            #self.robot.leds.eteindre()
+            if i < len(ordre) -1:
+              self.robot.avancer(10) # to check
         
         #ok = self.robot.pince_recuperer_et_stocker(0)
         #self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} -> {'OK' if ok else 'ECHEC'}")
-
-
-
-        """
-        self.robot.logs.log("RPi", f"Ordre couleurs détecté: {ordre}")
-    
-        self.robot.logs.log("WARN", "Caisses")
-        rotation = 1 if ordre[0] == self.robot.team else 0
-        
-        self.robot.logs.log("WARN", "JE vais prendre une caisse omg frerot")
-        print("icccccccccccccciiiiiiiiiiii", self.robot.pince_recuperer_et_stocker(rotation))
-        
-        # self.robot.logs.log("WARN", "JE vais avancer frerot")
-  
-        self.robot.avancer(10)
-
-        # self.robot.logs.log("RPi", f"Pince_RecupererEtStocker rotation={rotation} ->")
-        
-        print("icccccccccccccciiiiiiiiiiii", self.robot.pince_recuperer_et_stocker(rotation))
-        
-        self.robot.avancer(10)"""
+        self.robot.set_distance_lidar(45)
 
     # ------------------------------------------------------------------
     # Top level
 
+    # validé
     def homologation(self):
-        #self.robot.set_position(150, 150, -90)
-             
-             
+                 
         self.robot.logs.log("INFO", f"Le robot se dirige vers la zone ")
 
         if self.robot.team=="yellow":
             self.robot.avancer(85)
-
             time.sleep(5)
-            self.robot.reculer(70)
+            self.robot.reculer(85)
             time.sleep(5)
         else :
             self.robot.avancer(85)
             time.sleep(5)
-            self.robot.reculer(70)
+            self.robot.reculer(85)
             time.sleep(5)
                 
         time.sleep(5)
 
+    # validé
+    def serie_1(self):
+        self.debut_match = time.time()
+        
+        self.robot.logs.log("INFO", f"Lancement de la stratégie de derniere serie")
+
+        if self.robot.team == "yellow":
+            self.robot.avancer(85)
+            self.robot.gauche(35)
+            self.robot.diagonale_gauche(55)
+            self.robot.rotation_gauche(70)
+            self.aligner_et_recuperer_caisses()
+            self.robot.reculer(10)
+            time.sleep(0.5)
+            self.robot.ouvrir_porte()
+            time.sleep(1)
+            self.robot.gauche(45)
+            time.sleep(1)
+            self.robot.reculer(90)
+            time.sleep(1)
+            self.robot.gauche(70)
+        else:
+            self.robot.avancer(85)
+            self.robot.droite(35)
+            self.robot.diagonale_droite(55)
+            self.robot.rotation_droite(70)
+            self.aligner_et_recuperer_caisses()
+            self.robot.reculer(10)
+            time.sleep(0.5)
+            self.robot.ouvrir_porte()
+            time.sleep(1)
+            self.robot.droite(45)
+            time.sleep(1)
+            self.robot.reculer(90)
+            time.sleep(1)
+            self.robot.droite(70)
+
+            
     def serie(self):
         self.debut_match = time.time()
         
@@ -289,15 +308,28 @@ class Strategy:
         if self.robot.team == "yellow":
             #  1
             self.robot.avancer(85)
-            time.sleep(1)
-            self.robot.gauche(35)
-            time.sleep(1)
-            self.robot.diagonale_gauche(55)
-            time.sleep(1)
+            self.robot.gauche(25)
+            self.robot.diagonale_gauche(70)
             self.robot.rotation_gauche(70)
-            time.sleep(1)
             self.aligner_et_recuperer_caisses()
             self.robot.reculer(10)
+            time.sleep(0.5)
             self.robot.ouvrir_porte()
-            
-            
+            time.sleep(1)
+            self.robot.gauche(45)
+            time.sleep(1)
+            self.robot.reculer(90)
+            time.sleep(1)
+            self.robot.gauche(70)
+
+    def serie_mael(self):
+        self.debut_match = time.time()
+        
+        self.robot.logs.log("INFO", f"Lancement de la stratégie de derniere serie")
+
+        if self.robot.team == "yellow":
+            #  1
+            self.robot.avancer(20)
+            self.robot.diagonale_gauche(130)
+            self.robot.rotation_gauche(70)
+            self.aligner_et_recuperer_caisses()

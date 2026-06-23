@@ -18,7 +18,7 @@ class Lidar:
 
     def _assurer_iter_mesures(self):
         if self._iter_mesures is None:
-            self._iter_mesures = self.lidar.iter_measures(scan_type="normal", max_buf_meas=1000)
+            self._iter_mesures = self.lidar.iter_measures(scan_type="normal", max_buf_meas=3000)
     def _reinitialiser_iter_mesures(self):
         self._iter_mesures = None
         try:
@@ -30,12 +30,13 @@ class Lidar:
         except Exception:
             pass
 
-    def scan(self, distance_cm=45, min_distance_cm=1, max_measures=1000):
+    def scan(self, min_distance_cm=1, max_measures=700):
         """Collect one scan cycle from lidar measures.
 
         This implementation uses iter_measures directly to avoid intermittent
         unpack errors observed with some iter_scans flows.
         """
+        distance_cm = getattr(self, "distance_cm", 45)
         distance_mm = distance_cm * 10
         min_distance_mm = min_distance_cm * 10
         obstacles = []
@@ -47,7 +48,7 @@ class Lidar:
                 return []
             index = 0
             while index < max_measures:
-                index += 2
+                index += 1
                 mesure = next(self._iter_mesures)
                 try:
                     if not isinstance(mesure, (list, tuple)):

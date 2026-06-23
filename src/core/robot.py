@@ -39,7 +39,7 @@ class Robot(Mecanum):
         self.align_interval_ms = 50
         self._lidar_thread_started = False
         # Tolérance hors table pour le filtrage Lidar (0 = strictement dans [0..W]x[0..H]).
-        self.marge_ignore_lidar_cm = -10.0
+        self.marge_ignore_lidar_cm = -5.0
         self.decalage_angle_lidar_deg = 0.0
         self.sens_angle_lidar = -1.0
 
@@ -61,6 +61,10 @@ class Robot(Mecanum):
             self.send_raw("TB")
         else:
             self.logs.log("ERR", "No team set")
+
+    def set_distance_lidar(self, distance_cm):
+        if self.lidar:
+            self.lidar.distance_cm = distance_cm
 
     def stop(self):
         self.running = False
@@ -222,7 +226,5 @@ class Robot(Mecanum):
                     if obstacles_valides:
                         self.send_raw("STOP")
                         self.logs.log("LIDAR", f"Arrêt prioritaire Lidar ({len(obstacles_valides)} pts réels)")
-
-                time.sleep(0.001) 
 
         threading.Thread(target=boucle, daemon=True).start()
